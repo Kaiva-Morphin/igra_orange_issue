@@ -1,12 +1,9 @@
-[gd_scene load_steps=15 format=4 uid="uid://c3gyu4sc8mod0"]
+[gd_scene load_steps=12 format=4 uid="uid://c3gyu4sc8mod0"]
 
 [ext_resource type="Script" uid="uid://o5vbooy5r8yh" path="res://scenes/game.gd" id="1_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://buu0llfaduhea" path="res://scenes/pause.tscn" id="1_yqjtg"]
 [ext_resource type="Texture2D" uid="uid://cjqfufkpm1qp8" path="res://assets/textures/tileset.png" id="2_lnu2h"]
 [ext_resource type="Texture2D" uid="uid://te0hulw7hbws" path="res://assets/textures/player.png" id="3_lnu2h"]
-[ext_resource type="Script" uid="uid://cve43g8hmc2qb" path="res://scenes/game/ice.gd" id="5_iywne"]
-[ext_resource type="Script" uid="uid://be5dadgdq8rn1" path="res://scenes/game/lianes.gd" id="6_p57ef"]
-[ext_resource type="Script" uid="uid://j68v7gtbiqd2" path="res://scenes/game/ice_spikes.gd" id="6_u5sy4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lbhrr"]
 texture = ExtResource("2_lnu2h")
@@ -173,72 +170,19 @@ tile_set = SubResource("TileSet_iywne")
 visible = false
 tile_set = SubResource("TileSet_iywne")
 
+[node name="FutureProps" type="TileMapLayer" parent="."]
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Player")
 libraries = {
 &"": SubResource("AnimationLibrary_p57ef")
 }
 
-[node name="Ice" type="Node2D" parent="." groups=["gamestate_reaction", "movable", "swap_collider", "swap_reaction"]]
-position = Vector2(-23, -8)
-script = ExtResource("5_iywne")
-
-[node name="Sprite2D" type="Sprite2D" parent="Ice"]
-texture = ExtResource("2_lnu2h")
-region_enabled = true
-region_rect = Rect2(0, 32, 16, 16)
-
-[node name="Ice2" type="Node2D" parent="." groups=["gamestate_reaction", "movable", "swap_collider", "swap_reaction"]]
-position = Vector2(-8, 8)
-script = ExtResource("5_iywne")
-
-[node name="Sprite2D" type="Sprite2D" parent="Ice2"]
-texture = ExtResource("2_lnu2h")
-region_enabled = true
-region_rect = Rect2(0, 32, 16, 16)
-
-[node name="Lianes" type="Node2D" parent="." groups=["gamestate_reaction", "swap_collider", "swap_reaction"]]
-position = Vector2(24, -56)
-script = ExtResource("6_p57ef")
-
-[node name="Sprite2D" type="Sprite2D" parent="Lianes"]
-texture = ExtResource("2_lnu2h")
-region_enabled = true
-region_rect = Rect2(0, 48, 16, 16)
-
-[node name="Lianes2" type="Node2D" parent="." groups=["gamestate_reaction", "swap_collider", "swap_reaction"]]
-position = Vector2(40, -56)
-script = ExtResource("6_p57ef")
-
-[node name="Sprite2D" type="Sprite2D" parent="Lianes2"]
-texture = ExtResource("2_lnu2h")
-region_enabled = true
-region_rect = Rect2(0, 48, 16, 16)
-
-[node name="IceSpikes" type="Node2D" parent="." groups=["gamestate_reaction", "swap_collider", "swap_reaction"]]
-position = Vector2(24, -72)
-script = ExtResource("6_u5sy4")
-
-[node name="Sprite2D" type="Sprite2D" parent="IceSpikes"]
-texture = ExtResource("2_lnu2h")
-region_enabled = true
-region_rect = Rect2(0, 64, 16, 16)
-
-[node name="IceSpikes2" type="Node2D" parent="." groups=["gamestate_reaction", "swap_collider", "swap_reaction"]]
-position = Vector2(40, -72)
-script = ExtResource("6_u5sy4")
-
-[node name="Sprite2D" type="Sprite2D" parent="IceSpikes2"]
-texture = ExtResource("2_lnu2h")
-region_enabled = true
-region_rect = Rect2(0, 64, 16, 16)
-
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Player" type="Node2D" parent="."]
 position = Vector2(-8, -8)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(2, 2)
-
-[node name="Player" type="Node2D" parent="." groups=["gamestate_reaction"]]
-position = Vector2(-8, -8)
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
 texture = SubResource("AtlasTexture_lbhrr")
