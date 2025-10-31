@@ -1,0 +1,507 @@
+[gd_scene load_steps=23 format=3 uid="uid://hqdryxc766fs"]
+
+[ext_resource type="Theme" uid="uid://c4tnmjnv1swxg" path="res://resources/ui/main_theme.tres" id="1_klgdb"]
+[ext_resource type="Script" uid="uid://ciepjgslvoe36" path="res://scenes/menu/menu_controller.gd" id="2_e0arn"]
+[ext_resource type="Theme" uid="uid://7vvxi1od5y83" path="res://resources/ui/button.tres" id="2_mcvr8"]
+[ext_resource type="AudioStream" uid="uid://45seydecif80" path="res://assets/sounds/shapeforms/WHOOSH_AIRY_FLUTTER_01.wav" id="3_k48pe"]
+[ext_resource type="Texture2D" uid="uid://cnqambmc0c3pp" path="res://resources/ui/bg.png" id="3_y1o0p"]
+[ext_resource type="Texture2D" uid="uid://bmvipnloc3x1y" path="res://assets/particles/cloud.png" id="4_037ec"]
+[ext_resource type="AudioStream" uid="uid://bksx4qer1bjb6" path="res://assets/sounds/shapeforms/Tablet_Tap_07.wav" id="4_k48pe"]
+[ext_resource type="AudioStream" uid="uid://dcj5q48alcc57" path="res://assets/sounds/kenney/click2.ogg" id="5_f2fum"]
+[ext_resource type="AudioStream" uid="uid://ccl48un6bn75c" path="res://assets/sounds/shapeforms/PC Keyboard_Keystroke_28.wav" id="6_kaijy"]
+[ext_resource type="AudioStream" uid="uid://bypm53seyi7wx" path="res://assets/sounds/shapeforms/BUTTON_05.wav" id="7_y4i35"]
+[ext_resource type="PackedScene" uid="uid://dxlupbpywxun7" path="res://scenes/menu/settings.tscn" id="11_f2fum"]
+[ext_resource type="Script" uid="uid://cx2eqddx6y6uu" path="res://scenes/menu/creds.gd" id="12_kaijy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_037ec"]
+atlas = ExtResource("4_037ec")
+region = Rect2(0, 0, 35, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y1o0p"]
+atlas = ExtResource("4_037ec")
+region = Rect2(35, 0, 35, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r8yej"]
+atlas = ExtResource("4_037ec")
+region = Rect2(35, 18, 35, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3y2rt"]
+atlas = ExtResource("4_037ec")
+region = Rect2(0, 18, 35, 18)
+
+[sub_resource type="Animation" id="Animation_r8yej"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CURRENT:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("NEXT:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("NEXT:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CURRENT:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_y1o0p"]
+resource_name = "next"
+length = 0.5
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CURRENT:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, 0, 0, 0.2, -100, -200, -0.3, -44, 0, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("NEXT:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(200, 0, 0, 0.2, -100, 0, -0.3, -44, 0, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+
+[sub_resource type="Animation" id="Animation_3y2rt"]
+resource_name = "swap"
+length = 0.5
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CURRENT:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, 0, 0, 0.2, 100, -200, -0.3, 44, 0, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("NEXT:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-200, 0, 0, 0.2, 100, 0, -0.3, 44, 0, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("NEXT:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.16666667, 0.36666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.1, 0.1, 0.1, 1), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CURRENT:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.19999999),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.1, 0.1, 0.1, 1)]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"detach"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r8yej"]
+_data = {
+&"RESET": SubResource("Animation_r8yej"),
+&"next": SubResource("Animation_y1o0p"),
+&"swap": SubResource("Animation_3y2rt")
+}
+
+[sub_resource type="Gradient" id="Gradient_rqcjd"]
+offsets = PackedFloat32Array(0.23376623, 1)
+colors = PackedColorArray(0, 0, 0, 0.87058824, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dxr1k"]
+gradient = SubResource("Gradient_rqcjd")
+height = 24
+fill_from = Vector2(1, 0)
+fill_to = Vector2(1, 1)
+
+[node name="Menu" type="Control" node_paths=PackedStringArray("main_screen", "settings_screen", "creds_screen", "current_root", "next_root", "player")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -600.0
+offset_bottom = -450.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(4, 4)
+theme = ExtResource("1_klgdb")
+script = ExtResource("2_e0arn")
+main_screen = NodePath("Main")
+settings_screen = NodePath("Settings")
+creds_screen = NodePath("Creds")
+current_root = NodePath("CURRENT")
+next_root = NodePath("NEXT")
+player = NodePath("SwapPlayer")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 150.0
+texture = ExtResource("3_y1o0p")
+
+[node name="Particles" type="Node2D" parent="."]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Particles"]
+self_modulate = Color(0.19607843, 0.19607843, 0.19607843, 1)
+position = Vector2(225.5, 140.75)
+texture = SubResource("AtlasTexture_037ec")
+lifetime = 25.0
+preprocess = 100.0
+randomness = 0.5
+emission_shape = 3
+emission_rect_extents = Vector2(0, 10)
+direction = Vector2(-1, 0)
+spread = 0.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
+scale_amount_min = 4.0
+scale_amount_max = 4.0
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="Particles"]
+self_modulate = Color(0.25, 0.25, 0.25, 1)
+position = Vector2(225.5, 136.25)
+texture = SubResource("AtlasTexture_y1o0p")
+lifetime = 25.0
+preprocess = 100.0
+randomness = 0.5
+emission_shape = 3
+emission_rect_extents = Vector2(0, 10)
+direction = Vector2(-1, 0)
+spread = 0.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
+scale_amount_min = 4.0
+scale_amount_max = 4.0
+
+[node name="CPUParticles2D3" type="CPUParticles2D" parent="Particles"]
+self_modulate = Color(0.3, 0.3, 0.3, 1)
+position = Vector2(225.5, 131.75)
+texture = SubResource("AtlasTexture_r8yej")
+lifetime = 25.0
+preprocess = 100.0
+randomness = 0.5
+emission_shape = 3
+emission_rect_extents = Vector2(0, 10)
+direction = Vector2(-1, 0)
+spread = 0.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
+scale_amount_min = 4.0
+scale_amount_max = 4.0
+
+[node name="CPUParticles2D4" type="CPUParticles2D" parent="Particles"]
+self_modulate = Color(0.35, 0.35, 0.35, 1)
+position = Vector2(225.5, 125.75)
+texture = SubResource("AtlasTexture_3y2rt")
+lifetime = 25.0
+preprocess = 100.0
+randomness = 0.5
+emission_shape = 3
+emission_rect_extents = Vector2(0, 10)
+direction = Vector2(-1, 0)
+spread = 0.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
+scale_amount_min = 4.0
+scale_amount_max = 4.0
+
+[node name="SwapPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_r8yej")
+}
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="Swap" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("3_k48pe")
+volume_db = -28.363
+mix_target = 2
+bus = &"UI"
+
+[node name="Hover" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("4_k48pe")
+volume_db = -11.886
+bus = &"UI"
+
+[node name="Unhover" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("5_f2fum")
+volume_db = -24.477
+bus = &"UI"
+
+[node name="Pressed" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("6_kaijy")
+volume_db = -31.335
+pitch_scale = 1.38
+bus = &"UI"
+
+[node name="Released" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("7_y4i35")
+volume_db = -37.278
+pitch_scale = 1.27
+bus = &"UI"
+
+[node name="Main" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main"]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -34.0
+offset_right = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Main/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_colors/font_shadow_color = Color(0.1148968, 0.11489681, 0.1148968, 1)
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+bbcode_enabled = true
+text = "[wave amp=30.0 freq=5.0][rainbow freq=0.25]ИГРА"
+fit_content = true
+scroll_active = false
+autowrap_trim_flags = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control" type="Control" parent="Main/VBoxContainer"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="play" type="Button" parent="Main/VBoxContainer" groups=["ui_button"]]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("2_mcvr8")
+text = "играть"
+
+[node name="settings" type="Button" parent="Main/VBoxContainer" groups=["ui_button"]]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("2_mcvr8")
+text = "настройки"
+
+[node name="cred" type="Button" parent="Main/VBoxContainer" groups=["ui_button"]]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("2_mcvr8")
+text = "используем"
+
+[node name="exit" type="Button" parent="Main/VBoxContainer" groups=["ui_button"]]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("2_mcvr8")
+text = "выйти"
+
+[node name="CURRENT" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -6.1035156e-05
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="NEXT" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Settings" parent="." instance=ExtResource("11_f2fum")]
+visible = false
+layout_mode = 1
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="Creds" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_klgdb")
+script = ExtResource("12_kaijy")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Creds"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_right = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Creds/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Creds/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="Control" type="Control" parent="Creds/VBoxContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Creds/VBoxContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "< Звук >"
+vertical_alignment = 1
+
+[node name="Template" type="RichTextLabel" parent="Creds/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[color=gray]- [color=white][wave]template[/wave] [color=blue][url=https://aboba.com]link[/url]"
+fit_content = true
+
+[node name="Label" type="RichTextLabel" parent="Creds"]
+z_index = 1
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 26.0
+size_flags_vertical = 4
+theme_override_colors/font_shadow_color = Color(0.11372549, 0.11372549, 0.11372549, 1)
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+bbcode_enabled = true
+text = "[wave amp=30.0 freq=5.0][rainbow freq=0.25]Используемые Ассеты"
+fit_content = true
+scroll_active = false
+autowrap_trim_flags = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Creds/Label"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_dxr1k")
+
+[node name="CenterContainer" type="CenterContainer" parent="Creds/Label"]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+
+[node name="exit" type="Button" parent="Creds/Label/CenterContainer" groups=["ui_button"]]
+z_index = 2
+z_as_relative = false
+custom_minimum_size = Vector2(19, 0)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("2_mcvr8")
+text = "<"
+
+[connection signal="pressed" from="Main/VBoxContainer/play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Main/VBoxContainer/settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Main/VBoxContainer/cred" to="." method="_on_cred_pressed"]
+[connection signal="pressed" from="Main/VBoxContainer/exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Settings/RichTextLabel/CenterContainer/exit" to="." method="back"]
+[connection signal="pressed" from="Creds/Label/CenterContainer/exit" to="." method="back"]
+
+[editable path="Settings"]

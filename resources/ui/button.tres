@@ -1,0 +1,32 @@
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://7vvxi1od5y83"]
+
+[ext_resource type="FontFile" uid="uid://c25c7xpuy86ju" path="res://assets/fonts/monogram-extended.ttf" id="1_8fjby"]
+[ext_resource type="Texture2D" uid="uid://cajd3ma7wp3jw" path="res://resources/ui/button.png" id="1_w6etc"]
+[ext_resource type="Texture2D" uid="uid://b8mpcdtkbqb13" path="res://resources/ui/button_pressed.png" id="2_rj5sn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rj5sn"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rj5sn"]
+content_margin_top = 1.0
+texture = ExtResource("1_w6etc")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_in1vo"]
+content_margin_top = 2.0
+content_margin_bottom = 4.0
+texture = ExtResource("2_rj5sn")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 5.0
+
+[resource]
+default_font = ExtResource("1_8fjby")
+default_font_size = 16
+Button/styles/focus = SubResource("StyleBoxEmpty_rj5sn")
+Button/styles/hover = SubResource("StyleBoxTexture_rj5sn")
+Button/styles/normal = SubResource("StyleBoxTexture_rj5sn")
+Button/styles/pressed = SubResource("StyleBoxTexture_in1vo")

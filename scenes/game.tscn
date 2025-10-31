@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3gyu4sc8mod0"]
+
+[ext_resource type="Texture2D" uid="uid://bdtnvw6wnlj51" path="res://icon.svg" id="1_uwrxv"]
+[ext_resource type="PackedScene" uid="uid://buu0llfaduhea" path="res://scenes/pause.tscn" id="1_yqjtg"]
+
+[node name="testscene" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Pause" parent="CanvasLayer" instance=ExtResource("1_yqjtg")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_uwrxv")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]

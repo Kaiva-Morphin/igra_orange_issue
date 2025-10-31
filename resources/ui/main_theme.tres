@@ -1,0 +1,50 @@
+[gd_resource type="Theme" load_steps=12 format=3 uid="uid://c4tnmjnv1swxg"]
+
+[ext_resource type="FontFile" uid="uid://c25c7xpuy86ju" path="res://assets/fonts/monogram-extended.ttf" id="1_4kj51"]
+[ext_resource type="Texture2D" uid="uid://ddc2n114qngdh" path="res://resources/ui/ui.png" id="1_bhey1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_se0ae"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bhey1"]
+atlas = ExtResource("1_bhey1")
+region = Rect2(32, 0, 9, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_se0ae"]
+atlas = ExtResource("1_bhey1")
+region = Rect2(49, 0, 9, 10)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bhey1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ktsff"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ktsff"]
+atlas = ExtResource("1_bhey1")
+region = Rect2(42, 2, 6, 7)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_se0ae"]
+texture = SubResource("AtlasTexture_ktsff")
+texture_margin_left = 2.0
+texture_margin_top = 3.0
+texture_margin_right = 2.0
+texture_margin_bottom = 3.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p3v3s"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p7xcw"]
+bg_color = Color(0.103743516, 0.103743546, 0.10374347, 1)
+border_width_bottom = 1
+
+[resource]
+default_font = ExtResource("1_4kj51")
+default_font_size = 16
+FoldableContainer/styles/focus = SubResource("StyleBoxEmpty_se0ae")
+HSlider/constants/grabber_offset = -1
+HSlider/icons/grabber = SubResource("AtlasTexture_bhey1")
+HSlider/icons/grabber_highlight = SubResource("AtlasTexture_se0ae")
+HSlider/styles/grabber_area = SubResource("StyleBoxEmpty_bhey1")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxEmpty_ktsff")
+HSlider/styles/slider = SubResource("StyleBoxTexture_se0ae")
+LineEdit/styles/focus = SubResource("StyleBoxEmpty_p3v3s")
+LineEdit/styles/normal = SubResource("StyleBoxFlat_p7xcw")

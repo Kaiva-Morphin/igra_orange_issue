@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://sm8pjfh28icg"
+path="res://.godot/imported/PC Keyboard_Spacebar_06.wav-9519e71c794f38d1c422cbe2d7742e35.sample"
+
+[deps]
+
+source_file="res://assets/sounds/shapeforms/PC Keyboard_Spacebar_06.wav"
+dest_files=["res://.godot/imported/PC Keyboard_Spacebar_06.wav-9519e71c794f38d1c422cbe2d7742e35.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

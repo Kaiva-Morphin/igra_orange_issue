@@ -1,0 +1,111 @@
+[gd_scene load_steps=6 format=3 uid="uid://dxlupbpywxun7"]
+
+[ext_resource type="Theme" uid="uid://c4tnmjnv1swxg" path="res://resources/ui/main_theme.tres" id="1_dxr1k"]
+[ext_resource type="Theme" uid="uid://7vvxi1od5y83" path="res://resources/ui/button.tres" id="1_rqcjd"]
+[ext_resource type="PackedScene" uid="uid://c75u0igeymjnv" path="res://scenes/menu/components/sound_editor.tscn" id="2_37860"]
+
+[sub_resource type="Gradient" id="Gradient_rqcjd"]
+colors = PackedColorArray(0, 0, 0, 0.6509804, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dxr1k"]
+gradient = SubResource("Gradient_rqcjd")
+height = 24
+fill_from = Vector2(1, 0)
+fill_to = Vector2(1, 1)
+
+[node name="Settings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -600.0
+offset_bottom = -450.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_dxr1k")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_right = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="Control" type="Control" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+
+[node name="FoldableContainer" type="FoldableContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+title = "Звук"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer/FoldableContainer"]
+layout_mode = 2
+
+[node name="SoundEditor2" parent="VBoxContainer/ScrollContainer/VBoxContainer/FoldableContainer/VBoxContainer" instance=ExtResource("2_37860")]
+layout_mode = 2
+bus = "Master"
+label_text = "Основной"
+
+[node name="SoundEditor3" parent="VBoxContainer/ScrollContainer/VBoxContainer/FoldableContainer/VBoxContainer" instance=ExtResource("2_37860")]
+layout_mode = 2
+bus = "UI"
+label_text = "Интерфейс"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+z_index = 1
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 26.0
+size_flags_vertical = 4
+theme_override_colors/font_shadow_color = Color(0.11372549, 0.11372549, 0.11372549, 1)
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+bbcode_enabled = true
+text = "[wave amp=30.0 freq=5.0][rainbow freq=0.25]НАСТРОЙКИ"
+fit_content = true
+scroll_active = false
+autowrap_trim_flags = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="RichTextLabel"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_dxr1k")
+
+[node name="CenterContainer" type="CenterContainer" parent="RichTextLabel"]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+
+[node name="exit" type="Button" parent="RichTextLabel/CenterContainer" groups=["ui_button"]]
+z_index = 2
+z_as_relative = false
+custom_minimum_size = Vector2(19, 0)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("1_rqcjd")
+text = "<"
