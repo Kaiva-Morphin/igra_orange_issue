@@ -1,7 +1,8 @@
 extends Node2D
 
-
 @onready var player = $Player
+var world_preview = false
+
 @onready var anims = $AnimationPlayer
 
 @onready var past : TileMapLayer = $Past
@@ -45,12 +46,15 @@ func _ready() -> void:
 
 func swap():
 	swap_requested = false
+	if world_preview:
+		world_preview = false
 	if in_future:
 		anims.play("ToPast")
 	else:
 		anims.play("ToFuture")
 	in_future = !in_future
 	get_tree().call_group("swap_reaction", "swap", in_future)
+	world_preview = GAMESTATE.get_collider(UTILS.to_grid(player.position))
 
 func can_swap_now() -> bool:
 	var p = UTILS.to_grid(player.position)
@@ -59,13 +63,15 @@ func can_swap_now() -> bool:
 	return true
 
 func _process(_dt: float) -> void:
-	if swap_requested and can_swap_now():
+	if swap_requested:
 		swap()
 	if Input.is_action_just_pressed("swap"):
 		if in_move:
 			swap_requested = true
-		elif can_swap_now():
+		else:
 			swap()
+	if world_preview:
+		return 
 	if in_move:
 		# todo: next_move?
 		return

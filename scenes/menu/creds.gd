@@ -7,7 +7,8 @@ extends Control
 var text_template = "[color=gray]- {asset} от [color=white][wave]{author}[/wave] [color=blue][url={url}]{link}[/url]"
 enum TYPE {
 	Sound,
-	Font
+	Font,
+	Image
 }
 
 func type_to_header(type: TYPE) -> String:
@@ -16,12 +17,15 @@ func type_to_header(type: TYPE) -> String:
 			return "< Шрифты >"
 		TYPE.Sound:
 			return "< Звуки и музыка >"
+		TYPE.Image:
+			return "< Картинки >"
 	return "unknown!"
 
 func type_order() -> Array[TYPE]:
 	return [
 		TYPE.Font,
-		TYPE.Sound
+		TYPE.Sound,
+		TYPE.Image
 	]
 
 func format(i: Dictionary) -> String:
@@ -36,6 +40,8 @@ var creds = [
 	{"asset": "Shapeforms Audio Free Sound Effects", "author": "shapeforms", "link": "https://shapeforms.itch.io/shapeforms-audio-free-sfx", "types": [TYPE.Sound]},
 	{"asset": "interface-sfx-pack-1", "author": "obsydianx", "link": "https://obsydianx.itch.io/interface-sfx-pack-1", "types": [TYPE.Sound]},
 	{"asset": "Много всего", "author": "kenney", "link": "https://kenney.nl", "types": [TYPE.Sound]},
+	
+	{"asset": "Top-Down Forest Tileset (Edited)", "author": "gametoolkit", "link": "https://gametoolkit.itch.io/top-down-forest-tileset", "types": [TYPE.Image]},
 ]
 
 func header(t: TYPE) -> void:
