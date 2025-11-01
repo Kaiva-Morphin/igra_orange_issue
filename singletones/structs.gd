@@ -20,6 +20,7 @@ class Level extends Node2D:
 	var step = 0
 	var static_collider_store : StaticColliderStore
 	var movable_collider_store : MovableColliderStore
+	var ice_store : IceStore
 
 	func _ready() -> void:
 		history = []
@@ -27,6 +28,8 @@ class Level extends Node2D:
 		add_child(static_collider_store)
 		movable_collider_store = MovableColliderStore.new()
 		add_child(movable_collider_store)
+		ice_store = IceStore.new()
+		add_child(ice_store)
 		UTILS.log_print("[level] level ready")
 		
 		get_tree().call_group(LEVELSTATE_REACTION_GROUP, "_level_ready", self)
@@ -142,7 +145,6 @@ class SwapReaction extends LevelstateReaction:
 
 const STATE_COLLIDER_PLAYER_MASK : int = 1
 const STATE_COLLIDER_MOVABLE_MASK : int = 2
-const STATE_COLLIDER_WALL_MASK : int = 4
 
 const STATE_COLLIDER_GROUP : String = "state_collider"
 class StateCollider extends SwapReaction:
@@ -170,13 +172,16 @@ class StateCollider extends SwapReaction:
 		var s = super.save_state()
 		return s
 	
+	func get_mask(_world: WorldState) -> int:
+		return mask
+	
 	func restore_state(old_state: StateData):
 		super.restore_state(old_state)
 		var p = old_state.data.get("pos")
 		if p:
 			pos = p
 
-	func is_occupied(check_mask: int) -> bool:
+	func is_occupied_for(check_mask: int) -> bool:
 		UTILS.log_prints("[StateCollider] is_occupied", check_mask, mask)
 		return check_mask & mask != 0
 
@@ -204,7 +209,7 @@ class MovableCollider extends StateCollider:
 			pos = p
 			global_position = UTILS.from_grid(pos)
 
-	func is_occupied(check_mask: int) -> bool:
+	func is_occupied_for(check_mask: int) -> bool:
 		UTILS.log_prints("[MovableCollider] is_occupied", check_mask, mask, check_mask & mask)
 		return check_mask & mask != 0
 
@@ -246,10 +251,12 @@ class StaticColliderStore extends LevelstateReaction:
 	
 	func get_collider(p: Vector2i):
 		return pos_to_collider.get(p)
+	
+	func is_occupied_for(p: Vector2i, mask: int) -> bool:
+		return get_collider(p) != null && get_collider(p).is_occupied_for(mask)
 
 	func collide(p: Vector2i, mask: int) -> bool:
-		UTILS.log_prints("[static_collider_store] collide", p, get_collider(p), mask)
-		return get_collider(p) != null and get_collider(p).is_occupied(mask)
+		return get_collider(p) != null and get_collider(p).is_occupied_for(mask)
 
 class MovableColliderStore extends StaticColliderStore:
 	var moved : Array[Moved] = []
@@ -264,10 +271,11 @@ class MovableColliderStore extends StaticColliderStore:
 		moved = []
 		return s
 	
-	func can_push(obj: MovableCollider, dir: Vector2i, mask: int):
+	func can_push(obj: MovableCollider, dir: Vector2i, who: int):
 		var from = obj.pos
-		var to = from + dir
-		return obj.is_occupied(mask) && !level_ref.movable_collider_store.collide(to, mask)
+		var p = from + dir
+		UTILS.log_prints("[movable_collider_store] can_push", who, level_ref.movable_collider_store.is_occupied_for(p, STATE_COLLIDER_MOVABLE_MASK), level_ref.static_collider_store.is_occupied_for(p, STATE_COLLIDER_PLAYER_MASK))
+		return obj.is_occupied_for(who) && !(level_ref.movable_collider_store.is_occupied_for(p, STATE_COLLIDER_MOVABLE_MASK) || level_ref.static_collider_store.is_occupied_for(p, STATE_COLLIDER_PLAYER_MASK))
 	
 	func save_delta(from: Vector2i, to: Vector2i):
 		var m = Moved.new()
@@ -301,6 +309,67 @@ class MovableColliderStore extends StaticColliderStore:
 		pos_to_collider[to] = c
 		collider_to_pos.erase(c)
 		collider_to_pos[c] = to
-	
 
+
+class Ground extends STRUCTS.StateCollider:
+	func _init() -> void:
+		super._init(STATE_COLLIDER_PLAYER_MASK | STATE_COLLIDER_MOVABLE_MASK)
+
+	func get_mask(_world: WorldState) -> int:
+		return STATE_COLLIDER_PLAYER_MASK | STATE_COLLIDER_MOVABLE_MASK
+
+	func add_collider_to_store():
+		level_ref.static_collider_store.add_collider(self)
+
+
+class CollideInFuture extends STRUCTS.StateCollider:
+	func _init() -> void:
+		super._init(STATE_COLLIDER_PLAYER_MASK | STATE_COLLIDER_MOVABLE_MASK)
 	
+	func on_swap(world_state: WorldState):
+		push_step()
+		super.on_swap(world_state)
+		UTILS.log_print("[collide_in_past] on_swap " + str(world_state))
+		mask = get_mask(world_state)
+	
+	func get_mask(_world: WorldState) -> int:
+		if _world == STRUCTS.WorldState.Future:
+			return STATE_COLLIDER_PLAYER_MASK | STATE_COLLIDER_MOVABLE_MASK
+		return 0
+
+	func add_collider_to_store():
+		level_ref.static_collider_store.add_collider(self)
+
+
+class CollideInPast extends STRUCTS.StateCollider:
+	func _init() -> void:
+		super._init(STATE_COLLIDER_PLAYER_MASK | STATE_COLLIDER_MOVABLE_MASK)
+
+	func on_swap(world_state: WorldState):
+		push_step()
+		super.on_swap(world_state)
+		UTILS.log_print("[collide_in_past] on_swap " + str(world_state))
+		mask = get_mask(world_state)
+	
+	func get_mask(_world: WorldState) -> int:
+		if _world == STRUCTS.WorldState.Past:
+			return STATE_COLLIDER_PLAYER_MASK | STATE_COLLIDER_MOVABLE_MASK
+		return 0
+
+	func add_collider_to_store():
+		level_ref.static_collider_store.add_collider(self)
+
+class IceStore extends StaticColliderStore:
+	func _init() -> void:
+		super._init()
+
+class IceCollider extends STRUCTS.StateCollider:
+	func _init() -> void:
+		super._init(STATE_COLLIDER_PLAYER_MASK | STATE_COLLIDER_MOVABLE_MASK)
+
+	func _level_ready(level: Level, push_initial: bool = true):
+		super._level_ready(level, push_initial)
+		add_collider_to_store()
+
+	func add_collider_to_store():
+		level_ref.ice_store.add_collider(self)

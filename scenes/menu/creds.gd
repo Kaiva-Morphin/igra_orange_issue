@@ -42,6 +42,7 @@ var creds = [
 	{"asset": "Много всего", "author": "kenney", "link": "https://kenney.nl", "types": [TYPE.Sound]},
 	
 	{"asset": "Top-Down Forest Tileset (Edited)", "author": "gametoolkit", "link": "https://gametoolkit.itch.io/top-down-forest-tileset", "types": [TYPE.Image]},
+	{"asset": "All Screaming Brain Studios Textures", "author": "All Screaming Brain Studios", "link": "https://screamingbrainstudios.itch.io/", "types": [TYPE.Image]},
 ]
 
 func header(t: TYPE) -> void:

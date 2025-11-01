@@ -1,16 +1,40 @@
-[gd_scene load_steps=3 format=4 uid="uid://ddyi0gms06xau"]
+[gd_scene load_steps=3 format=3 uid="uid://ddyi0gms06xau"]
 
 [ext_resource type="Script" uid="uid://ckws06grlxkmg" path="res://scenes/components/level_surface.gd" id="1_4ipou"]
 [ext_resource type="TileSet" uid="uid://bkphcw0d67prq" path="res://scenes/components/level_surface.tres" id="1_7fnnd"]
 
 [node name="LevelSurface" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_4ipou")
 
 [node name="Future" type="TileMapLayer" parent="."]
+z_index = -2
 position = Vector2(-8, -8)
-tile_map_data = PackedByteArray("AAD8//z/AAAAAAEAAAD8//3/AAAAAAEAAAD8//7/AAAAAAEAAAD8////AAAAAAEAAAD8/wAAAAAAAAEAAAD8/wEAAAAAAAEAAAD8/wIAAAAAAAEAAAD9//z/AAAAAAEAAAD9//3/AAAAAAEAAAD9//7/AAAAAAEAAAD9////AAAAAAEAAAD9/wAAAAAAAAEAAAD9/wEAAAAAAAEAAAD9/wIAAAAAAAEAAAD+//z/AAAAAAEAAAD+//3/AAAAAAEAAAD+//7/AAAAAAEAAAD+////AAAAAAEAAAD+/wAAAAAAAAEAAAD+/wEAAAAAAAEAAAD+/wIAAAAAAAEAAAD///z/AAAAAAEAAAD///3/AAAAAAEAAAD///7/AAAAAAEAAAD/////AAAAAAEAAAD//wAAAAAAAAEAAAD//wEAAAAAAAEAAAD//wIAAAAAAAEAAAAAAPz/AAAAAAEAAAAAAP3/AAAAAAEAAAAAAP7/AAAAAAEAAAAAAP//AAAAAAEAAAAAAAAAAAAAAAEAAAAAAAEAAAAAAAEAAAAAAAIAAAAAAAEAAAABAPz/AAAAAAEAAAABAP3/AAAAAAEAAAABAP7/AAAAAAEAAAABAP//AAAAAAEAAAABAAAAAAAAAAEAAAABAAEAAAAAAAEAAAABAAIAAAAAAAEAAAACAPz/AAAAAAEAAAACAP3/AAAAAAEAAAACAP7/AAAAAAEAAAACAP//AAAAAAEAAAACAAAAAAAAAAEAAAACAAEAAAAAAAEAAAACAAIAAAAAAAEAAAADAPz/AAAAAAEAAAADAP3/AAAAAAEAAAADAP7/AAAAAAEAAAADAP//AAAAAAEAAAADAAAAAAAAAAEAAAADAAEAAAAAAAEAAAADAAIAAAAAAAEAAAD8/wMAAAAAAAEAAAD9/wMAAAAAAAEAAAD+/wMAAAAAAAEAAAD//wMAAAAAAAEAAAAAAAMAAAAAAAEAAAABAAMAAAAAAAEAAAACAAMAAAAAAAEAAAADAAMAAAAAAAEAAAA=")
+tile_set = ExtResource("1_7fnnd")
+
+[node name="Future2" type="TileMapLayer" parent="."]
+z_index = -1
+y_sort_enabled = true
+position = Vector2(-8, -8)
+tile_set = ExtResource("1_7fnnd")
+
+[node name="Future3" type="TileMapLayer" parent="."]
+y_sort_enabled = true
+position = Vector2(-8, -8)
 tile_set = ExtResource("1_7fnnd")
 
 [node name="Past" type="TileMapLayer" parent="."]
-visible = false
+z_index = -2
+position = Vector2(-8, -8)
+tile_set = ExtResource("1_7fnnd")
+
+[node name="Past2" type="TileMapLayer" parent="."]
+z_index = -1
+y_sort_enabled = true
+position = Vector2(-8, -8)
+tile_set = ExtResource("1_7fnnd")
+
+[node name="Past3" type="TileMapLayer" parent="."]
+y_sort_enabled = true
+position = Vector2(-8, -8)
 tile_set = ExtResource("1_7fnnd")

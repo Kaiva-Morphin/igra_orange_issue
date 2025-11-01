@@ -1,6 +1,7 @@
-extends STRUCTS.MovableCollider
+extends STRUCTS.StateCollider
 
 @onready var sprite = $Sprite2D
+@onready var in_future_sprite = $Sprite2D3
 
 func _init() -> void:
 	super._init(STATE_COLLIDER_PLAYER_MASK | STATE_COLLIDER_MOVABLE_MASK)
@@ -23,8 +24,6 @@ func save_state() -> StateData:
 
 func restore_state(old_state: StateData):
 	super.restore_state(old_state)
-	pos = old_state.data["pos"]
-	position = UTILS.from_grid(pos)
 	process_swap(is_future)
 
 func get_mask(_world: WorldState) -> int:
@@ -32,10 +31,12 @@ func get_mask(_world: WorldState) -> int:
 		return 0
 	else:
 		return STATE_COLLIDER_PLAYER_MASK | STATE_COLLIDER_MOVABLE_MASK
-	
+
 func process_swap(world_state: WorldState):
 	mask = get_mask(world_state)
 	if world_state == STRUCTS.WorldState.Future:
-		sprite.frame = 1
+		in_future_sprite.show()
+		sprite.hide()
 	else:
-		sprite.frame = 0
+		in_future_sprite.hide()
+		sprite.show()

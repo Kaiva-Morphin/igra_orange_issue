@@ -48,3 +48,14 @@ func log_print(msg):
 func log_prints(...msg):
 	if OS.is_debug_build():
 		prints(msg)
+
+func dir_to_anim(dir: Vector2i):
+	if dir.x == 0 and dir.y == -1:
+		return "up"
+	if dir.x == 0 and dir.y == 1:
+		return "down"
+	if dir.x == -1 and dir.y == 0:
+		return "left"
+	if dir.x == 1 and dir.y == 0:
+		return "right"
+	return null

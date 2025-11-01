@@ -1,6 +1,7 @@
 extends STRUCTS.SwapReaction
 
 var pos : Vector2i
+@onready var sprite : Sprite2D = $Sprite2D
 
 func _level_ready(level: Level, push_initial: bool = true):
 	print("[player] level ready for " + self.name)
@@ -12,18 +13,37 @@ func restore_state(old_state: StateData):
 	super.restore_state(old_state)
 	print("[player] restore state")
 	pos = old_state.data["pos"]
+	sprite.frame = old_state.data.get("frame")
+	UTILS.log_prints("[player] State restored " + str(pos) + " " + str(sprite.region_rect))
 	position = UTILS.from_grid(pos)
 
 func save_state() -> StateData:
 	var s = super.save_state()
 	pos = UTILS.to_grid(position)
 	s.data["pos"] = pos
+	s.data["frame"] = sprite.frame
 	print("[player] save state for " + self.name + " state: " + str(s.data))
 	return s
 
 func push_step():
 	super.push_step()
 
+@onready var anim : AnimationPlayer = $AnimationPlayer
+
+func play(n: String, time: float = 0.8):
+	anim.play("walk_" + n, -1, time)
+
+func stop_anim():
+	anim.stop(true)
+
+func play_right(time: float = 0.8):
+	anim.play("walk_right", -1, time)
+func play_up(time: float = 0.8):
+	anim.play("walk_up", -1, time)
+func play_left(time: float = 0.8):
+	anim.play("walk_left", -1, time)
+func play_down(time: float = 0.8):
+	anim.play("walk_down", -1, time)
 # func swap():
 # 	GAMESTATE.swap()
 # 	processing_step = false

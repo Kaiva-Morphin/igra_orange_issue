@@ -1,3 +1,36 @@
-[gd_scene format=3 uid="uid://7cvvbke3uido"]
+[gd_scene load_steps=5 format=3 uid="uid://7cvvbke3uido"]
+
+[ext_resource type="Script" uid="uid://8cnytedojd2r" path="res://scenes/components/objects/ice_spike.gd" id="1_q6rcx"]
+[ext_resource type="Texture2D" uid="uid://s2k44jvfosc1" path="res://assets/textures/ice_spike.png" id="2_lij4v"]
+[ext_resource type="Shader" uid="uid://bolnlv3rdsyh" path="res://scenes/components/reflection.gdshader" id="3_c8syv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c8syv"]
+shader = ExtResource("3_c8syv")
+shader_parameter/frame_size = Vector2(0, 0)
 
 [node name="IceSpike" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_q6rcx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+y_sort_enabled = true
+texture = ExtResource("2_lij4v")
+offset = Vector2(0, -9)
+hframes = 3
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+y_sort_enabled = true
+material = SubResource("ShaderMaterial_c8syv")
+position = Vector2(0, -8)
+texture = ExtResource("2_lij4v")
+offset = Vector2(0, 18)
+flip_v = true
+hframes = 3
+frame = 2
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+y_sort_enabled = true
+texture = ExtResource("2_lij4v")
+offset = Vector2(0, -9)
+hframes = 3
+frame = 1

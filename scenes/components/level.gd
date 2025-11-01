@@ -27,7 +27,7 @@ func smooth_back(item: StateData, on_end = null, speed_per_tile = UTILS.speed_pe
 
 
 func step_relative_speed(s: int) -> float:
-	return 0.1 / pow(1.05, s)
+	return max(0.1 / pow(1.05, s), 0.02)
 
 var swap_speed = UTILS.speed_per_tile * 16
 func process_revert() -> bool:
@@ -43,6 +43,16 @@ func process_revert() -> bool:
 			get_tree().create_timer(step_relative_speed(processing_revert_step) * swap_speed).connect("timeout", func(): processing_revert_stepping = false)
 	return processing_history.size() != 0 or processing_revert_stepping
 
+var dbg = []
+func spawn_dbg(p: Vector2, color: Color):
+	var d : Sprite2D = $DBG.duplicate()
+	add_child(d)
+	d.position = p
+	d.modulate = color
+	d.show()
+	dbg.append(d)
+
+
 func _process(_dt: float) -> void:
 	# for v in dbg:
 	# 	v.queue_free()
@@ -53,6 +63,10 @@ func _process(_dt: float) -> void:
 	# 	spawn_dbg(UTILS.from_grid(i.pos), Color(1, 0, 0))
 	# for i in movable_collider_store.pos_to_collider.keys():
 	# 	spawn_dbg(Vector2(UTILS.from_grid(i)) + Vector2(8, 8), Color(1, 0, 1))
+	# for i in static_collider_store.pos_to_collider.values():
+	# 	spawn_dbg(UTILS.from_grid(i.pos), Color(1, 1, 0))
+	# for i in static_collider_store.pos_to_collider.keys():
+	# 	spawn_dbg(Vector2(UTILS.from_grid(i)) + Vector2(8, 8), Color(1, 1, 1))
 
 
 	if process_revert():
@@ -62,11 +76,13 @@ func _process(_dt: float) -> void:
 		requested_swap = true
 	
 	if processing_step:
-		UTILS.log_print("processing step")
 		return
+	else:
+		player.stop_anim()
 	
 	if requested_swap:
 		requested_swap = false
+
 		start_new_step()
 		UTILS.log_print("[level instance] swap")
 		GAMESTATE.swap()
@@ -97,12 +113,11 @@ func _process(_dt: float) -> void:
 	if i_dir == Vector2i.ZERO:
 		return
 	var grid_pos = player.pos;
-	if static_collider_store.get_collider(grid_pos + i_dir):
+	if static_collider_store.is_occupied_for(grid_pos + i_dir, STATE_COLLIDER_PLAYER_MASK):
 		return
 	
 	var m = movable_collider_store.get_collider(grid_pos + i_dir)
-	if m: prints("ABB", m, m.is_occupied(STATE_COLLIDER_PLAYER_MASK))
-	if m && m.is_occupied(STATE_COLLIDER_PLAYER_MASK):
+	if m && m.is_occupied_for(STATE_COLLIDER_PLAYER_MASK):
 		UTILS.log_prints("[level instance] push", grid_pos + i_dir, "real", m.pos)
 		if !movable_collider_store.can_push(m, i_dir, STATE_COLLIDER_PLAYER_MASK):
 			UTILS.log_print("[level instance] push blocked")
@@ -127,19 +142,12 @@ func _process(_dt: float) -> void:
 
 
 
-
+	var anim_name = UTILS.dir_to_anim(i_dir)
+	if anim_name:
+		player.play(anim_name, 4)
+	
 	var dst = player.position + Vector2(i_dir * UTILS.tile_size)
 	processing_step = true
 	player.push_step()
 	player.pos = player.pos + i_dir
 	UTILS.tween_move(player, dst, func(): processing_step = false)
-
-# var dbg = []
-
-# func spawn_dbg(p: Vector2, color: Color):
-# 	var d : Sprite2D = $DBG.duplicate()
-# 	add_child(d)
-# 	d.position = p
-# 	d.modulate = color
-# 	d.show()
-# 	dbg.append(d)
