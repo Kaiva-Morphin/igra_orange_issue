@@ -1,6 +1,25 @@
-extends Node
+extends STRUCTS.LevelstateReaction
 
-# static > movable > swap 
+
+var worldstate = STRUCTS.WorldState.Future
+
+func swap():
+	push_step()
+	var new_state = UTILS.reverse_state(worldstate)
+	print("[gamestate] swap to", new_state)
+	get_tree().call_group(STRUCTS.SWAP_REACTION_GROUP, "on_swap", new_state)
+	worldstate = new_state
+
+func save_state() -> STRUCTS.StateData:
+	var s = STRUCTS.StateData.new()
+	s.data = {"worldstate" : GAMESTATE.worldstate}
+	s.ref = self
+	return s
+
+func restore_state(old_state: STRUCTS.StateData):
+	super.restore_state(old_state)
+	print("[level instance] restore state")
+	worldstate = old_state.data["worldstate"]
 
 var static_colliders : Dictionary = {}
 var swap_colliders : Dictionary = {}

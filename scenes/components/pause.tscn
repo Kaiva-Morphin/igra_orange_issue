@@ -1,14 +1,14 @@
 [gd_scene load_steps=15 format=3 uid="uid://buu0llfaduhea"]
 
-[ext_resource type="Theme" uid="uid://c4tnmjnv1swxg" path="res://resources/ui/main_theme.tres" id="1_aicil"]
-[ext_resource type="Script" uid="uid://c445ke2nmxwej" path="res://scenes/pause_controller.gd" id="1_r8yp4"]
-[ext_resource type="Theme" uid="uid://7vvxi1od5y83" path="res://resources/ui/button.tres" id="2_aicil"]
-[ext_resource type="PackedScene" uid="uid://dxlupbpywxun7" path="res://scenes/menu/settings.tscn" id="2_m0klm"]
-[ext_resource type="AudioStream" uid="uid://45seydecif80" path="res://assets/sounds/shapeforms/WHOOSH_AIRY_FLUTTER_01.wav" id="5_1xtef"]
-[ext_resource type="AudioStream" uid="uid://bksx4qer1bjb6" path="res://assets/sounds/shapeforms/Tablet_Tap_07.wav" id="6_xmhi0"]
-[ext_resource type="AudioStream" uid="uid://dcj5q48alcc57" path="res://assets/sounds/kenney/click2.ogg" id="7_xw83q"]
-[ext_resource type="AudioStream" uid="uid://ccl48un6bn75c" path="res://assets/sounds/shapeforms/PC Keyboard_Keystroke_28.wav" id="8_0akjr"]
-[ext_resource type="AudioStream" uid="uid://bypm53seyi7wx" path="res://assets/sounds/shapeforms/BUTTON_05.wav" id="9_capb0"]
+[ext_resource type="Theme" uid="uid://c4tnmjnv1swxg" path="res://resources/ui/main_theme.tres" id="1_l63hr"]
+[ext_resource type="Script" uid="uid://c445ke2nmxwej" path="res://scenes/components/pause_controller.gd" id="2_wdnx1"]
+[ext_resource type="Theme" uid="uid://7vvxi1od5y83" path="res://resources/ui/button.tres" id="3_dc6cb"]
+[ext_resource type="PackedScene" uid="uid://dxlupbpywxun7" path="res://scenes/menu/settings.tscn" id="4_s8h8j"]
+[ext_resource type="AudioStream" uid="uid://45seydecif80" path="res://assets/sounds/shapeforms/WHOOSH_AIRY_FLUTTER_01.wav" id="5_n2a8l"]
+[ext_resource type="AudioStream" uid="uid://bksx4qer1bjb6" path="res://assets/sounds/shapeforms/Tablet_Tap_07.wav" id="6_krhho"]
+[ext_resource type="AudioStream" uid="uid://dcj5q48alcc57" path="res://assets/sounds/kenney/click2.ogg" id="7_stxwk"]
+[ext_resource type="AudioStream" uid="uid://ccl48un6bn75c" path="res://assets/sounds/shapeforms/PC Keyboard_Keystroke_28.wav" id="8_wap4a"]
+[ext_resource type="AudioStream" uid="uid://bypm53seyi7wx" path="res://assets/sounds/shapeforms/BUTTON_05.wav" id="9_q6g33"]
 
 [sub_resource type="Animation" id="Animation_r8yej"]
 length = 0.001
@@ -231,8 +231,8 @@ offset_bottom = -450.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(4, 4)
-theme = ExtResource("1_aicil")
-script = ExtResource("1_r8yp4")
+theme = ExtResource("1_l63hr")
+script = ExtResource("2_wdnx1")
 main_screen = NodePath("Main")
 settings_screen = NodePath("Settings")
 current_root = NodePath("CURRENT")
@@ -291,22 +291,22 @@ layout_mode = 2
 [node name="continue" type="Button" parent="Main/VBoxContainer" groups=["ui_button"]]
 layout_mode = 2
 mouse_default_cursor_shape = 2
-theme = ExtResource("2_aicil")
+theme = ExtResource("3_dc6cb")
 text = "продолжить"
 
 [node name="settings" type="Button" parent="Main/VBoxContainer" groups=["ui_button"]]
 layout_mode = 2
 mouse_default_cursor_shape = 2
-theme = ExtResource("2_aicil")
+theme = ExtResource("3_dc6cb")
 text = "настройки"
 
 [node name="exit" type="Button" parent="Main/VBoxContainer" groups=["ui_button"]]
 layout_mode = 2
 mouse_default_cursor_shape = 2
-theme = ExtResource("2_aicil")
+theme = ExtResource("3_dc6cb")
 text = "выйти"
 
-[node name="Settings" parent="." instance=ExtResource("2_m0klm")]
+[node name="Settings" parent="." instance=ExtResource("4_s8h8j")]
 layout_mode = 1
 offset_right = 0.0
 offset_bottom = 0.0
@@ -338,29 +338,29 @@ mouse_filter = 2
 [node name="Sounds" type="Node" parent="."]
 
 [node name="Swap" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource("5_1xtef")
+stream = ExtResource("5_n2a8l")
 volume_db = -28.363
 mix_target = 2
 bus = &"UI"
 
 [node name="Hover" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource("6_xmhi0")
+stream = ExtResource("6_krhho")
 volume_db = -11.886
 bus = &"UI"
 
 [node name="Unhover" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource("7_xw83q")
+stream = ExtResource("7_stxwk")
 volume_db = -24.477
 bus = &"UI"
 
 [node name="Pressed" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource("8_0akjr")
+stream = ExtResource("8_wap4a")
 volume_db = -31.335
 pitch_scale = 1.38
 bus = &"UI"
 
 [node name="Released" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource("9_capb0")
+stream = ExtResource("9_q6g33")
 volume_db = -37.278
 pitch_scale = 1.27
 bus = &"UI"
