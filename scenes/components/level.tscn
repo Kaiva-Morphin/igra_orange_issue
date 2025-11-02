@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://cxpycm8cc7sgl"]
+[gd_scene load_steps=9 format=4 uid="uid://cxpycm8cc7sgl"]
 
 [ext_resource type="Script" uid="uid://bvfo5go5xltmv" path="res://scenes/components/level.gd" id="1_bjy6a"]
 [ext_resource type="PackedScene" uid="uid://ddyi0gms06xau" path="res://scenes/components/level_surface.tscn" id="2_007lt"]
@@ -6,6 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://4l033lsf7pxu" path="res://scenes/components/objects/ice.tscn" id="3_grtfn"]
 [ext_resource type="Texture2D" uid="uid://bdtnvw6wnlj51" path="res://icon.svg" id="5_cdpqt"]
 [ext_resource type="PackedScene" uid="uid://7cvvbke3uido" path="res://scenes/components/objects/ice_spike.tscn" id="6_uaovo"]
+[ext_resource type="PackedScene" uid="uid://brc7cxlek8yso" path="res://scenes/components/room.tscn" id="7_cmn70"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cmn70"]
+size = Vector2(269, 192)
 
 [node name="Level" type="Node2D"]
 y_sort_enabled = true
@@ -56,4 +60,14 @@ position = Vector2(40, -72)
 [node name="Player" parent="." instance=ExtResource("2_knrxq")]
 position = Vector2(24, -8)
 
+[node name="Room" parent="." instance=ExtResource("7_cmn70")]
+visible = true
+position = Vector2(95, 32)
+perfer_zoom = 2.0
+
+[node name="AREA" parent="Room" index="0"]
+position = Vector2(-95, -32)
+shape = SubResource("RectangleShape2D_cmn70")
+
 [editable path="LevelSurface"]
+[editable path="Room"]

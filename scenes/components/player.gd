@@ -2,14 +2,15 @@ extends STRUCTS.SwapReaction
 
 var suppressed = false
 var pos : Vector2i
-@onready var sprite : Sprite2D = $Sprite2D
-@onready var sprite2 : Sprite2D = $Sprite2D2
+@onready var sprites : Node2D = $Sprite
+@onready var sprite : Sprite2D = $Sprite/Sprite2D
+@onready var sprite2 : Sprite2D = $Sprite/Sprite2D2
 
 @onready var cloud_player : AnimationPlayer = $CloudPlayer
 @onready var emotion_player : AnimationPlayer = $EmotionPlayer
 @onready var suppressed_node : Node2D = $Suppressed
+@onready var suppressed2_node : Node2D = $Suppressed2
 @onready var particles : CPUParticles2D = $Suppressed/CPUParticles2D
-
 
 func _level_ready(level: Level, push_initial: bool = true):
 	print("[player] level ready for " + self.name)
@@ -65,15 +66,15 @@ func on_swap(world_state: WorldState):
 func process_suppress(s: bool):
 	if s:
 		suppressed_node.show()
-		sprite.hide()
-		sprite2.hide()
+		suppressed2_node.show()
+		sprites.hide()
 		cloud_player.play("cloud")
 		emotion_player.play("inspect")
 		particles.restart()
 	else:
 		suppressed_node.hide()
-		sprite.show()
-		sprite2.show()
+		suppressed2_node.hide()
+		sprites.show()
 	# 
 
 # func swap():

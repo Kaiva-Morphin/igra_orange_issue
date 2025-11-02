@@ -1,6 +1,7 @@
 extends STRUCTS.StateCollider
 
 @onready var sprite = $Sprite2D
+@onready var reflection = $Sprite2D2
 @onready var in_future_sprite = $Sprite2D3
 
 func _init() -> void:
@@ -37,6 +38,8 @@ func process_swap(world_state: WorldState):
 	if world_state == STRUCTS.WorldState.Future:
 		in_future_sprite.show()
 		sprite.hide()
+		reflection.hide()
 	else:
 		in_future_sprite.hide()
 		sprite.show()
+		reflection.show()

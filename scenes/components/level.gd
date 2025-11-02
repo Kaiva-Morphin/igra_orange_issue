@@ -7,6 +7,9 @@ var requested_swap = false
 
 func _ready() -> void:
 	super._ready()
+	GAMESTATE.camera = $Camera2D
+	GAMESTATE.player = player
+	CAMERA.on_ready()
 
 var processing_history = []
 var processing_revert_stepping = false
@@ -55,6 +58,7 @@ func spawn_dbg(p: Vector2, color: Color):
 
 
 func _process(_dt: float) -> void:
+	CAMERA.update(_dt)
 	# for v in dbg:
 		# v.queue_free()
 	# dbg = []

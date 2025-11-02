@@ -21,11 +21,13 @@ UTILS="*res://singletones/utils.gd"
 STORE="*res://singletones/store.gd"
 GAMESTATE="*res://singletones/gamestate.gd"
 STRUCTS="*res://singletones/structs.gd"
+CAMERA="*res://singletones/camera.gd"
 
 [display]
 
 window/size/viewport_width=800
 window/size/viewport_height=600
+window/stretch/mode="viewport"
 
 [global_group]
 
@@ -34,6 +36,7 @@ movable=""
 swap_reaction=""
 swap_collider=""
 gamestate_reaction=""
+player=""
 
 [input]
 

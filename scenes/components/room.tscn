@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://brc7cxlek8yso"]
+
+[ext_resource type="Script" uid="uid://cflb6lsl4kdnj" path="res://scenes/components/room.gd" id="1_agyv5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bhllk"]
+size = Vector2(257, 225)
+
+[node name="Room" type="Area2D"]
+visible = false
+script = ExtResource("1_agyv5")
+
+[node name="AREA" type="CollisionShape2D" parent="."]
+position = Vector2(46.5, -25.5)
+shape = SubResource("RectangleShape2D_bhllk")
+debug_color = Color(0.7500655, 0.36097035, 0.73325014, 0.41960785)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

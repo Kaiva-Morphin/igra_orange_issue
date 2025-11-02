@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://8cnytedojd2r" path="res://scenes/components/objects/ice_spike.gd" id="1_q6rcx"]
 [ext_resource type="Texture2D" uid="uid://s2k44jvfosc1" path="res://assets/textures/ice_spike.png" id="2_lij4v"]
-[ext_resource type="Shader" uid="uid://bolnlv3rdsyh" path="res://scenes/components/reflection.gdshader" id="3_c8syv"]
+[ext_resource type="Shader" uid="uid://bolnlv3rdsyh" path="res://resources/shaders/reflection.gdshader" id="3_c8syv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c8syv"]
 shader = ExtResource("3_c8syv")

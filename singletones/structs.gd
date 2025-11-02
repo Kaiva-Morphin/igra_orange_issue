@@ -184,7 +184,6 @@ class StateCollider extends SwapReaction:
 			pos = p
 
 	func is_occupied_for(check_mask: int) -> bool:
-		UTILS.log_prints("[StateCollider] is_occupied", check_mask, mask)
 		return check_mask & mask != 0
 
 const MOVABLE_COLLIDER_GROUP : String = "movable_collider"
@@ -212,7 +211,6 @@ class MovableCollider extends StateCollider:
 			global_position = UTILS.from_grid(pos)
 
 	func is_occupied_for(check_mask: int) -> bool:
-		UTILS.log_prints("[MovableCollider] is_occupied", check_mask, mask, check_mask & mask)
 		return check_mask & mask != 0
 
 
@@ -238,7 +236,6 @@ class StaticColliderStore extends LevelstateReaction:
 	func _post_level_ready():
 		super._post_level_ready()
 		var s = save_full_state()
-		UTILS.log_print("[static_collider_store] push initial for " + self.name + " state: " + str(s.data))
 		level_ref.push_initial(s)
 	
 	func _init() -> void:
@@ -334,7 +331,6 @@ class CollideInFuture extends STRUCTS.StateCollider:
 	func on_swap(world_state: WorldState):
 		push_step()
 		super.on_swap(world_state)
-		UTILS.log_print("[collide_in_past] on_swap " + str(world_state))
 		mask = get_mask(world_state)
 	
 	func get_mask(_world: WorldState) -> int:
@@ -353,7 +349,6 @@ class CollideInPast extends STRUCTS.StateCollider:
 	func on_swap(world_state: WorldState):
 		push_step()
 		super.on_swap(world_state)
-		UTILS.log_print("[collide_in_past] on_swap " + str(world_state))
 		mask = get_mask(world_state)
 	
 	func get_mask(_world: WorldState) -> int:

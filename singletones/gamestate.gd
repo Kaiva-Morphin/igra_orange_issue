@@ -2,6 +2,8 @@ extends STRUCTS.LevelstateReaction
 
 
 var worldstate = STRUCTS.WorldState.Future
+var player
+var camera
 
 func swap():
 	push_step()
