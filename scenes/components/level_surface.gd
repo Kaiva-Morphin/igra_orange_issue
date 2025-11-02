@@ -5,6 +5,8 @@ extends STRUCTS.SwapReaction
 
 var offset = Vector2i(0, -13)
 func _level_ready(level: Level, push_initial: bool = true):
+	var pos = UTILS.to_grid(position)
+	position = Vector2(UTILS.from_grid(pos)) - Vector2(UTILS.tile_size) * 0.5
 	for i in range(pasts.size()):
 		var past = pasts[i]
 		var future = futures[i]

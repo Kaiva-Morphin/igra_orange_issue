@@ -1,7 +1,15 @@
 extends STRUCTS.SwapReaction
 
+var suppressed = false
 var pos : Vector2i
 @onready var sprite : Sprite2D = $Sprite2D
+@onready var sprite2 : Sprite2D = $Sprite2D2
+
+@onready var cloud_player : AnimationPlayer = $CloudPlayer
+@onready var emotion_player : AnimationPlayer = $EmotionPlayer
+@onready var suppressed_node : Node2D = $Suppressed
+@onready var particles : CPUParticles2D = $Suppressed/CPUParticles2D
+
 
 func _level_ready(level: Level, push_initial: bool = true):
 	print("[player] level ready for " + self.name)
@@ -11,10 +19,13 @@ func _level_ready(level: Level, push_initial: bool = true):
 
 func restore_state(old_state: StateData):
 	super.restore_state(old_state)
-	print("[player] restore state")
 	pos = old_state.data["pos"]
 	sprite.frame = old_state.data.get("frame")
-	UTILS.log_prints("[player] State restored " + str(pos) + " " + str(sprite.region_rect))
+	sprite2.frame = old_state.data.get("frame")
+	sprite2.position = old_state.data.get("offset")
+	suppressed = old_state.data.get("suppressed")
+	process_suppress(suppressed)
+	print("[player] " + self.name + " restore state: " + str(old_state.data))
 	position = UTILS.from_grid(pos)
 
 func save_state() -> StateData:
@@ -22,6 +33,8 @@ func save_state() -> StateData:
 	pos = UTILS.to_grid(position)
 	s.data["pos"] = pos
 	s.data["frame"] = sprite.frame
+	s.data["offset"] = sprite2.position
+	s.data["suppressed"] = suppressed
 	print("[player] save state for " + self.name + " state: " + str(s.data))
 	return s
 
@@ -44,6 +57,25 @@ func play_left(time: float = 0.8):
 	anim.play("walk_left", -1, time)
 func play_down(time: float = 0.8):
 	anim.play("walk_down", -1, time)
+
+func on_swap(world_state: WorldState):
+	super.on_swap(world_state)
+	process_suppress(self.suppressed)
+
+func process_suppress(s: bool):
+	if s:
+		suppressed_node.show()
+		sprite.hide()
+		sprite2.hide()
+		cloud_player.play("cloud")
+		emotion_player.play("inspect")
+		particles.restart()
+	else:
+		suppressed_node.hide()
+		sprite.show()
+		sprite2.show()
+	# 
+
 # func swap():
 # 	GAMESTATE.swap()
 # 	processing_step = false

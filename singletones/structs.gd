@@ -30,7 +30,7 @@ class Level extends Node2D:
 		add_child(movable_collider_store)
 		ice_store = IceStore.new()
 		add_child(ice_store)
-		UTILS.log_print("[level] level ready")
+		# UTILS.log_print("[level] level ready")
 		
 		get_tree().call_group(LEVELSTATE_REACTION_GROUP, "_level_ready", self)
 		get_tree().call_group(LEVELSTATE_REACTION_GROUP, "_post_level_ready")
@@ -57,7 +57,7 @@ class Level extends Node2D:
 
 	func pop_from_history():
 		if history.size() == 0:
-			UTILS.log_print("[level] no prev step")
+			# UTILS.log_print("[level] no prev step")
 			return
 		step -= 0
 		return history.pop_back()
@@ -68,17 +68,17 @@ class Level extends Node2D:
 	
 	func back():
 		if history.size() == 0:
-			UTILS.log_print("[level] no prev step")
+			# UTILS.log_print("[level] no prev step")
 			return
-		UTILS.log_print("[level] back")
+		# UTILS.log_print("[level] back")
 		var to_back = history.pop_back()
 		for p : StateData in to_back:
-			UTILS.log_prints("[level] reverting: ", p is StateData, p.ref.name, p.data)
+			# UTILS.log_prints("[level] reverting: ", p is StateData, p.ref.name, p.data)
 			p.revert()
 		step -= 1
 	
 	func push_initial(data: StateData):
-		UTILS.log_print("[level] push initial state for " + str(data.ref.name) + " state: " + str(data.data))
+		# UTILS.log_print("[level] push initial state for " + str(data.ref.name) + " state: " + str(data.data))
 		initial_state.push_back(data)
 	
 	func push_state(data: StateData):
@@ -94,10 +94,11 @@ class LevelstateReaction extends Node2D:
 	func _level_ready(level: Level, push_initial: bool = true):
 		level_ref = level
 		if push_initial: level_ref.push_initial(save_full_state())
-		UTILS.log_print("[LevelstateReaction] level ready for " + self.name)
+		# UTILS.log_print("[LevelstateReaction] level ready for " + self.name)
 	
 	func _post_level_ready():
-		UTILS.log_print("[LevelstateReaction] post level ready for " + self.name)
+		pass
+		# UTILS.log_print("[LevelstateReaction] post level ready for " + self.name)
 
 	func save_full_state() -> StateData:
 		return save_state()
@@ -106,15 +107,16 @@ class LevelstateReaction extends Node2D:
 		var new_state = StateData.new()
 		new_state.data = {}
 		new_state.ref = self
-		UTILS.log_print("[LevelstateReaction] save state for " + self.name + " state: " + str(new_state.data))
+		# UTILS.log_print("[LevelstateReaction] save state for " + self.name + " state: " + str(new_state.data))
 		return new_state 
 	
 	func restore_state(_old_state: StateData):
-		UTILS.log_print("[LevelstateReaction] restore state for " + self.name)
+		pass
+		# UTILS.log_print("[LevelstateReaction] restore state for " + self.name)
 
 	func push_step():
 		var state = save_state()
-		UTILS.log_print("[LevelstateReaction] push step for " + self.name + " state: " + str(state.data))
+		# UTILS.log_print("[LevelstateReaction] push step for " + self.name + " state: " + str(state.data))
 		level_ref.push_state(state)
 
 
@@ -274,8 +276,12 @@ class MovableColliderStore extends StaticColliderStore:
 	func can_push(obj: MovableCollider, dir: Vector2i, who: int):
 		var from = obj.pos
 		var p = from + dir
-		UTILS.log_prints("[movable_collider_store] can_push", who, level_ref.movable_collider_store.is_occupied_for(p, STATE_COLLIDER_MOVABLE_MASK), level_ref.static_collider_store.is_occupied_for(p, STATE_COLLIDER_PLAYER_MASK))
-		return obj.is_occupied_for(who) && !(level_ref.movable_collider_store.is_occupied_for(p, STATE_COLLIDER_MOVABLE_MASK) || level_ref.static_collider_store.is_occupied_for(p, STATE_COLLIDER_PLAYER_MASK))
+		return \
+			obj.is_occupied_for(who) \
+			&& !(
+				level_ref.movable_collider_store.is_occupied_for(p, STATE_COLLIDER_MOVABLE_MASK) \
+				|| level_ref.static_collider_store.is_occupied_for(p, STATE_COLLIDER_PLAYER_MASK)
+			)
 	
 	func save_delta(from: Vector2i, to: Vector2i):
 		var m = Moved.new()
@@ -287,7 +293,6 @@ class MovableColliderStore extends StaticColliderStore:
 		var from = obj.pos
 		var to = from + dir
 		obj.pos = to
-		return true
 
 	func restore_state(old_state: StateData):
 		super.restore_state(old_state)

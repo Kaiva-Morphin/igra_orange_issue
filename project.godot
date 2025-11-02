@@ -26,7 +26,6 @@ STRUCTS="*res://singletones/structs.gd"
 
 window/size/viewport_width=800
 window/size/viewport_height=600
-window/stretch/mode="viewport"
 
 [global_group]
 
