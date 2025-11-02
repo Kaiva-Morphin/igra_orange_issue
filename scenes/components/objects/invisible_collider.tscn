@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://chyebkasse78b"]
+
+[ext_resource type="Script" uid="uid://dqeeumo8cbfm3" path="res://scenes/components/objects/invisible_collider.gd" id="1_r6b36"]
+[ext_resource type="Texture2D" uid="uid://byutidsxi5jwu" path="res://assets/textures/invisible_collider.png" id="2_nrufw"]
+
+[node name="InvisibleCollider" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_r6b36")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_nrufw")

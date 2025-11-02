@@ -1,16 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://cxpycm8cc7sgl"]
+[gd_scene load_steps=3 format=3 uid="uid://cxpycm8cc7sgl"]
 
 [ext_resource type="Script" uid="uid://bvfo5go5xltmv" path="res://scenes/components/level.gd" id="1_bjy6a"]
-[ext_resource type="PackedScene" uid="uid://4l033lsf7pxu" path="res://scenes/components/objects/ice.tscn" id="3_grtfn"]
 [ext_resource type="Texture2D" uid="uid://bdtnvw6wnlj51" path="res://icon.svg" id="5_cdpqt"]
-[ext_resource type="PackedScene" uid="uid://7cvvbke3uido" path="res://scenes/components/objects/ice_spike.tscn" id="6_uaovo"]
 
 [node name="Level" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_bjy6a")
-
-[node name="Ice" parent="." instance=ExtResource("3_grtfn")]
-position = Vector2(-24, -72)
 
 [node name="DBG" type="Sprite2D" parent="."]
 visible = false
@@ -18,6 +13,3 @@ modulate = Color(1, 0, 0, 1)
 position = Vector2(-8, -8)
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("5_cdpqt")
-
-[node name="IceSpike" parent="." instance=ExtResource("6_uaovo")]
-position = Vector2(-104, -24)

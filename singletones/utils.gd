@@ -59,3 +59,4 @@ func dir_to_anim(dir: Vector2i):
 	if dir.x == 1 and dir.y == 0:
 		return "right"
 	return null
+

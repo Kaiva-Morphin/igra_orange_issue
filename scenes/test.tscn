@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://p03i8wc7jxvj"]
+
+[ext_resource type="PackedScene" uid="uid://cxpycm8cc7sgl" path="res://scenes/components/level.tscn" id="1_bl13t"]
+[ext_resource type="PackedScene" uid="uid://bnjbnki21opm8" path="res://scenes/levels/puzzle_ice_1.tscn" id="1_errlg"]
+[ext_resource type="PackedScene" uid="uid://u3xhep13ucw4" path="res://scenes/components/player.tscn" id="3_iyx0m"]
+[ext_resource type="PackedScene" uid="uid://7cvvbke3uido" path="res://scenes/components/objects/ice_spike.tscn" id="4_74lek"]
+[ext_resource type="PackedScene" uid="uid://b5lssn8aobfev" path="res://scenes/components/canvas.tscn" id="5_j5jx5"]
+
+[node name="Test" type="Node2D"]
+
+[node name="Level" parent="." instance=ExtResource("1_bl13t")]
+dbg_render = true
+
+[node name="PuzzleIce1" parent="Level" instance=ExtResource("1_errlg")]
+position = Vector2(8, 8)
+
+[node name="Camera2D" type="Camera2D" parent="Level" groups=["camera"]]
+
+[node name="Player" parent="Level" instance=ExtResource("3_iyx0m")]
+position = Vector2(-40, -8)
+
+[node name="IceSpike" parent="Level" instance=ExtResource("4_74lek")]
+position = Vector2(-72, -8)
+
+[node name="Canvas" parent="Level" instance=ExtResource("5_j5jx5")]

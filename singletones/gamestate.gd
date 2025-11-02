@@ -1,7 +1,7 @@
 extends STRUCTS.LevelstateReaction
 
 
-var worldstate = STRUCTS.WorldState.Future
+var worldstate = STRUCTS.WorldState.Past
 var player
 var camera
 
@@ -15,13 +15,15 @@ func swap():
 func save_state() -> STRUCTS.StateData:
 	var s = STRUCTS.StateData.new()
 	s.data = {"worldstate" : GAMESTATE.worldstate}
+	print("[level instance] save state", s.data)
 	s.ref = self
 	return s
 
 func restore_state(old_state: STRUCTS.StateData):
 	super.restore_state(old_state)
-	print("[level instance] restore state")
+	print("[level instance] restore state", old_state.data)
 	worldstate = old_state.data["worldstate"]
+	# get_tree().call_group(STRUCTS.SWAP_REACTION_GROUP, "on_swap", worldstate)
 
 var static_colliders : Dictionary = {}
 var swap_colliders : Dictionary = {}

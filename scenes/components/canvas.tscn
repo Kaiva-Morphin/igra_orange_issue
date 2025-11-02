@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://b5lssn8aobfev"]
+
+[ext_resource type="Shader" uid="uid://gffyjabwf0ut" path="res://resources/shaders/swap.gdshader" id="1_y7jjh"]
+[ext_resource type="Texture2D" uid="uid://b76dkfd23ul7d" path="res://assets/textures/screenshot.png" id="2_i23cq"]
+[ext_resource type="PackedScene" uid="uid://buu0llfaduhea" path="res://scenes/components/pause.tscn" id="3_vnem3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ivt2s"]
+shader = ExtResource("1_y7jjh")
+shader_parameter/strength = 0.0800000038
+shader_parameter/center = Vector2(0.5, 0.5)
+shader_parameter/radius = 1.0
+shader_parameter/aberration = 0.425
+shader_parameter/width = 0.09999999747
+shader_parameter/width2 = 0.21619999453014
+shader_parameter/feather = 0.26000001235
+shader_parameter/feather2 = 0.1030000048925
+
+[node name="Canvas" type="CanvasLayer"]
+
+[node name="PrevSwapState" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_ivt2s")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -300.0
+offset_right = 400.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_i23cq")
+metadata/_edit_use_anchors_ = true
+
+[node name="Pause" parent="." instance=ExtResource("3_vnem3")]
+visible = false

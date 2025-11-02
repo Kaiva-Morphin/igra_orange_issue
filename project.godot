@@ -37,6 +37,7 @@ swap_reaction=""
 swap_collider=""
 gamestate_reaction=""
 player=""
+camera=""
 
 [input]
 

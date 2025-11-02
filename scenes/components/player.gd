@@ -26,7 +26,6 @@ func restore_state(old_state: StateData):
 	sprite2.position = old_state.data.get("offset")
 	suppressed = old_state.data.get("suppressed")
 	process_suppress(suppressed)
-	print("[player] " + self.name + " restore state: " + str(old_state.data))
 	position = UTILS.from_grid(pos)
 
 func save_state() -> StateData:
@@ -36,7 +35,6 @@ func save_state() -> StateData:
 	s.data["frame"] = sprite.frame
 	s.data["offset"] = sprite2.position
 	s.data["suppressed"] = suppressed
-	print("[player] save state for " + self.name + " state: " + str(s.data))
 	return s
 
 func push_step():

@@ -6,7 +6,7 @@ var requested_swap = false
 @export var dbg_render : bool = false
 
 var player
-var tweened_player_pos 
+var tweened_player
 
 @onready var swap_interpolation : TextureRect = $Canvas/PrevSwapState
 
@@ -15,8 +15,12 @@ func _ready() -> void:
 	GAMESTATE.camera = get_tree().get_nodes_in_group("camera")[0]
 	GAMESTATE.player = get_tree().get_nodes_in_group("player")[0]
 	player = GAMESTATE.player
-	tweened_player_pos = player.global_position
+	tweened_player = Node2D.new()
+	add_child(tweened_player)
+	tweened_player.global_position = player.global_position
 	CAMERA.on_ready()
+
+var inited = false
 
 var processing_history = []
 var processing_revert_stepping = false
@@ -36,7 +40,7 @@ func smooth_back(item: StateData, on_end = null, speed_per_tile = UTILS.speed_pe
 		return false
 
 func step_relative_speed(s: int) -> float:
-	return max(0.1 / pow(1.05, s), 0.02)
+	return max(0.1 / pow(1.01, s), 0.001)
 
 
 var swap_speed = UTILS.speed_per_tile * 16
@@ -66,6 +70,11 @@ func spawn_dbg(p: Vector2, color: Color):
 var screenshot: Texture2D
 
 func _process(_dt: float) -> void:
+	if !inited:
+		inited = true
+		
+	
+	# player.global_position = floor(tweened_player.global_position)
 	CAMERA.update(_dt)
 	for v in dbg:
 		v.queue_free()
@@ -94,11 +103,11 @@ func _process(_dt: float) -> void:
 		player.stop_anim()
 
 	if requested_swap:
+		requested_swap = false
 		await RenderingServer.frame_post_draw
 		var viewport_texture = get_viewport().get_texture()
 		var img = viewport_texture.get_image()
 		var tex = ImageTexture.create_from_image(img)
-		requested_swap = false
 		swap_interpolation.texture = tex
 		processing_step = true
 		var mat : ShaderMaterial = swap_interpolation.material

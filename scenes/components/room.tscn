@@ -10,6 +10,8 @@ visible = false
 script = ExtResource("1_agyv5")
 
 [node name="AREA" type="CollisionShape2D" parent="."]
+z_index = 20
+z_as_relative = false
 position = Vector2(46.5, -25.5)
 shape = SubResource("RectangleShape2D_bhllk")
 debug_color = Color(0.7500655, 0.36097035, 0.73325014, 0.41960785)

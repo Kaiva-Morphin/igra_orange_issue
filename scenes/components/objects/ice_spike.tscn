@@ -6,7 +6,6 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c8syv"]
 shader = ExtResource("3_c8syv")
-shader_parameter/frame_size = Vector2(0, 0)
 
 [node name="IceSpike" type="Node2D"]
 y_sort_enabled = true
