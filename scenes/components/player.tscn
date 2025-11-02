@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dyn1tp1e832mo" path="res://assets/textures/question.png" id="6_v4i73"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v4i73"]
+radius = 7.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_acvb7"]
 shader = ExtResource("3_sjsxr")

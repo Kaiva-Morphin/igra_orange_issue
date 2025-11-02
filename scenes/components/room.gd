@@ -1,12 +1,12 @@
 extends Area2D
 
-@export var perfer_zoom = 3.
+@export var prefer_zoom = 3.
 @onready var area = self.get_node("AREA")
 var rect : Rect2;
 
 func _ready() -> void:
 	self.process_mode = Node.PROCESS_MODE_ALWAYS
-	var pos = Vector2(UTILS.from_grid(UTILS.to_grid(area.global_position)))
+	var pos = Vector2(UTILS.from_grid(UTILS.to_grid(area.global_position))) - Vector2(UTILS.tile_size) * 0.5
 	var size = area.shape.size
 	self.monitoring = true
 	rect = Rect2(pos - size * 0.5, pos + size * 0.5)
@@ -15,13 +15,13 @@ func _on_body_entered(body):
 	print("[room] enter")
 	if !body.is_in_group("player"): return
 	print("[room] enter player")
-	#CAMERA.override_zoom = perfer_zoom
-	CAMERA.room_bound_rects.append([perfer_zoom, rect])
+	#CAMERA.override_zoom = prefer_zoom
+	CAMERA.room_bound_rects.append([prefer_zoom, rect])
 func _on_body_exited(body):
 	print("[room] exit")
 	if !body.is_in_group("player"): return
 	#CAMERA.override_zoom = 0.
-	CAMERA.room_bound_rects.erase([perfer_zoom, rect])
+	CAMERA.room_bound_rects.erase([prefer_zoom, rect])
 
 var d = 0
 

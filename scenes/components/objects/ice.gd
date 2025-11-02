@@ -2,6 +2,7 @@ extends STRUCTS.MovableCollider
 
 @onready var sprite = $Sprite2D
 @onready var reflection = $Sprite2D2
+@onready var puddle = $Puddle
 
 func _init() -> void:
 	super._init(STATE_COLLIDER_PLAYER_MASK | STATE_COLLIDER_MOVABLE_MASK)
@@ -37,8 +38,10 @@ func get_mask(_world: WorldState) -> int:
 func process_swap(world_state: WorldState):
 	mask = get_mask(world_state)
 	if world_state == STRUCTS.WorldState.Future:
+		sprite.hide()
 		reflection.hide()
-		sprite.frame = 1
+		puddle.show()
 	else:
-		sprite.frame = 0
+		sprite.show()
+		puddle.hide()
 		reflection.show()

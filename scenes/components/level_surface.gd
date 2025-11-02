@@ -1,12 +1,14 @@
 extends STRUCTS.SwapReaction
 
-@onready var pasts : Array[TileMapLayer] = [$Past, $Past2, $Past3]
-@onready var futures : Array[TileMapLayer] = [$Future, $Future2, $Future3]
+@onready var past_root : Node2D = $Past
+@onready var future_root : Node2D = $Future
 
 var offset = Vector2i(0, -13)
 func _level_ready(level: Level, push_initial: bool = true):
 	var pos = UTILS.to_grid(position)
 	position = Vector2(UTILS.from_grid(pos)) - Vector2(UTILS.tile_size) * 0.5
+	var pasts = past_root.get_children()
+	var futures = future_root.get_children()
 	for i in range(pasts.size()):
 		var past = pasts[i]
 		var future = futures[i]
@@ -61,13 +63,8 @@ func on_swap(world_state: WorldState):
 
 func process_state(world_state: WorldState):
 	if world_state:
-		for past in pasts:
-			past.hide()
-		for future in futures:
-			print("[level_surface] show future: ", future.name)
-			future.show()
+		past_root.hide()
+		future_root.show()
 	else:
-		for past in pasts:
-			past.show()
-		for future in futures:
-			future.hide()
+		past_root.show()
+		future_root.hide()

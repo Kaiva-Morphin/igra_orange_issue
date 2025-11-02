@@ -3,12 +3,19 @@ extends STRUCTS.Level
 var processing_step = false
 var requested_swap = false
 
-@onready var player = $Player
+@export var dbg_render : bool = false
+
+var player
+var tweened_player_pos 
+
+@onready var swap_interpolation : TextureRect = $Canvas/PrevSwapState
 
 func _ready() -> void:
 	super._ready()
-	GAMESTATE.camera = $Camera2D
-	GAMESTATE.player = player
+	GAMESTATE.camera = get_tree().get_nodes_in_group("camera")[0]
+	GAMESTATE.player = get_tree().get_nodes_in_group("player")[0]
+	player = GAMESTATE.player
+	tweened_player_pos = player.global_position
 	CAMERA.on_ready()
 
 var processing_history = []
@@ -56,22 +63,24 @@ func spawn_dbg(p: Vector2, color: Color):
 	d.show()
 	dbg.append(d)
 
+var screenshot: Texture2D
 
 func _process(_dt: float) -> void:
 	CAMERA.update(_dt)
-	# for v in dbg:
-		# v.queue_free()
-	# dbg = []
-	# if true:
-	# 	spawn_dbg(UTILS.from_grid(player.pos) , Color(0, 1, 0))
-	# for i in movable_collider_store.pos_to_collider.values():
-	# 	spawn_dbg(UTILS.from_grid(i.pos), Color(1, 0, 0))
-	# for i in movable_collider_store.pos_to_collider.keys():
-	# 	spawn_dbg(Vector2(UTILS.from_grid(i)) + Vector2(8, 8), Color(1, 0, 1))
-	# for i in static_collider_store.pos_to_collider.values():
-	# 	spawn_dbg(UTILS.from_grid(i.pos), Color(1, 1, 0))
-	# for i in static_collider_store.pos_to_collider.keys():
-	# 	spawn_dbg(Vector2(UTILS.from_grid(i)) + Vector2(8, 8), Color(1, 1, 1))
+	for v in dbg:
+		v.queue_free()
+	dbg = []
+	if dbg_render:
+		if true:
+			spawn_dbg(UTILS.from_grid(player.pos) , Color(0, 1, 0))
+		for i in movable_collider_store.pos_to_collider.values():
+			spawn_dbg(UTILS.from_grid(i.pos), Color(1, 0, 0))
+		for i in movable_collider_store.pos_to_collider.keys():
+			spawn_dbg(Vector2(UTILS.from_grid(i)) + Vector2(8, 8), Color(1, 0, 1))
+		for i in static_collider_store.pos_to_collider.values():
+			spawn_dbg(UTILS.from_grid(i.pos), Color(1, 1, 0))
+		for i in static_collider_store.pos_to_collider.keys():
+			spawn_dbg(Vector2(UTILS.from_grid(i)) + Vector2(8, 8), Color(1, 1, 1))
 
 	if process_revert():
 		return
@@ -85,7 +94,24 @@ func _process(_dt: float) -> void:
 		player.stop_anim()
 
 	if requested_swap:
+		await RenderingServer.frame_post_draw
+		var viewport_texture = get_viewport().get_texture()
+		var img = viewport_texture.get_image()
+		var tex = ImageTexture.create_from_image(img)
 		requested_swap = false
+		swap_interpolation.texture = tex
+		processing_step = true
+		var mat : ShaderMaterial = swap_interpolation.material
+		mat.set_shader_parameter("radius", 0.0)
+		var tween = create_tween()
+		tween.tween_property(
+			mat,
+			"shader_parameter/radius",
+			1.0,
+			1.2
+		)
+		tween.finished.connect(func(): processing_step = false)
+
 		var suppressed = false
 		var mc = movable_collider_store.get_collider(player.pos)
 		if mc:

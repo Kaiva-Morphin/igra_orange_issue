@@ -7,28 +7,51 @@
 y_sort_enabled = true
 script = ExtResource("1_4ipou")
 
-[node name="Future" type="TileMapLayer" parent="."]
-z_index = -2
+[node name="Future" type="Node2D" parent="."]
+
+[node name="FutureSurface" type="TileMapLayer" parent="Future"]
+z_index = -3
 tile_set = ExtResource("1_7fnnd")
 
-[node name="Future2" type="TileMapLayer" parent="."]
+[node name="FutureGround" type="TileMapLayer" parent="Future"]
+z_index = -2
+y_sort_enabled = true
+tile_set = ExtResource("1_7fnnd")
+
+[node name="FutureDetails" type="TileMapLayer" parent="Future"]
 z_index = -1
 y_sort_enabled = true
 tile_set = ExtResource("1_7fnnd")
 
-[node name="Future3" type="TileMapLayer" parent="."]
+[node name="FutureCliffs" type="TileMapLayer" parent="Future"]
 y_sort_enabled = true
 tile_set = ExtResource("1_7fnnd")
 
-[node name="Past" type="TileMapLayer" parent="."]
+[node name="FutureCliffsDetails" type="TileMapLayer" parent="Future"]
+z_index = 2
+y_sort_enabled = true
+tile_set = ExtResource("1_7fnnd")
+
+[node name="Past" type="Node2D" parent="."]
+
+[node name="PastSurface" type="TileMapLayer" parent="Past"]
+z_index = -3
+tile_set = ExtResource("1_7fnnd")
+
+[node name="PastGround" type="TileMapLayer" parent="Past"]
 z_index = -2
-tile_set = ExtResource("1_7fnnd")
-
-[node name="Past2" type="TileMapLayer" parent="."]
-z_index = -1
 y_sort_enabled = true
 tile_set = ExtResource("1_7fnnd")
 
-[node name="Past3" type="TileMapLayer" parent="."]
+[node name="PastDetails" type="TileMapLayer" parent="Past"]
+y_sort_enabled = true
+tile_set = ExtResource("1_7fnnd")
+
+[node name="PastCliffs" type="TileMapLayer" parent="Past"]
+y_sort_enabled = true
+tile_set = ExtResource("1_7fnnd")
+
+[node name="PastCliffsDetails" type="TileMapLayer" parent="Past"]
+z_index = 2
 y_sort_enabled = true
 tile_set = ExtResource("1_7fnnd")

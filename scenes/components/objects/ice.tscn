@@ -6,7 +6,6 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a1ram"]
 shader = ExtResource("3_a1ram")
-shader_parameter/frame_size = Vector2(0, 0)
 
 [node name="Ice" type="Node2D"]
 y_sort_enabled = true
@@ -20,6 +19,7 @@ hframes = 2
 region_rect = Rect2(0, 32, 16, 16)
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
+visible = false
 y_sort_enabled = true
 material = SubResource("ShaderMaterial_a1ram")
 position = Vector2(0, 16)
@@ -27,4 +27,15 @@ scale = Vector2(1, -1)
 texture = ExtResource("2_qan7x")
 offset = Vector2(0, -8)
 hframes = 2
+region_rect = Rect2(0, 32, 16, 16)
+
+[node name="Puddle" type="Sprite2D" parent="."]
+visible = false
+z_index = -1
+position = Vector2(0, 8)
+scale = Vector2(1, -1)
+texture = ExtResource("2_qan7x")
+offset = Vector2(0, -8)
+hframes = 2
+frame = 1
 region_rect = Rect2(0, 32, 16, 16)

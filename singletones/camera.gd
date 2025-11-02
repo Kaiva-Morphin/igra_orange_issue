@@ -5,7 +5,7 @@ extends STRUCTS.LevelstateReaction
 var room_bound_rects = []
 
 
-@export var perfer_zoom = 2.0
+@export var prefer_zoom = 2.0
 @export var override_zoom : float
 
 @export var follow_node : Node2D = null
@@ -15,7 +15,7 @@ func get_state():
 	return [
 		GAMESTATE.camera,
 		follow_speed,
-		perfer_zoom,
+		prefer_zoom,
 		override_zoom,
 		follow_node,
 		override_focus_node,
@@ -27,7 +27,7 @@ func set_state(data):
 	if data == []: return
 	GAMESTATE.camera = data[0]
 	follow_speed = data[1]
-	perfer_zoom = data[2]
+	prefer_zoom = data[2]
 	override_zoom = data[3]
 	follow_node = data[4]
 	override_focus_node = data[5]
@@ -71,7 +71,7 @@ func update(delta: float) -> void:
 	
 	if override_zoom: target_zoom = override_zoom
 	elif len(room_bound_rects) != 0: target_zoom = room_bound_rects[len(room_bound_rects)-1][0]
-	else: target_zoom = perfer_zoom
+	else: target_zoom = prefer_zoom
 	if follow_speed == 0:
 		GAMESTATE.camera.zoom = Vector2(target_zoom, target_zoom)
 	else:
@@ -108,4 +108,5 @@ func update(delta: float) -> void:
 				if follow_speed == 0:
 					GAMESTATE.camera.global_position = target_position
 				else:
-					GAMESTATE.camera.global_position = lerp(GAMESTATE.camera.global_position, target_position, delta * follow_speed)  + shake_vec
+					#GAMESTATE.camera.global_position = lerp(GAMESTATE.camera.global_position, target_position, delta * follow_speed)  + shake_vec
+					GAMESTATE.camera.global_position = target_position

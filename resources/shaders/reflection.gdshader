@@ -19,7 +19,7 @@ void fragment() {
 	float max_offset = 2.0;
 	float wave_len = 4.0;
 	float speed_scale = 7.0;
-	float v = px.y * floor(sin(floor(world_pos.x / wave_len) + TIME * speed_scale) * max_offset) / max_offset;
+	float v = px.y * (floor(sin(floor(world_pos.x / wave_len) + TIME * speed_scale) * max_offset) / max_offset - 1.0);
 	
 	vec4 shifted_color = texture(
 		TEXTURE, 
