@@ -15,7 +15,7 @@ func _level_ready(level: Level, push_initial: bool = true):
 	pos = UTILS.to_grid(position)
 	position = UTILS.from_grid(pos)
 	super._level_ready(level, push_initial)
-	process_swap(is_future)
+	process_swap(GAMESTATE.worldstate)
 
 func on_swap(world_state: WorldState):
 	push_step()
@@ -29,7 +29,7 @@ func save_state() -> StateData:
 
 func restore_state(old_state: StateData):
 	super.restore_state(old_state)
-	process_swap(is_future)
+	process_swap(GAMESTATE.worldstate)
 
 func get_mask(_world: WorldState) -> int:
 	var m = 0

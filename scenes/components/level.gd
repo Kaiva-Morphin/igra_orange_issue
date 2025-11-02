@@ -19,6 +19,8 @@ func _ready() -> void:
 	add_child(tweened_player)
 	tweened_player.global_position = player.global_position
 	CAMERA.on_ready()
+	start_new_step()
+	get_tree().call_group(STRUCTS.SWAP_REACTION_GROUP, "on_swap", GAMESTATE.worldstate)
 
 var inited = false
 
@@ -40,7 +42,7 @@ func smooth_back(item: StateData, on_end = null, speed_per_tile = UTILS.speed_pe
 		return false
 
 func step_relative_speed(s: int) -> float:
-	return max(0.1 / pow(1.01, s), 0.001)
+	return max(0.1 / pow(1.1, s), 0.0001)
 
 
 var swap_speed = UTILS.speed_per_tile * 16
@@ -72,7 +74,6 @@ var screenshot: Texture2D
 func _process(_dt: float) -> void:
 	if !inited:
 		inited = true
-		
 	
 	# player.global_position = floor(tweened_player.global_position)
 	CAMERA.update(_dt)

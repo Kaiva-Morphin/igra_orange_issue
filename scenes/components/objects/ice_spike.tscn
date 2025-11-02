@@ -28,6 +28,7 @@ hframes = 3
 frame = 2
 
 [node name="Sprite2D3" type="Sprite2D" parent="."]
+visible = false
 y_sort_enabled = true
 texture = ExtResource("2_lij4v")
 offset = Vector2(0, -9)

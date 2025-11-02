@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://7uv76nxqe7nu"]
+[gd_scene load_steps=10 format=4 uid="uid://7uv76nxqe7nu"]
 
 [ext_resource type="PackedScene" uid="uid://cxpycm8cc7sgl" path="res://scenes/components/level.tscn" id="1_damgg"]
 [ext_resource type="PackedScene" uid="uid://u3xhep13ucw4" path="res://scenes/components/player.tscn" id="2_uifax"]
@@ -6,12 +6,13 @@
 [ext_resource type="PackedScene" uid="uid://brc7cxlek8yso" path="res://scenes/components/room.tscn" id="4_uifax"]
 [ext_resource type="PackedScene" uid="uid://b5lssn8aobfev" path="res://scenes/components/canvas.tscn" id="5_cp366"]
 [ext_resource type="PackedScene" uid="uid://bnjbnki21opm8" path="res://scenes/levels/puzzle_ice_1.tscn" id="8_7bsie"]
+[ext_resource type="PackedScene" uid="uid://7cvvbke3uido" path="res://scenes/components/objects/ice_spike.tscn" id="9_ivt2s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cp366"]
 size = Vector2(304, 320)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uifax"]
-size = Vector2(608, 384)
+size = Vector2(600, 384)
 
 [node name="main" type="Node2D"]
 
@@ -39,25 +40,25 @@ tile_map_data = PackedByteArray("AAD7/9v/AAAEABEAAAA=")
 [node name="PastCliffsDetails" parent="Level/LevelSurface/Past" index="5"]
 tile_map_data = PackedByteArray("AAD7/+3/AAATAA0AAAD6/+3/AAATAA0AAAD5/+3/AAATAA0AAAD4/+3/AAAWAA8AAAD3/+3/AAATAA4AAAD2/+3/AAATAA4AAAD1/+3/AAATAA4AAAAIAO3/AAAWAA0AAAAHAO3/AAAXAA8AAAAGAO3/AAATAA0AAAAFAO3/AAASAA0AAAD4/+z/AAAUAA4AAAD4/+v/AAAUAA0AAAD3/+z/AAATAA4AAAD3/+v/AAATAA0AAAD2/+z/AAATAA4AAAD2/+v/AAAWAA8AAAD1/+z/AAATAA4AAAD1/+v/AAATAA4AAAD2/+r/AAAUAA4AAAD2/+n/AAAUAA4AAAD2/+j/AAAUAA4AAAD2/+f/AAAUAA0AAAD1/+r/AAATAA4AAAD1/+n/AAATAA4AAAD1/+j/AAATAA4AAAD1/+f/AAAWAA8AAAD1/+b/AAAUAA4AAAD1/+X/AAAUAA4AAAD1/+T/AAAUAA4AAAD1/+P/AAAUAA4AAAD1/+L/AAAUAA4AAAD1/+H/AAAUAA0AAAD0/+X/AAASAA4AAAD0/+T/AAASAA4AAAD0/+P/AAASAA4AAAD0/+L/AAASAA4AAAD0/+H/AAASAA0AAAD0/+3/AAASAA4AAAD0/+z/AAASAA4AAAD0/+v/AAASAA4AAAD0/+r/AAASAA4AAAD0/+n/AAASAA4AAAD0/+j/AAASAA4AAAD0/+f/AAASAA4AAAD0/+b/AAASAA4AAAAIAOz/AAAXAA8AAAAIAOv/AAASAA4AAAAHAOz/AAASAA0AAAAIAN//AAAXAA0AAAAIAN7/AAATAA4AAAAIAN3/AAATAA4AAAAIANz/AAATAA4AAAAIANv/AAATAA4AAAAHAN//AAASAA8AAAAHAN7/AAASAA4AAAAHAN3/AAAXAA0AAAAHANz/AAATAA4AAAAHANv/AAATAA4AAAAIANr/AAATAA4AAAAHANr/AAATAA4AAAAGAN3/AAASAA8AAAAGANz/AAAXAA0AAAAGANv/AAATAA4AAAAGANr/AAATAA4AAAAFANv/AAAXAA0AAAAFANr/AAATAA4AAAAFANz/AAASAA8AAAAEANv/AAASAA8AAAAEANr/AAASAA4AAAAJAN//AAAUAA4AAAAJAN7/AAAUAA4AAAAJAN3/AAAUAA4AAAAJANz/AAAUAA4AAAAJANv/AAAUAA4AAAAJANr/AAAUAA4AAAAJANn/AAAUAA4AAAAIANn/AAATAA4AAAAJAOL/AAAWAA8AAAAJAOH/AAAUAA4AAAAJAOD/AAAUAA4AAAAIAOL/AAASAA4AAAAIAOH/AAASAA4AAAAIAOD/AAASAA4AAAAJAOr/AAAUAA4AAAAJAOn/AAAUAA4AAAAJAOj/AAAWAA0AAAAJAOf/AAATAA4AAAAJAOb/AAASAA4AAAAJAOX/AAASAA4AAAAJAOT/AAASAA4AAAAJAOP/AAAXAA0AAAAIAOr/AAASAA4AAAAIAOn/AAASAA4AAAAIAOj/AAASAA4AAAAIAOf/AAASAA0AAAAIAOP/AAASAA8AAAAJAOv/AAAUAA4AAAAKAOb/AAAUAA4AAAAKAOX/AAAUAA4AAAAKAOT/AAAUAA4AAAAKAOP/AAAUAA4AAAAKAOL/AAAUAA0AAAAKAOf/AAAUAA4AAAAKAOj/AAAUAA8AAAD+/+3/AAAUAA0AAAD9/+3/AAATAA0AAAD8/+3/AAATAA0AAAD0/+7/AAASAA4AAAD1/+7/AAATAA4AAAD2/+7/AAATAA4AAAD3/+7/AAATAA4AAAD4/+7/AAATAA4AAAD5/+7/AAATAA4AAAD6/+7/AAATAA4AAAD7/+7/AAATAA4AAAD8/+7/AAATAA4AAAD9/+7/AAATAA4AAAD+/+7/AAAWAA8AAAD//+7/AAAUAA0AAAAEAO7/AAASAA0AAAAFAO7/AAAXAA8AAAAGAO7/AAATAA4AAAAHAO7/AAATAA4AAAAIAO7/AAAUAA4AAAAJAOz/AAAUAA4AAAAJAO3/AAAUAA8AAAAHANn/AAATAA4AAAAGANn/AAATAA4AAAAFANn/AAATAA4AAAAEANn/AAAXAA0AAAADANn/AAASAA8AAAAJANj/AAAUAA0AAAAIANj/AAATAA0AAAAHANj/AAATAA0AAAAGANj/AAATAA0AAAAFANj/AAATAA0AAAAEANj/AAATAA0AAAADANj/AAASAA0AAAD0/+//AAASAA4AAAD1/+//AAATAA4AAAD2/+//AAATAA4AAAD3/+//AAATAA4AAAD4/+//AAATAA4AAAD5/+//AAATAA4AAAD6/+//AAATAA4AAAD7/+//AAATAA4AAAD8/+//AAATAA4AAAD9/+//AAATAA4AAAD+/+//AAATAA4AAAD//+//AAAWAA8AAAAAAO//AAAUAA0AAAAEAO//AAASAA4AAAAFAO//AAATAA4AAAAGAO//AAATAA4AAAAHAO//AAATAA4AAAAIAO//AAAUAA4AAAA=")
 
-[node name="CaveRoom" parent="Level" instance=ExtResource("4_uifax")]
+[node name="CaveRoom" parent="Level/LevelSurface" instance=ExtResource("4_uifax")]
 visible = true
-position = Vector2(-8, -424)
+position = Vector2(-16, -432)
 
-[node name="AREA" parent="Level/CaveRoom" index="0"]
+[node name="AREA" parent="Level/LevelSurface/CaveRoom" index="0"]
 position = Vector2(-8, 0)
 shape = SubResource("RectangleShape2D_cp366")
 
-[node name="CaveExit" parent="Level" instance=ExtResource("4_uifax")]
+[node name="CaveExit" parent="Level/LevelSurface" instance=ExtResource("4_uifax")]
 visible = true
-position = Vector2(-8, -72)
+position = Vector2(-16, -80)
 prefer_zoom = 2.0
 
-[node name="AREA" parent="Level/CaveExit" index="0"]
-position = Vector2(80, 0)
+[node name="AREA" parent="Level/LevelSurface/CaveExit" index="0"]
+position = Vector2(76, 0)
 shape = SubResource("RectangleShape2D_uifax")
 
 [node name="Player" parent="Level" instance=ExtResource("2_uifax")]
-position = Vector2(40, -408)
+position = Vector2(356, -96)
 
 [node name="Camera2D" type="Camera2D" parent="Level" groups=["camera"]]
 position = Vector2(8, 8)
@@ -67,7 +68,10 @@ position = Vector2(8, 8)
 [node name="PuzzleIce1" parent="Level" instance=ExtResource("8_7bsie")]
 position = Vector2(384, -80)
 
+[node name="IceSpike" parent="Level" instance=ExtResource("9_ivt2s")]
+position = Vector2(352, -300)
+
 [editable path="Level"]
 [editable path="Level/LevelSurface"]
-[editable path="Level/CaveRoom"]
-[editable path="Level/CaveExit"]
+[editable path="Level/LevelSurface/CaveRoom"]
+[editable path="Level/LevelSurface/CaveExit"]

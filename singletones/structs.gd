@@ -123,26 +123,27 @@ class LevelstateReaction extends Node2D:
 
 const SWAP_REACTION_GROUP : String = "swap_reaction"
 class SwapReaction extends LevelstateReaction:
-	var is_future = false
+	# var is_future = false
 	func _init() -> void:
 		super._init()
 		self.add_to_group(SWAP_REACTION_GROUP)
 	
 	func _level_ready(level: Level, push_initial: bool = true):
-		is_future = GAMESTATE.worldstate == WorldState.Future
+		# is_future = GAMESTATE.worldstate == WorldState.Future
 		super._level_ready(level, push_initial)
 
 	func save_state() -> StateData:
 		var s = super.save_state()
-		s.data["is_future"] = is_future
+		# s.data["is_future"] = is_future
 		return s
 	
 	func restore_state(old_state: StateData):
 		super.restore_state(old_state)
-		is_future = old_state.data["is_future"]
+		# is_future = old_state.data["is_future"]
 	
-	func on_swap(world_state: WorldState):
-		is_future = world_state == WorldState.Future
+	func on_swap(_world_state: WorldState):
+		# is_future = world_state == WorldState.Future
+		pass
 
 
 const STATE_COLLIDER_PLAYER_MASK : int = 1
