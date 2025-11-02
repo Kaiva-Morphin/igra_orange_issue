@@ -108,5 +108,5 @@ func update(delta: float) -> void:
 				if follow_speed == 0:
 					GAMESTATE.camera.global_position = target_position
 				else:
-					# GAMESTATE.camera.global_position = lerp(GAMESTATE.camera.global_position, target_position, delta * follow_speed)  + shake_vec
-					GAMESTATE.camera.global_position = target_position
+					GAMESTATE.camera.global_position = lerp(GAMESTATE.camera.global_position, target_position, delta * follow_speed)  + shake_vec
+					# GAMESTATE.camera.global_position = target_position

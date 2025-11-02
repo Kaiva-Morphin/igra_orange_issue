@@ -386,6 +386,7 @@ libraries = {
 
 [node name="Suppressed" type="Node2D" parent="."]
 visible = false
+z_index = 1
 position = Vector2(0, -8)
 
 [node name="Sprite2D3" type="Sprite2D" parent="Suppressed"]
@@ -400,6 +401,7 @@ frame = 1
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="Suppressed"]
 position = Vector2(0, -8)
+emitting = false
 amount = 3
 texture = SubResource("AtlasTexture_ypwcc")
 one_shot = true

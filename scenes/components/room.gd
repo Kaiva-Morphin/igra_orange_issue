@@ -6,7 +6,7 @@ var rect : Rect2;
 
 func _ready() -> void:
 	self.process_mode = Node.PROCESS_MODE_ALWAYS
-	var pos = area.global_position
+	var pos = area.global_position - UTILS.tile_size * 0.5
 	var size = area.shape.size
 	self.monitoring = true
 	rect = Rect2(pos - size * 0.5, pos + size * 0.5)
@@ -15,6 +15,14 @@ func _on_body_entered(body):
 	if !body.is_in_group("player"): return
 	#CAMERA.override_zoom = prefer_zoom
 	CAMERA.room_bound_rects.append([prefer_zoom, rect])
+	var parent = get_parent();
+	print("[room] player")
+	print("[room] parent", parent)
+	var m = parent.get("modulate")
+	print("[room] modulate", m)
+	if m:
+		body.get_parent().modulate = m
+
 func _on_body_exited(body):
 	if !body.is_in_group("player"): return
 	#CAMERA.override_zoom = 0.
@@ -23,11 +31,11 @@ func _on_body_exited(body):
 var d = 0
 
 func _process(delta: float) -> void:
-	self.process_mode = Node.PROCESS_MODE_ALWAYS
-	var pos = area.global_position
-	var size = area.shape.size
-	self.monitoring = true
-	rect = Rect2(pos - size * 0.5, pos + size * 0.5)
+	# self.process_mode = Node.PROCESS_MODE_ALWAYS
+	# var pos = area.global_position
+	# var size = area.shape.size
+	# self.monitoring = true
+	# rect = Rect2(pos - size * 0.5, pos + size * 0.5)
 
 	# if !GAME.enable_opt: return
 	d += delta

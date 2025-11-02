@@ -1,0 +1,35 @@
+[gd_scene load_steps=8 format=3 uid="uid://7uv76nxqe7nu"]
+
+[ext_resource type="PackedScene" uid="uid://cxpycm8cc7sgl" path="res://scenes/components/level.tscn" id="1_u81e1"]
+[ext_resource type="PackedScene" uid="uid://u3xhep13ucw4" path="res://scenes/components/player.tscn" id="2_b6bv0"]
+[ext_resource type="PackedScene" uid="uid://b5lssn8aobfev" path="res://scenes/components/canvas.tscn" id="3_ubwgw"]
+[ext_resource type="PackedScene" uid="uid://bnjbnki21opm8" path="res://scenes/levels/puzzle_ice_1.tscn" id="4_vkq25"]
+[ext_resource type="PackedScene" uid="uid://k0d3rjnhq25v" path="res://scenes/levels/cave.tscn" id="5_7lrji"]
+[ext_resource type="PackedScene" uid="uid://dfs77egu2ooq6" path="res://scenes/levels/cave_exit.tscn" id="6_b6bv0"]
+[ext_resource type="PackedScene" uid="uid://b4l7xofqvc3a1" path="res://scenes/levels/first_ice.tscn" id="7_ubwgw"]
+
+[node name="main" type="Node2D"]
+
+[node name="Level" parent="." instance=ExtResource("1_u81e1")]
+
+[node name="CaveExit" parent="Level" instance=ExtResource("6_b6bv0")]
+position = Vector2(-384, 192)
+
+[node name="Player" parent="Level" instance=ExtResource("2_b6bv0")]
+position = Vector2(409, 171)
+
+[node name="Camera2D" type="Camera2D" parent="Level" groups=["camera"]]
+position = Vector2(8, 8)
+
+[node name="Canvas" parent="Level" instance=ExtResource("3_ubwgw")]
+
+[node name="PuzzleIce1" parent="Level" instance=ExtResource("4_vkq25")]
+position = Vector2(944, 752)
+
+[node name="FirstIce" parent="Level" instance=ExtResource("7_ubwgw")]
+position = Vector2(304, 336)
+
+[node name="Cave" parent="Level" instance=ExtResource("5_7lrji")]
+position = Vector2(-336, -288)
+
+[editable path="Level"]

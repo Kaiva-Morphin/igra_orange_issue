@@ -12,8 +12,8 @@ func _ready() -> void:
 	$Sprite2D.hide()
 
 func _level_ready(level: Level, push_initial: bool = true):
-	pos = UTILS.to_grid(position)
-	position = UTILS.from_grid(pos)
+	pos = UTILS.to_grid(global_position)
+	global_position = Vector2(UTILS.from_grid(pos)) # - Vector2(UTILS.tile_size * 0.5)
 	super._level_ready(level, push_initial)
 	process_swap(GAMESTATE.worldstate)
 
@@ -47,5 +47,3 @@ func get_mask(_world: WorldState) -> int:
 
 func process_swap(world_state: WorldState):
 	mask = get_mask(world_state)
-
-

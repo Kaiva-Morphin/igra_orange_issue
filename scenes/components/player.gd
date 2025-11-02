@@ -42,7 +42,9 @@ func push_step():
 
 @onready var anim : AnimationPlayer = $AnimationPlayer
 
-func play(n: String, time: float = 0.8):
+func play(n: String, time: float = UTILS.walk_anim_speed):
+	if anim.is_playing() and anim.current_animation == "walk_" + n:
+		return
 	anim.play("walk_" + n, -1, time)
 
 func stop_anim():
@@ -73,7 +75,6 @@ func process_suppress(s: bool):
 		suppressed_node.hide()
 		suppressed2_node.hide()
 		sprites.show()
-	# 
 
 # func swap():
 # 	GAMESTATE.swap()

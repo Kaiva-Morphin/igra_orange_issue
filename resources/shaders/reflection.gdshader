@@ -34,14 +34,14 @@ void fragment() {
 	//COLOR = shifted_color;
 	
 	if (
-		length(screen_color.rgb - water) < .1
+		length(screen_color.rgb - water) < .02
 		&& shifted_color.a > 0.0
 	) {
 		COLOR = shifted_color * screen_color;
-		COLOR.a = 1.0;
+		//COLOR.a = 1.0;
 	}
 	else if (
-		length(screen_color.rgb - ice) < .1
+		length(screen_color.rgb - ice) < .02
 		&& COLOR.a > 0.0
 	) {
 		COLOR.a = 0.5;

@@ -8,8 +8,8 @@ func _init() -> void:
 	super._init(STATE_COLLIDER_PLAYER_MASK | STATE_COLLIDER_MOVABLE_MASK)
 
 func _level_ready(level: Level, push_initial: bool = true):
-	pos = UTILS.to_grid(position)
-	position = UTILS.from_grid(pos)
+	pos = UTILS.to_grid(global_position)
+	global_position = UTILS.from_grid(pos)
 	super._level_ready(level, push_initial)
 	process_swap(GAMESTATE.worldstate)
 
@@ -26,7 +26,7 @@ func save_state() -> StateData:
 func restore_state(old_state: StateData):
 	super.restore_state(old_state)
 	pos = old_state.data["pos"]
-	position = UTILS.from_grid(pos)
+	global_position = UTILS.from_grid(pos)
 	process_swap(GAMESTATE.worldstate)
 
 func get_mask(_world: WorldState) -> int:

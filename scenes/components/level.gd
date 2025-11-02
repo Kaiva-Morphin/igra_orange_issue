@@ -12,6 +12,7 @@ var tweened_player
 
 func _ready() -> void:
 	super._ready()
+	GAMESTATE.level_controller = self
 	GAMESTATE.camera = get_tree().get_nodes_in_group("camera")[0]
 	GAMESTATE.player = get_tree().get_nodes_in_group("player")[0]
 	player = GAMESTATE.player
@@ -21,8 +22,6 @@ func _ready() -> void:
 	CAMERA.on_ready()
 	start_new_step()
 	get_tree().call_group(STRUCTS.SWAP_REACTION_GROUP, "on_swap", GAMESTATE.worldstate)
-
-var inited = false
 
 var processing_history = []
 var processing_revert_stepping = false
@@ -72,10 +71,7 @@ func spawn_dbg(p: Vector2, color: Color):
 var screenshot: Texture2D
 
 func _process(_dt: float) -> void:
-	if !inited:
-		inited = true
-	
-	# player.global_position = floor(tweened_player.global_position)
+	UTILS.update_tween_positions()
 	CAMERA.update(_dt)
 	for v in dbg:
 		v.queue_free()
@@ -100,7 +96,7 @@ func _process(_dt: float) -> void:
 	
 	if processing_step:
 		return
-	else:
+	elif !player.suppressed:
 		player.stop_anim()
 
 	if requested_swap:
@@ -224,14 +220,14 @@ func _process(_dt: float) -> void:
 		player.pos = end
 		var anim_n = UTILS.dir_to_anim(i_dir)
 		if anim_n:
-			player.play(anim_n, 4)
+			player.play(anim_n)
 		UTILS.tween_move(player, UTILS.from_grid(end), func(): processing_step = false, dist * UTILS.speed_per_tile)
 		processing_step = true
 		return
 
 	var anim_name = UTILS.dir_to_anim(i_dir)
 	if anim_name:
-		player.play(anim_name, 4)
+		player.play(anim_name)
 	processing_step = true
 	player.push_step()
 	player.pos = player.pos + i_dir

@@ -20,6 +20,7 @@ region_rect = Rect2(0, 32, 16, 16)
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 visible = false
+z_index = -1
 y_sort_enabled = true
 material = SubResource("ShaderMaterial_a1ram")
 position = Vector2(0, 16)

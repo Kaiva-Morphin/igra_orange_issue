@@ -5,6 +5,10 @@ void vertex() {
     world_pos = (MODEL_MATRIX * vec4(VERTEX, 0.0, 1.0)).xy;
 }
 
+float hash(vec2 p) {
+    return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+}
+
 void fragment() {
 	vec2 tex_size = vec2(textureSize(TEXTURE, 0));
 	vec2 px = vec2(1.0 / tex_size.x, 1.0 / tex_size.y);
@@ -14,7 +18,6 @@ void fragment() {
 	//  +
 	float wpy = floor(world_pos.y * 0.25);
 	float v = px.y * ((floor(sin(floor((world_pos.x + wpy) / wave_len) + TIME * speed_scale) * max_offset) / max_offset - 1.0) + 0.1);
-
 	vec4 col = texture(TEXTURE, UV);
 	vec4 shifted_color = texture(
 		TEXTURE,

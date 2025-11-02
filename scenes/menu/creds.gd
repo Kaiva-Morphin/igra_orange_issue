@@ -8,7 +8,8 @@ var text_template = "[color=gray]- {asset} от [color=white][wave]{author}[/wav
 enum TYPE {
 	Sound,
 	Font,
-	Image
+	Image,
+	Shader
 }
 
 func type_to_header(type: TYPE) -> String:
@@ -19,13 +20,16 @@ func type_to_header(type: TYPE) -> String:
 			return "< Звуки и музыка >"
 		TYPE.Image:
 			return "< Картинки >"
-	return "unknown!"
+		TYPE.Shader:
+			return "< Шейдеры >"
+	return "unknown"
 
 func type_order() -> Array[TYPE]:
 	return [
 		TYPE.Font,
 		TYPE.Sound,
-		TYPE.Image
+		TYPE.Image,
+		TYPE.Shader
 	]
 
 func format(i: Dictionary) -> String:
@@ -43,6 +47,8 @@ var creds = [
 	
 	{"asset": "Top-Down Forest Tileset (Edited)", "author": "gametoolkit", "link": "https://gametoolkit.itch.io/top-down-forest-tileset", "types": [TYPE.Image]},
 	{"asset": "All Screaming Brain Studios Textures", "author": "All Screaming Brain Studios", "link": "https://screamingbrainstudios.itch.io/", "types": [TYPE.Image]},
+
+	{"asset": "Distortion/Shockwave Shader (Edited)", "author": "", "link": "https://godotshaders.com/shader/distortion/", "types": [TYPE.Shader]}
 ]
 
 func header(t: TYPE) -> void:

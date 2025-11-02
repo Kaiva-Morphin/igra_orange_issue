@@ -2,6 +2,7 @@ extends Node
 
 var tile_size : Vector2i = Vector2i(16, 16)
 var speed_per_tile : float = 0.15
+var walk_anim_speed = 2.5
 
 func to_grid(v: Vector2):
 	return Vector2i(floor(v.x / tile_size.x), floor(v.y / tile_size.y))
@@ -37,12 +38,42 @@ func reverse_state(state: STRUCTS.WorldState):
 
 func tween_move(what: Node, dst: Vector2, on_end = null, time=speed_per_tile):
 	var tween := get_tree().create_tween()
-	tween.tween_property(what, "position", dst, time)
+	tween.tween_property(what, "global_position", dst, time)
 	if on_end: tween.finished.connect(on_end)
+
+func update_tween_positions():
+	pass
+
+# var tween_proxies := {} # what -> proxy
+
+# func tween_move(what: Node2D, dst: Vector2, on_end = null, time = speed_per_tile):
+# 	var proxy := Node2D.new()
+# 	proxy.position = what.global_position
+# 	get_tree().current_scene.add_child(proxy)
+
+# 	tween_proxies[what] = {
+# 		"proxy": proxy,
+# 		"on_end": on_end
+# 	}
+
+# 	var tween := get_tree().create_tween()
+# 	tween.tween_property(proxy, "global_position", dst, time)
+# 	tween.finished.connect(func():
+# 		if on_end:
+# 			on_end.call()
+# 		tween_proxies.erase(what)
+# 		proxy.queue_free()
+# 	)
+
+# func update_tween_positions():
+# 	for what in tween_proxies.keys():
+# 		var proxy_data = tween_proxies[what]
+# 		var proxy = proxy_data["proxy"]
+# 		what.global_position = proxy.global_position
 
 
 func log_print(msg):
-	if OS.is_debug_build():
+	if OS.is_debug_build(): 
 		print(msg)
 
 func log_prints(...msg):
@@ -89,7 +120,7 @@ func get_input_dir() -> Vector2i:
 		return Vector2i.ZERO
 
 	# Выбираем последнюю нажатую клавишу
-	var last_action := active[0]
+	var last_action = active[0]
 	for action in active:
 		if _press_times[action] > _press_times[last_action]:
 			last_action = action
