@@ -380,6 +380,7 @@ debug_color = Color(0.9372549, 0, 0, 0.41960785)
 
 [node name="CutsceneUtils" type="Node2D" parent="LevelSurface/CutsceneController"]
 script = ExtResource("4_dve5i")
+zoom = 3.0
 
 [node name="PlayerPosOverride" type="Node2D" parent="LevelSurface/CutsceneController/CutsceneUtils"]
 position = Vector2(-8, -45)

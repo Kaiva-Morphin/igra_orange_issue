@@ -36,6 +36,13 @@ func end_player_follow():
 	GAMESTATE.player.play_walk()
 
 
+func set_camera_override(node_name : String):
+	CAMERA.follow_node = get_node(node_name)
+
+func clear_camera_override():
+	CAMERA.follow_node = GAMESTATE.player
+
+
 func _process(_delta: float) -> void:
 	if camera_grabbed:
 		CAMERA.override_zoom = zoom

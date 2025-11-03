@@ -42,7 +42,9 @@ func main_anim_done():
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if !body.is_in_group("player"): return
-	shooted = false
+	if shooted:
+		return
+	shooted = true
 	GAMESTATE.level_controller.requested_swap = false
 	GAMESTATE.player.suppressed = true
 	GAMESTATE.player.stop_anim()
@@ -120,7 +122,8 @@ func _process(_delta: float) -> void:
 			UTILS.log_prints("[cutscene]", processing_idx, d, single_axis, "Going from", GAMESTATE.player.global_position, "to", dst)
 			if single_axis:
 				processing_idx += 1
-	
+		else:
+			stage = Stage.PreDone
 
 	if stage == Stage.PreDone:
 		stage = Stage.Done

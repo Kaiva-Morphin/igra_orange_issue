@@ -6,4 +6,8 @@ func _ready() -> void:
 	for s in $Sounds.get_children():
 		s.play()
 
-
+var i = false
+func _process(_dt: float) -> void:
+	if !i:
+		i = true
+		GAMESTATE.player.look_down()
