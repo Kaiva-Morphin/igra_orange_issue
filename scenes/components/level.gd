@@ -30,10 +30,10 @@ var processing_revert_step = 0
 func smooth_back(item: StateData, on_end = null, speed_per_tile = UTILS.speed_per_tile) -> bool:
 	var pos = item.data.get("pos")
 	if pos != null:
-		var p = item.ref.position
+		var p = item.ref.global_position
 		item.revert()
-		item.ref.position = p
-		var dist = Vector2(UTILS.to_grid(item.ref.position) - pos).length()
+		item.ref.global_position = p
+		var dist = Vector2(UTILS.to_grid(item.ref.global_position) - pos).length()
 		UTILS.tween_move(item.ref, pos * UTILS.tile_size, on_end, speed_per_tile * dist)
 		return true
 	else:
@@ -83,10 +83,10 @@ func _process(_dt: float) -> void:
 			spawn_dbg(UTILS.from_grid(i.pos), Color(1, 0, 0))
 		for i in movable_collider_store.pos_to_collider.keys():
 			spawn_dbg(Vector2(UTILS.from_grid(i)) + Vector2(8, 8), Color(1, 0, 1))
-		for i in static_collider_store.pos_to_collider.values():
-			spawn_dbg(UTILS.from_grid(i.pos), Color(1, 1, 0))
-		for i in static_collider_store.pos_to_collider.keys():
-			spawn_dbg(Vector2(UTILS.from_grid(i)) + Vector2(8, 8), Color(1, 1, 1))
+		# for i in static_collider_store.pos_to_collider.values():
+		# 	spawn_dbg(UTILS.from_grid(i.pos), Color(1, 1, 0))
+		# for i in static_collider_store.pos_to_collider.keys():
+		# 	spawn_dbg(Vector2(UTILS.from_grid(i)) + Vector2(8, 8), Color(1, 1, 1))
 
 	if process_revert():
 		return
@@ -98,7 +98,6 @@ func _process(_dt: float) -> void:
 		return
 	elif !player.suppressed:
 		player.stop_anim()
-
 	if requested_swap:
 		requested_swap = false
 		await RenderingServer.frame_post_draw
@@ -149,6 +148,8 @@ func _process(_dt: float) -> void:
 	if player.suppressed:
 		return
 	
+	player.stop_anim()
+	
 	if Input.is_action_just_pressed("hard_reset"):
 		UTILS.log_print("[level instance] hard reset")
 		reset()
@@ -173,14 +174,17 @@ func _process(_dt: float) -> void:
 	
 	var m = movable_collider_store.get_collider(dst_grid)
 	var i = ice_store.get_collider(dst_grid)
+	var p_i = ice_store.get_collider(grid_pos)
 	if m && m.is_occupied_for(STATE_COLLIDER_PLAYER_MASK):
 		if !movable_collider_store.can_push(m, i_dir, STATE_COLLIDER_PLAYER_MASK):
 			UTILS.log_print("[level instance] push blocked")
 			return
 		start_new_step()
 		var m_dst = m.pos + i_dir
-		
-		if i and GAMESTATE.worldstate == WorldState.Past:
+		var m_i = ice_store.get_collider(m_dst)
+
+		# // p_i || (
+		if m_i and GAMESTATE.worldstate == WorldState.Past:
 			m_dst = get_slide_end(m_dst, i_dir)
 			var d = m_dst - grid_pos
 			var dist = max(abs(d.x), abs(d.y))
@@ -193,41 +197,55 @@ func _process(_dt: float) -> void:
 			m.pos = m_dst
 			processing_step = true
 			UTILS.tween_move(m, UTILS.from_grid(m_dst), func(): processing_step = false, t)
+			UTILS.log_print("[push] m_i push")
 			return
 
 		movable_collider_store.save_delta(m.pos, m.pos + i_dir)
 		movable_collider_store.push_step()
 
 		movable_collider_store.unchecked_move(m.pos, m.pos + i_dir)
+		UTILS.log_prints("[push] !m_i push", p_i)
 
 		m.push_step()
 		movable_collider_store.unchecked_push_object(m, i_dir)
 
-		UTILS.log_prints("[level instance] move", m.pos)
+		UTILS.log_prints("[level instance] move", m.pos, p_i)
 		UTILS.tween_move(m, UTILS.from_grid(grid_pos) + i_dir * 2 * UTILS.tile_size, func(): processing_step = false)
-		# processing_step = true
-		# return
+		if p_i != null:
+			processing_step = true
+			return
 	else:
 		start_new_step()
 
 	var dst = player.position + Vector2(i_dir * UTILS.tile_size)
 
 	if i and GAMESTATE.worldstate == WorldState.Past:
+		UTILS.log_print("[push] slide")
 		var end = get_slide_end(grid_pos, i_dir)
 		var d = end - grid_pos
 		var dist = max(abs(d.x), abs(d.y))
 		player.push_step()
 		player.pos = end
-		var anim_n = UTILS.dir_to_anim(i_dir)
-		if anim_n:
-			player.play(anim_n)
+		player.look_dir(i_dir)
+		player.play_walk()
+		player.resume_anim()
+		var t = get_tree().create_timer(0.25);
+		t.timeout.connect(func(): player.stop_anim())
 		UTILS.tween_move(player, UTILS.from_grid(end), func(): processing_step = false, dist * UTILS.speed_per_tile)
 		processing_step = true
 		return
+	player.look_dir(i_dir)
+	UTILS.log_print("[push] move")
 
-	var anim_name = UTILS.dir_to_anim(i_dir)
-	if anim_name:
-		player.play(anim_name)
+	# if i_dir.x == 0 and i_dir.y == -1:
+	# 	player.look_up()
+	# if i_dir.x == 0 and i_dir.y == 1:
+	# if i_dir.x == -1 and i_dir.y == 0:
+	# 	player.look_left()
+	# if i_dir.x == 1 and i_dir.y == 0:
+	# 	player.look_right()
+	player.play_walk(0.15)
+	player.resume_anim()
 	processing_step = true
 	player.push_step()
 	player.pos = player.pos + i_dir

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://u3xhep13ucw4"]
+[gd_scene load_steps=23 format=3 uid="uid://u3xhep13ucw4"]
 
 [ext_resource type="Script" uid="uid://d1qwscxc6v1d4" path="res://scenes/components/player.gd" id="1_6mmc7"]
 [ext_resource type="Texture2D" uid="uid://te0hulw7hbws" path="res://assets/textures/player.png" id="2_h3cwf"]
@@ -208,9 +208,15 @@ tracks/2/keys = {
 "values": [Vector2(0, 17)]
 }
 
+[sub_resource type="Animation" id="Animation_lkd77"]
+resource_name = "test"
+length = 0.8
+loop_mode = 1
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_v4i73"]
 _data = {
 &"RESET": SubResource("Animation_h3cwf"),
+&"test": SubResource("Animation_lkd77"),
 &"walk_down": SubResource("Animation_sjsxr"),
 &"walk_left": SubResource("Animation_v4i73"),
 &"walk_right": SubResource("Animation_acvb7"),
@@ -358,16 +364,17 @@ y_sort_enabled = true
 position = Vector2(0, -4)
 texture = ExtResource("2_h3cwf")
 hframes = 4
-vframes = 10
+vframes = 12
 
 [node name="Sprite2D2" type="Sprite2D" parent="Sprite"]
+visible = false
 y_sort_enabled = true
 material = SubResource("ShaderMaterial_acvb7")
 position = Vector2(0, 20)
 texture = ExtResource("2_h3cwf")
 flip_v = true
 hframes = 4
-vframes = 10
+vframes = 12
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

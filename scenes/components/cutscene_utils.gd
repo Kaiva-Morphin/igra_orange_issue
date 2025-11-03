@@ -1,7 +1,9 @@
 extends Node2D
 
-@onready var camera_override : Node2D = $CameraOverride
+@onready var pos_override : Node2D = $PlayerPosOverride
 @onready var particle_template : Sprite2D = $Particles
+
+@export var zoom : float = 2.5
 
 func _ready() -> void:
 	particle_template.hide()
@@ -17,3 +19,36 @@ func shoot_particle_effect_player(idx: int, initial_offset: Vector2, dir: Vector
 	p.frame = idx
 	UTILS.tween_move(p, GAMESTATE.player.global_position + dir + initial_offset, func(): p.queue_free(), lifetime)
 	return
+
+var camera_grabbed = false
+func grab_camera():
+	zoom = GAMESTATE.camera.zoom.x
+	camera_grabbed = true
+
+var player_following = false
+func begin_player_follow():
+	player_following = true
+
+func end_player_follow():
+	player_following = false
+	GAMESTATE.player.play_walk()
+
+
+func _process(_delta: float) -> void:
+	if camera_grabbed:
+		GAMESTATE.camera.zoom = Vector2(zoom, zoom)
+	if player_following:
+		GAMESTATE.player.global_position = pos_override.global_position - Vector2(UTILS.tile_size / 2)
+		GAMESTATE.player.pos = UTILS.to_grid(pos_override.global_position)
+	if player_anim_grabbed:
+		GAMESTATE.player.set_sprite(player_frame)
+
+@export var player_frame : int = 8
+
+var player_anim_grabbed = false
+func grab_player_anim():
+	GAMESTATE.player.anim_paused = true
+	player_anim_grabbed = true
+
+func end_player_anim():
+	player_anim_grabbed = false

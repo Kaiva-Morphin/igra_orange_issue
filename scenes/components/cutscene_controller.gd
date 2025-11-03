@@ -43,6 +43,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	shooted = false
 	GAMESTATE.level_controller.requested_swap = false
 	GAMESTATE.player.suppressed = true
+	GAMESTATE.player.stop_anim()
 	if animator && animator.get_animation(init_anim) != null:
 		animator.play(init_anim)
 		stage = Stage.InitAnim
@@ -74,20 +75,10 @@ func _process(_delta: float) -> void:
 				dst = Vector2(GAMESTATE.player.global_position.x, g_pos.y)
 			var dist = max(abs(d.x), abs(d.y))
 
-			var dir = Vector2i.ZERO
-			if d.x > 0:
-				dir.x = 1
-			elif d.x < 0:
-				dir.x = -1
-			if d.y > 0:
-				dir.y = 1
-			elif d.y < 0:
-				dir.y = -1
-			var a = UTILS.dir_to_anim(dir)
-			UTILS.log_prints("[cutscene] dir", dir, "a", a)
-			if a:
-				GAMESTATE.player.anim.stop()	
-				GAMESTATE.player.play(a)
+			GAMESTATE.player.look_dir(d)
+			GAMESTATE.player.resume_anim()
+			GAMESTATE.player.play_walk()
+
 			GAMESTATE.player.pos = UTILS.to_grid(dst)
 			processing = true
 			UTILS.tween_move(GAMESTATE.player, dst, func(): processing = false, dist / UTILS.tile_size.x * UTILS.speed_per_tile)
