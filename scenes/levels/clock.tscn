@@ -21,7 +21,7 @@ metadata/_edit_lock_ = true
 [node name="FutureSurface" parent="LevelSurface/Future" index="0"]
 y_sort_enabled = true
 
-[node name="Past" parent="LevelSurface" index="1"]
+[node name="Past" parent="LevelSurface" index="3"]
 metadata/_edit_lock_ = true
 
 [node name="PastSurface" parent="LevelSurface/Past" index="0"]
