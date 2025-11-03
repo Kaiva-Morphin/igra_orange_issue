@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://b5lssn8aobfev"]
+[gd_scene load_steps=8 format=3 uid="uid://b5lssn8aobfev"]
 
+[ext_resource type="Script" uid="uid://btimc1q7t3cvu" path="res://scenes/components/canvas.gd" id="1_vnem3"]
 [ext_resource type="Shader" uid="uid://gffyjabwf0ut" path="res://resources/shaders/swap.gdshader" id="1_y7jjh"]
 [ext_resource type="Texture2D" uid="uid://b76dkfd23ul7d" path="res://assets/textures/screenshot.png" id="2_i23cq"]
 [ext_resource type="PackedScene" uid="uid://buu0llfaduhea" path="res://scenes/components/pause.tscn" id="3_vnem3"]
+[ext_resource type="Shader" uid="uid://drgo586b0daos" path="res://resources/shaders/vignette.gdshader" id="4_i23cq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ivt2s"]
 shader = ExtResource("1_y7jjh")
@@ -15,7 +17,16 @@ shader_parameter/width2 = 0.21619999453014
 shader_parameter/feather = 0.26000001235
 shader_parameter/feather2 = 0.1030000048925
 
-[node name="Canvas" type="CanvasLayer"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i23cq"]
+shader = ExtResource("4_i23cq")
+shader_parameter/progress = 0.0
+shader_parameter/col = Color(0, 0, 0, 1)
+shader_parameter/width = 0.09999999747
+shader_parameter/feather = 1.0
+
+[node name="Canvas" type="CanvasLayer" node_paths=PackedStringArray("vignette")]
+script = ExtResource("1_vnem3")
+vignette = NodePath("vignette")
 
 [node name="PrevSwapState" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_ivt2s")
@@ -35,3 +46,12 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Pause" parent="." instance=ExtResource("3_vnem3")]
 visible = false
+
+[node name="vignette" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_i23cq")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_i23cq")

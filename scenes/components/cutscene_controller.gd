@@ -1,11 +1,13 @@
 extends STRUCTS.LevelstateReaction
 
+
 var shooted = false
 func save_state() -> STRUCTS.StateData:
 	var s = super.save_state()
 	s.data["shooted"] = shooted
 	s.ref = self
 	return s
+
 
 func restore_state(old_state: STRUCTS.StateData):
 	super.restore_state(old_state)
@@ -18,6 +20,7 @@ func restore_state(old_state: STRUCTS.StateData):
 @export var init_anim : String
 @export var anim : String
 
+
 enum Stage {
 	NotShooted,
 	InitAnim,
@@ -28,6 +31,7 @@ enum Stage {
 	Done
 }
 
+
 func to_follow():
 	if stage != Stage.InitAnim:
 		return
@@ -35,10 +39,12 @@ func to_follow():
 
 var stage = Stage.NotShooted
 
+
 func main_anim_done():
 	if stage != Stage.Animation:
 		return
 	stage = Stage.LatePath
+
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if !body.is_in_group("player"): return
@@ -58,11 +64,13 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		animator.play(anim)
 		stage = Stage.Animation
 
+
 var processing = false
 var processing_idx = 0
 func _process(_delta: float) -> void:
 	if processing:
 		return
+	
 	if stage == Stage.FollowPath:
 		if path:
 			if processing_idx >= path.curve.point_count:
@@ -89,6 +97,7 @@ func _process(_delta: float) -> void:
 			UTILS.log_prints("[cutscene]", processing_idx, d, single_axis, "Going from", GAMESTATE.player.global_position, "to", dst)
 			if single_axis:
 				processing_idx += 1
+	
 	if stage == Stage.Animation:
 		if animator:
 			animator.play(anim)
@@ -96,7 +105,7 @@ func _process(_delta: float) -> void:
 			stage = Stage.LatePath
 
 	if stage == Stage.LatePath:
-		print("[cutscene] late path")
+		UTILS.log_print("[cutscene] late path")
 		if late_path:
 			if processing_idx >= late_path.curve.point_count:
 				GAMESTATE.player.stop_anim()

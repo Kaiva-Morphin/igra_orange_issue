@@ -11,3 +11,11 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 func tp():
 	GAMESTATE.player.pos = UTILS.to_grid(tp_pos.global_position)
 	GAMESTATE.player.global_position = UTILS.from_grid(GAMESTATE.player.pos)
+	GAMESTATE.vignette.animate(0.0, 0.3, 5.0, Vector4(1.0, 1.0, 1.0, 1.0))
+
+func suppress_player():
+	GAMESTATE.player.suppressed = true
+
+
+func unsuppress_player():
+	GAMESTATE.player.suppressed = false

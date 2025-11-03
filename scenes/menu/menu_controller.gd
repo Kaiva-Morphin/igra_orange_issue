@@ -1,9 +1,5 @@
 extends Control
 
-enum SELECTED {
-	MAIN,
-}
-
 @export var main_screen : Control
 @export var settings_screen : Control
 @export var creds_screen : Control

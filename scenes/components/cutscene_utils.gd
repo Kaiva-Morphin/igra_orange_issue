@@ -27,6 +27,9 @@ func grab_camera():
 	zoom = GAMESTATE.camera.zoom.x
 	camera_grabbed = true
 
+func release_camera():
+	camera_grabbed = false
+
 var player_following = false
 func begin_player_follow():
 	player_following = true

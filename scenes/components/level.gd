@@ -1,5 +1,14 @@
 extends STRUCTS.Level
 
+var powers_unlocked = false
+
+func checkpoint():
+	pass
+
+func load_checkpoint():
+	pass
+
+
 var processing_step = false
 var requested_swap = false
 
@@ -22,6 +31,7 @@ func _ready() -> void:
 	CAMERA.on_ready()
 	start_new_step()
 	get_tree().call_group(STRUCTS.SWAP_REACTION_GROUP, "on_swap", GAMESTATE.worldstate)
+	GAMESTATE.vignette.animate(0.0, 0.3, 5.0)
 
 var processing_history = []
 var processing_revert_stepping = false
@@ -92,7 +102,7 @@ func _process(_dt: float) -> void:
 	if process_revert():
 		return
 
-	if Input.is_action_just_pressed("swap"):
+	if Input.is_action_just_pressed("swap") && powers_unlocked:
 		requested_swap = true
 	
 	if processing_step:
@@ -141,7 +151,7 @@ func _process(_dt: float) -> void:
 		GAMESTATE.swap()
 		return
 	
-	if Input.is_action_just_pressed("step_back"):
+	if Input.is_action_just_pressed("step_back")  && powers_unlocked:
 		UTILS.log_prints("[level instance] step_back")
 		var h = pop_from_history()
 		if h:
@@ -156,12 +166,12 @@ func _process(_dt: float) -> void:
 	
 	player.stop_anim()
 	
-	if Input.is_action_just_pressed("hard_reset"):
+	if Input.is_action_just_pressed("hard_reset")  && powers_unlocked:
 		UTILS.log_print("[level instance] hard reset")
 		reset()
 		return
 	
-	if Input.is_action_just_pressed("reset"):
+	if Input.is_action_just_pressed("reset") && powers_unlocked:
 		UTILS.log_print("[level instance] reset")
 		var hist = take_history()
 		hist.reverse()

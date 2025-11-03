@@ -13,7 +13,6 @@ func _ready() -> void:
 
 func _on_body_entered(body):
 	if !body.is_in_group("player"): return
-	#CAMERA.override_zoom = prefer_zoom
 	CAMERA.room_bound_rects.append([prefer_zoom, rect])
 	var parent = get_parent();
 	print("[room] player")
@@ -22,6 +21,7 @@ func _on_body_entered(body):
 	print("[room] modulate", m)
 	if m:
 		body.get_parent().modulate = m
+
 
 func _on_body_exited(body):
 	if !body.is_in_group("player"): return

@@ -5,6 +5,7 @@ var worldstate = STRUCTS.WorldState.Past
 var player
 var camera
 var level_controller : STRUCTS.Level
+var vignette
 
 func swap():
 	push_step()
