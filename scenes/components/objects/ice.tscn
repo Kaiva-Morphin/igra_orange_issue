@@ -15,19 +15,19 @@ script = ExtResource("1_qan7x")
 y_sort_enabled = true
 texture = ExtResource("2_qan7x")
 offset = Vector2(0, -8)
-hframes = 2
+hframes = 3
 region_rect = Rect2(0, 32, 16, 16)
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
-visible = false
 z_index = -1
 y_sort_enabled = true
 material = SubResource("ShaderMaterial_a1ram")
-position = Vector2(0, 16)
+position = Vector2(0, 14)
 scale = Vector2(1, -1)
 texture = ExtResource("2_qan7x")
 offset = Vector2(0, -8)
-hframes = 2
+hframes = 3
+frame = 2
 region_rect = Rect2(0, 32, 16, 16)
 
 [node name="Puddle" type="Sprite2D" parent="."]
@@ -37,6 +37,6 @@ position = Vector2(0, 8)
 scale = Vector2(1, -1)
 texture = ExtResource("2_qan7x")
 offset = Vector2(0, -8)
-hframes = 2
+hframes = 3
 frame = 1
 region_rect = Rect2(0, 32, 16, 16)

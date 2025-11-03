@@ -380,7 +380,6 @@ debug_color = Color(0.9372549, 0, 0, 0.41960785)
 
 [node name="CutsceneUtils" type="Node2D" parent="LevelSurface/CutsceneController"]
 script = ExtResource("4_dve5i")
-zoom = 3.0
 
 [node name="PlayerPosOverride" type="Node2D" parent="LevelSurface/CutsceneController/CutsceneUtils"]
 position = Vector2(-8, -45)
@@ -416,6 +415,7 @@ vframes = 3
 
 [node name="Camera2D" type="Camera2D" parent="LevelSurface/CutsceneController"]
 enabled = false
+zoom = Vector2(3, 3)
 
 [node name="Path2D" type="Path2D" parent="LevelSurface/CutsceneController"]
 curve = SubResource("Curve2D_ge1oy")

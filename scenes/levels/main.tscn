@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://7uv76nxqe7nu"]
+[gd_scene load_steps=9 format=3 uid="uid://7uv76nxqe7nu"]
 
 [ext_resource type="PackedScene" uid="uid://cxpycm8cc7sgl" path="res://scenes/components/level.tscn" id="1_u81e1"]
 [ext_resource type="PackedScene" uid="uid://u3xhep13ucw4" path="res://scenes/components/player.tscn" id="2_b6bv0"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://k0d3rjnhq25v" path="res://scenes/levels/cave.tscn" id="5_7lrji"]
 [ext_resource type="PackedScene" uid="uid://dfs77egu2ooq6" path="res://scenes/levels/cave_exit.tscn" id="6_b6bv0"]
 [ext_resource type="PackedScene" uid="uid://b4l7xofqvc3a1" path="res://scenes/levels/first_ice.tscn" id="7_ubwgw"]
+[ext_resource type="PackedScene" uid="uid://ccvyelicelqg" path="res://lab.tscn" id="8_vkq25"]
 
 [node name="main" type="Node2D"]
 
@@ -19,7 +20,7 @@ volume_db = -26.294
 position = Vector2(-384, 192)
 
 [node name="Player" parent="Level" instance=ExtResource("2_b6bv0")]
-position = Vector2(-164, -455)
+position = Vector2(-148, 587)
 
 [node name="Camera2D" type="Camera2D" parent="Level" groups=["camera"]]
 position = Vector2(8, 8)
@@ -34,5 +35,8 @@ position = Vector2(304, 336)
 
 [node name="Cave" parent="Level" instance=ExtResource("5_7lrji")]
 position = Vector2(-336, -288)
+
+[node name="lab" parent="Level" instance=ExtResource("8_vkq25")]
+position = Vector2(-210, 543)
 
 [editable path="Level"]

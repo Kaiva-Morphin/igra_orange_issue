@@ -52,6 +52,11 @@ tracks/2/keys = {
 "values": [Vector2(0, 20)]
 }
 
+[sub_resource type="Animation" id="Animation_lkd77"]
+resource_name = "test"
+length = 0.8
+loop_mode = 1
+
 [sub_resource type="Animation" id="Animation_sjsxr"]
 resource_name = "walk_down"
 tracks/0/type = "value"
@@ -207,11 +212,6 @@ tracks/2/keys = {
 "update": 0,
 "values": [Vector2(0, 17)]
 }
-
-[sub_resource type="Animation" id="Animation_lkd77"]
-resource_name = "test"
-length = 0.8
-loop_mode = 1
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_v4i73"]
 _data = {
@@ -442,3 +442,6 @@ use_parent_material = true
 texture = ExtResource("5_v4i73")
 hframes = 5
 frame = 1
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+current = true
