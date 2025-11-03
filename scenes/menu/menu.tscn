@@ -316,7 +316,6 @@ pitch_scale = 1.27
 bus = &"UI"
 
 [node name="Main" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -324,20 +323,25 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Main"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Main"]
 layout_mode = 1
-anchors_preset = 13
-anchor_left = 0.5
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -34.0
-offset_right = 34.0
-grow_horizontal = 2
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -52.0
+offset_right = 72.0
+offset_bottom = 52.0
 grow_vertical = 2
+
+[node name="Control" type="Control" parent="Main/HBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main/HBoxContainer"]
+layout_mode = 2
 theme_override_constants/separation = 2
 alignment = 1
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Main/VBoxContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Main/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_colors/font_shadow_color = Color(0.1148968, 0.11489681, 0.1148968, 1)
@@ -345,36 +349,36 @@ theme_override_constants/shadow_outline_size = 0
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
 bbcode_enabled = true
-text = "[wave amp=30.0 freq=5.0][rainbow freq=0.25]ИГРА"
+text = "[wave amp=30.0 freq=5.0][rainbow freq=0.25]CLOCat"
 fit_content = true
 scroll_active = false
 autowrap_trim_flags = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Control" type="Control" parent="Main/VBoxContainer"]
+[node name="Control" type="Control" parent="Main/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 5)
 layout_mode = 2
 
-[node name="play" type="Button" parent="Main/VBoxContainer" groups=["ui_button"]]
+[node name="play" type="Button" parent="Main/HBoxContainer/VBoxContainer" groups=["ui_button"]]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme = ExtResource("2_mcvr8")
 text = "играть"
 
-[node name="settings" type="Button" parent="Main/VBoxContainer" groups=["ui_button"]]
+[node name="settings" type="Button" parent="Main/HBoxContainer/VBoxContainer" groups=["ui_button"]]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme = ExtResource("2_mcvr8")
 text = "настройки"
 
-[node name="cred" type="Button" parent="Main/VBoxContainer" groups=["ui_button"]]
+[node name="cred" type="Button" parent="Main/HBoxContainer/VBoxContainer" groups=["ui_button"]]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme = ExtResource("2_mcvr8")
 text = "используем"
 
-[node name="exit" type="Button" parent="Main/VBoxContainer" groups=["ui_button"]]
+[node name="exit" type="Button" parent="Main/HBoxContainer/VBoxContainer" groups=["ui_button"]]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme = ExtResource("2_mcvr8")
@@ -406,6 +410,7 @@ offset_right = 0.0
 offset_bottom = 0.0
 
 [node name="Creds" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -497,10 +502,10 @@ mouse_default_cursor_shape = 2
 theme = ExtResource("2_mcvr8")
 text = "<"
 
-[connection signal="pressed" from="Main/VBoxContainer/play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="Main/VBoxContainer/settings" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="Main/VBoxContainer/cred" to="." method="_on_cred_pressed"]
-[connection signal="pressed" from="Main/VBoxContainer/exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Main/HBoxContainer/VBoxContainer/play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Main/HBoxContainer/VBoxContainer/settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Main/HBoxContainer/VBoxContainer/cred" to="." method="_on_cred_pressed"]
+[connection signal="pressed" from="Main/HBoxContainer/VBoxContainer/exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="Settings/RichTextLabel/CenterContainer/exit" to="." method="back"]
 [connection signal="pressed" from="Creds/Label/CenterContainer/exit" to="." method="back"]
 

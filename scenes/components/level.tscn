@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cxpycm8cc7sgl"]
+[gd_scene load_steps=5 format=3 uid="uid://cxpycm8cc7sgl"]
 
 [ext_resource type="Script" uid="uid://bvfo5go5xltmv" path="res://scenes/components/level.gd" id="1_bjy6a"]
+[ext_resource type="AudioStream" uid="uid://b50v12coviagd" path="res://assets/sounds/back.ogg" id="3_grtfn"]
+[ext_resource type="AudioStream" uid="uid://bhj8dfaf4qkso" path="res://assets/sounds/556991__ycbcr__tabletop-clock-ticking-speed-ramp-down-followup.ogg" id="4_cdpqt"]
 [ext_resource type="Texture2D" uid="uid://bdtnvw6wnlj51" path="res://icon.svg" id="5_cdpqt"]
 
 [node name="Level" type="Node2D"]
@@ -13,3 +15,17 @@ modulate = Color(1, 0, 0, 1)
 position = Vector2(-8, -8)
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("5_cdpqt")
+
+[node name="Tick" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_grtfn")
+volume_db = -26.0
+pitch_scale = 2.27
+bus = &"TIME"
+
+[node name="Rewind" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_cdpqt")
+pitch_scale = 2.0
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="."]
+
+[node name="AudioStreamPlayer4" type="AudioStreamPlayer" parent="."]

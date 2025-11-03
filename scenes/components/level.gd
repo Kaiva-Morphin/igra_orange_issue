@@ -70,8 +70,9 @@ func spawn_dbg(p: Vector2, color: Color):
 
 var screenshot: Texture2D
 
+var from_prev_step = 0
 func _process(_dt: float) -> void:
-	UTILS.update_tween_positions()
+	from_prev_step += _dt
 	CAMERA.update(_dt)
 	for v in dbg:
 		v.queue_free()
@@ -98,6 +99,9 @@ func _process(_dt: float) -> void:
 		return
 	elif !player.suppressed:
 		player.stop_anim()
+	else:
+		from_prev_step += _dt
+	
 	if requested_swap:
 		requested_swap = false
 		await RenderingServer.frame_post_draw
@@ -113,7 +117,7 @@ func _process(_dt: float) -> void:
 			mat,
 			"shader_parameter/radius",
 			1.0,
-			1.2
+			0.8
 		)
 		tween.finished.connect(func(): processing_step = false)
 
@@ -136,11 +140,13 @@ func _process(_dt: float) -> void:
 		UTILS.log_print("[level instance] swap")
 		GAMESTATE.swap()
 		return
+	
 	if Input.is_action_just_pressed("step_back"):
 		UTILS.log_prints("[level instance] step_back")
 		var h = pop_from_history()
 		if h:
 			for item in h:
+				$Tick.play(1.2)
 				if smooth_back(item, func(): processing_step = false):
 					processing_step = true
 		return
@@ -161,6 +167,9 @@ func _process(_dt: float) -> void:
 		hist.reverse()
 		processing_history = hist
 		processing_revert_step = 0
+		return
+	
+	if from_prev_step < UTILS.input_delay:
 		return
 	
 	var i_dir = UTILS.get_input_dir()
@@ -196,6 +205,7 @@ func _process(_dt: float) -> void:
 			movable_collider_store.unchecked_push_object(m, i_dir)
 			m.pos = m_dst
 			processing_step = true
+			from_prev_step = 0.0
 			UTILS.tween_move(m, UTILS.from_grid(m_dst), func(): processing_step = false, t)
 			UTILS.log_print("[push] m_i push")
 			return
@@ -213,6 +223,7 @@ func _process(_dt: float) -> void:
 		UTILS.tween_move(m, UTILS.from_grid(grid_pos) + i_dir * 2 * UTILS.tile_size, func(): processing_step = false)
 		if p_i != null:
 			processing_step = true
+			from_prev_step = 0.0
 			return
 	else:
 		start_new_step()
@@ -233,6 +244,7 @@ func _process(_dt: float) -> void:
 		t.timeout.connect(func(): player.stop_anim())
 		UTILS.tween_move(player, UTILS.from_grid(end), func(): processing_step = false, dist * UTILS.speed_per_tile)
 		processing_step = true
+		from_prev_step = 0.0
 		return
 	player.look_dir(i_dir)
 	UTILS.log_print("[push] move")
@@ -247,6 +259,7 @@ func _process(_dt: float) -> void:
 	player.play_walk(0.15)
 	player.resume_anim()
 	processing_step = true
+	from_prev_step = 0.0
 	player.push_step()
 	player.pos = player.pos + i_dir
 	UTILS.tween_move(player, dst, func(): processing_step = false)

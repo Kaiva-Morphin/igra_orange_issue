@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=12 format=3 uid="uid://c4tnmjnv1swxg"]
+[gd_resource type="Theme" load_steps=16 format=3 uid="uid://c4tnmjnv1swxg"]
 
 [ext_resource type="FontFile" uid="uid://c25c7xpuy86ju" path="res://assets/fonts/monogram-extended.ttf" id="1_4kj51"]
 [ext_resource type="Texture2D" uid="uid://ddc2n114qngdh" path="res://resources/ui/ui.png" id="1_bhey1"]
@@ -36,6 +36,24 @@ axis_stretch_vertical = 1
 bg_color = Color(0.103743516, 0.103743546, 0.10374347, 1)
 border_width_bottom = 1
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_p7xcw"]
+atlas = ExtResource("1_bhey1")
+region = Rect2(67, 0, 2, 10)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jjtn0"]
+texture = SubResource("AtlasTexture_p7xcw")
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p3v3s"]
+atlas = ExtResource("1_bhey1")
+region = Rect2(78, 0, 1, 9)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_p7xcw"]
+texture = SubResource("AtlasTexture_p3v3s")
+
 [resource]
 default_font = ExtResource("1_4kj51")
 default_font_size = 16
@@ -48,3 +66,8 @@ HSlider/styles/grabber_area_highlight = SubResource("StyleBoxEmpty_ktsff")
 HSlider/styles/slider = SubResource("StyleBoxTexture_se0ae")
 LineEdit/styles/focus = SubResource("StyleBoxEmpty_p3v3s")
 LineEdit/styles/normal = SubResource("StyleBoxFlat_p7xcw")
+VScrollBar/styles/grabber = SubResource("StyleBoxTexture_jjtn0")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxTexture_jjtn0")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxTexture_jjtn0")
+VScrollBar/styles/scroll = SubResource("StyleBoxTexture_p7xcw")
+VScrollBar/styles/scroll_focus = SubResource("StyleBoxTexture_p7xcw")

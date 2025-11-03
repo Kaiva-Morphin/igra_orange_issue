@@ -3,7 +3,8 @@ extends Node
 var tile_size : Vector2i = Vector2i(16, 16)
 var speed_per_tile : float = 0.15
 var walk_anim_speed = 2.5
-
+var input_delay = 0.175
+var transition = Tween.TRANS_LINEAR
 func to_grid(v: Vector2):
 	return Vector2i(floor(v.x / tile_size.x), floor(v.y / tile_size.y))
 
@@ -37,12 +38,9 @@ func reverse_state(state: STRUCTS.WorldState):
 # 	return Vector2i.ZERO
 
 func tween_move(what: Node, dst: Vector2, on_end = null, time=speed_per_tile):
-	var tween := get_tree().create_tween()
+	var tween := get_tree().create_tween().set_trans(Tween.TRANS_LINEAR)
 	tween.tween_property(what, "global_position", dst, time)
 	if on_end: tween.finished.connect(on_end)
-
-func update_tween_positions():
-	pass
 
 # var tween_proxies := {} # what -> proxy
 

@@ -5,7 +5,9 @@ extends Node2D
 
 @export var zoom : float = 2.5
 
+@onready var p_anim : Sprite2D = $PlayerPosOverride/AnimPreview
 func _ready() -> void:
+	p_anim.hide()
 	particle_template.hide()
 
 func shoot_particle_effect():
@@ -36,15 +38,14 @@ func end_player_follow():
 
 func _process(_delta: float) -> void:
 	if camera_grabbed:
-		GAMESTATE.camera.zoom = Vector2(zoom, zoom)
+		CAMERA.override_zoom = zoom
 	if player_following:
 		GAMESTATE.player.global_position = pos_override.global_position - Vector2(UTILS.tile_size / 2)
 		GAMESTATE.player.pos = UTILS.to_grid(pos_override.global_position)
 	if player_anim_grabbed:
-		GAMESTATE.player.set_sprite(player_frame)
+		GAMESTATE.player.set_sprite(p_anim.frame)
 
 @export var player_frame : int = 8
-
 var player_anim_grabbed = false
 func grab_player_anim():
 	GAMESTATE.player.anim_paused = true

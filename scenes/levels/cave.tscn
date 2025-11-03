@@ -1,23 +1,305 @@
-[gd_scene load_steps=7 format=4 uid="uid://k0d3rjnhq25v"]
+[gd_scene load_steps=22 format=4 uid="uid://k0d3rjnhq25v"]
 
 [ext_resource type="PackedScene" uid="uid://ddyi0gms06xau" path="res://scenes/components/level_surface.tscn" id="1_sqngc"]
 [ext_resource type="PackedScene" uid="uid://brc7cxlek8yso" path="res://scenes/components/room.tscn" id="2_qmj5m"]
+[ext_resource type="Script" uid="uid://iukce77fxqgw" path="res://scenes/components/cutscene_controller.gd" id="3_pwkrs"]
 [ext_resource type="PackedScene" uid="uid://chyebkasse78b" path="res://scenes/components/objects/invisible_collider.tscn" id="3_sqngc"]
+[ext_resource type="Script" uid="uid://ca05bbiniab3v" path="res://scenes/components/cutscene_utils.gd" id="4_dve5i"]
+[ext_resource type="Texture2D" uid="uid://bvynquabiogdy" path="res://assets/noises/Circular_08-256x256.png" id="4_qmj5m"]
+[ext_resource type="Texture2D" uid="uid://byutidsxi5jwu" path="res://assets/textures/invisible_collider.png" id="5_ge1oy"]
+[ext_resource type="Texture2D" uid="uid://te0hulw7hbws" path="res://assets/textures/player.png" id="6_lu7dl"]
+[ext_resource type="Texture2D" uid="uid://cf3vsgy4b65u1" path="res://assets/particles/map.png" id="7_ulb4e"]
+[ext_resource type="Texture2D" uid="uid://defceehmotqis" path="res://assets/noises/Circular_03-256x256.png" id="8_ge1oy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sqngc"]
 size = Vector2(320, 320)
 
-[sub_resource type="Gradient" id="Gradient_sqngc"]
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_sqngc"]
+polygon = PackedVector2Array(200, 0, 216, 16, 216, -12)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_qmj5m"]
-gradient = SubResource("Gradient_sqngc")
-fill_from = Vector2(1, 0)
-fill_to = Vector2(1, 1)
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qmj5m"]
+polygon = PackedVector2Array(240, -8, 216, 16, 216, -20)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_dve5i"]
+polygon = PackedVector2Array(257, -20, 224, 0, 186, -20)
+
+[sub_resource type="Animation" id="Animation_dve5i"]
+resource_name = "CaveMain"
+length = 17.0
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CutsceneController/CutsceneUtils")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.19999999, 0.21, 8.033334, 12.840242, 15.2998905, 16.99, 17),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"values": [{
+"args": [],
+"method": &"grab_camera"
+}, {
+"args": [],
+"method": &"begin_player_follow"
+}, {
+"args": [],
+"method": &"grab_player_anim"
+}, {
+"args": [2, Vector2(0, -20), Vector2(0, -10), 2.0],
+"method": &"shoot_particle_effect_player"
+}, {
+"args": [4, Vector2(0, -20), Vector2(0, -10), 2.0],
+"method": &"shoot_particle_effect_player"
+}, {
+"args": [4, Vector2(0, -20), Vector2(0, -10), 2.0],
+"method": &"shoot_particle_effect_player"
+}, {
+"args": [],
+"method": &"end_player_anim"
+}, {
+"args": [],
+"method": &"end_player_follow"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CutsceneController")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(17),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"main_anim_done"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CutsceneController/CutsceneUtils/PlayerPosOverride:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-8, -45)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CutsceneController/CutsceneUtils:zoom")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(-0.0333333, 0.63333344, 6.9333334, 7.8333335, 8.220419),
+"transitions": PackedFloat32Array(0.3789284, 0.3789284, 0.3789284, 0.3789284, 0.3789284),
+"update": 0,
+"values": [3.0, 3.0, 3.5, 3.5, 3.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CutsceneController/CutsceneUtils:player_frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.26666668, 0.5768913, 0.83783627, 1.1, 1.3636749, 4.0952406, 4.4356103, 4.8, 5.1666665),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 28, 32, 36, 40, 36, 32, 28, 0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CutsceneController/CutsceneUtils/PlayerPosOverride/AnimPreview:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.6, 1.2, 1.8, 2.400915, 3.000915, 3.600915, 4.200915, 4.8023715, 5.4023714, 6.002372, 6.602371, 7.3, 7.9666667, 8.4, 8.966667, 9.166666, 9.766666, 9.966667, 11.565939, 11.799999, 12.833332, 14, 14.233334, 15.299999, 16.766666, 16.966667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [40, 44, 40, 44, 40, 44, 40, 44, 40, 44, 40, 44, 40, 36, 31, 39, 31, 39, 31, 39, 27, 31, 39, 35, 31, 28, 0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("CutsceneController/CutsceneUtils/PlayerPosOverride/PointLight2D2:enabled")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 7.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+
+[sub_resource type="Animation" id="Animation_ceat7"]
+resource_name = "FirstIceIntro"
+length = 3.0
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CutsceneController")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"to_follow"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CutsceneController/CutsceneUtils")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.20000005),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [0, Vector2(0, -10), Vector2(0, -10), 2.0],
+"method": &"shoot_particle_effect_player"
+}, {
+"args": [],
+"method": &"grab_camera"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CutsceneController/CutsceneUtils:zoom")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2, 1.7),
+"transitions": PackedFloat32Array(0.07179359, 0.2773923),
+"update": 0,
+"values": [2.5, 3.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CutsceneController/Camera2D:zoom")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.9333333),
+"transitions": PackedFloat32Array(0.3789284, 1),
+"update": 0,
+"values": [Vector2(3, 3), Vector2(2.5, 2.5)]
+}
+
+[sub_resource type="Animation" id="Animation_drian"]
+resource_name = "FirstIceMain"
+length = 7.4
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CutsceneController/CutsceneUtils")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.19999999, 0.21, 7.3, 7.366667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"values": [{
+"args": [4, Vector2(0, -10), Vector2(0, -10), 2.0],
+"method": &"shoot_particle_effect_player"
+}, {
+"args": [],
+"method": &"begin_player_follow"
+}, {
+"args": [],
+"method": &"grab_player_anim"
+}, {
+"args": [],
+"method": &"end_player_anim"
+}, {
+"args": [],
+"method": &"end_player_follow"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CutsceneController")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(7.366667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"main_anim_done"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CutsceneController/CutsceneUtils/PlayerPosOverride:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.26666665, 5.166667, 7.366667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(168, 72), Vector2(168, 76), Vector2(168, 76), Vector2(168, 344)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CutsceneController/CutsceneUtils:zoom")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(5.1666665, 6.633333),
+"transitions": PackedFloat32Array(0.3789284, 1),
+"update": 0,
+"values": [3.0, 2.5]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CutsceneController/CutsceneUtils/PlayerPosOverride/AnimPreview:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.26666668, 0.58216524, 0.8431359, 1.1041065, 1.3666667, 4.090213, 4.4415193, 4.8028636, 5.169226),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 28, 32, 36, 40, 36, 32, 28, 0]
+}
+
+[sub_resource type="Animation" id="Animation_5waj2"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_drian"]
+_data = {
+&"CaveMain": SubResource("Animation_dve5i"),
+&"FirstIceIntro": SubResource("Animation_ceat7"),
+&"FirstIceMain": SubResource("Animation_drian"),
+&"RESET": SubResource("Animation_5waj2")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pwkrs"]
+size = Vector2(202, 239)
+
+[sub_resource type="Curve2D" id="Curve2D_ge1oy"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -8, -5, 0, 0, 0, 0, 40, -5, 0, 0, 0, 0, 40, 147)
+}
+point_count = 3
 
 [node name="Cave" type="Node2D"]
-modulate = Color(0.17641911, 0.17641908, 0.17641908, 1)
+modulate = Color(0.19076231, 0.19076234, 0.19076231, 1)
 
 [node name="Room" parent="." instance=ExtResource("2_qmj5m")]
+visible = true
 
 [node name="AREA" parent="Room" index="0"]
 position = Vector2(160, -160)
@@ -42,10 +324,101 @@ tile_map_data = PackedByteArray("AAATAP//AAATAA4AAAATAP7/AAATAA4AAAATAP3/AAATAA4
 
 [node name="PointLight2D" type="PointLight2D" parent="LevelSurface"]
 texture_filter = 1
-position = Vector2(223.99998, -40)
-scale = Vector2(0.62499976, 1.25)
+position = Vector2(221, -1.000001)
+scale = Vector2(1.2148438, 1.2543947)
+color = Color(0.7411765, 1, 1, 1)
 energy = 5.0
-texture = SubResource("GradientTexture2D_qmj5m")
+shadow_enabled = true
+texture = ExtResource("4_qmj5m")
+offset = Vector2(0, -32)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="LevelSurface"]
+position = Vector2(-16, -16)
+occluder = SubResource("OccluderPolygon2D_sqngc")
+
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="LevelSurface"]
+position = Vector2(29, -16)
+occluder = SubResource("OccluderPolygon2D_qmj5m")
+
+[node name="LightOccluder2D3" type="LightOccluder2D" parent="LevelSurface"]
+position = Vector2(43, -57)
+occluder = SubResource("OccluderPolygon2D_qmj5m")
+
+[node name="LightOccluder2D5" type="LightOccluder2D" parent="LevelSurface"]
+position = Vector2(43, -57)
+occluder = SubResource("OccluderPolygon2D_qmj5m")
+
+[node name="LightOccluder2D4" type="LightOccluder2D" parent="LevelSurface"]
+position = Vector2(59, -99)
+occluder = SubResource("OccluderPolygon2D_qmj5m")
+
+[node name="LightOccluder2D6" type="LightOccluder2D" parent="LevelSurface"]
+position = Vector2(0, 20)
+occluder = SubResource("OccluderPolygon2D_dve5i")
+
+[node name="CutsceneController" type="Node2D" parent="LevelSurface" node_paths=PackedStringArray("animator", "late_path")]
+position = Vector2(184, -115)
+script = ExtResource("3_pwkrs")
+animator = NodePath("Animation")
+late_path = NodePath("Path2D")
+anim = "CaveMain"
+
+[node name="Animation" type="AnimationPlayer" parent="LevelSurface/CutsceneController"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_drian")
+}
+
+[node name="Area2D" type="Area2D" parent="LevelSurface/CutsceneController"]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelSurface/CutsceneController/Area2D"]
+z_index = 25
+position = Vector2(-16, -41)
+shape = SubResource("RectangleShape2D_pwkrs")
+debug_color = Color(0.9372549, 0, 0, 0.41960785)
+
+[node name="CutsceneUtils" type="Node2D" parent="LevelSurface/CutsceneController"]
+script = ExtResource("4_dve5i")
+zoom = 3.0
+
+[node name="PlayerPosOverride" type="Node2D" parent="LevelSurface/CutsceneController/CutsceneUtils"]
+position = Vector2(-8, -45)
+
+[node name="Sprite2D" type="Sprite2D" parent="LevelSurface/CutsceneController/CutsceneUtils/PlayerPosOverride"]
+visible = false
+modulate = Color(0.9999998, 0.845044, 0.7061551, 1)
+texture = ExtResource("5_ge1oy")
+
+[node name="AnimPreview" type="Sprite2D" parent="LevelSurface/CutsceneController/CutsceneUtils/PlayerPosOverride"]
+position = Vector2(0, -3.9742966)
+texture = ExtResource("6_lu7dl")
+hframes = 4
+vframes = 12
+frame = 40
+
+[node name="PointLight2D2" type="PointLight2D" parent="LevelSurface/CutsceneController/CutsceneUtils/PlayerPosOverride"]
+texture_filter = 1
+position = Vector2(5.722046e-06, 5.722046e-06)
+scale = Vector2(0.37968758, 0.37968758)
+color = Color(0, 0.6734007, 0.68050784, 1)
+energy = 1.08
+shadow_enabled = true
+texture = ExtResource("8_ge1oy")
+texture_scale = 2.0
+
+[node name="Particles" type="Sprite2D" parent="LevelSurface/CutsceneController/CutsceneUtils"]
+z_index = 5
+z_as_relative = false
+texture = ExtResource("7_ulb4e")
+hframes = 3
+vframes = 3
+
+[node name="Camera2D" type="Camera2D" parent="LevelSurface/CutsceneController"]
+enabled = false
+
+[node name="Path2D" type="Path2D" parent="LevelSurface/CutsceneController"]
+curve = SubResource("Curve2D_ge1oy")
 
 [node name="InvisibleCollider" parent="." instance=ExtResource("3_sqngc")]
 position = Vector2(56, -232)
@@ -88,6 +461,22 @@ collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
+
+[node name="InvisibleCollider7" parent="." instance=ExtResource("3_sqngc")]
+position = Vector2(216, 8)
+collide_player_in_future = true
+collide_movable_in_future = true
+collide_player_in_past = true
+collide_movable_in_past = true
+
+[node name="InvisibleCollider8" parent="." instance=ExtResource("3_sqngc")]
+position = Vector2(232, 8)
+collide_player_in_future = true
+collide_movable_in_future = true
+collide_player_in_past = true
+collide_movable_in_past = true
+
+[connection signal="body_entered" from="LevelSurface/CutsceneController/Area2D" to="LevelSurface/CutsceneController" method="_on_area_2d_body_entered"]
 
 [editable path="Room"]
 [editable path="LevelSurface"]
