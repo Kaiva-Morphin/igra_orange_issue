@@ -1,14 +1,21 @@
 extends STRUCTS.SwapReaction
 
-@onready var past_root : Node2D = $Past
-@onready var future_root : Node2D = $Future
+@onready var past_from_future : Node2D = $AutoPast
+@onready var future_to_past : Node2D = $FutureDraw
+
+@onready var future_from_past : Node2D = $Future
+@onready var past_to_future : Node2D = $Past
 
 var offset = Vector2i(0, -13)
 func _level_ready(level: Level, push_initial: bool = true):
 	var pos = UTILS.to_grid(global_position)
 	global_position = Vector2(UTILS.from_grid(pos)) - Vector2(UTILS.tile_size) * 0.5
-	var pasts = past_root.get_children()
-	var futures = future_root.get_children()
+	gen(future_to_past, past_from_future, level, push_initial)
+	gen(past_to_future, future_from_past, level, push_initial)
+
+func gen(from, to, level, push_initial):
+	var pasts = from.get_children()
+	var futures = to.get_children()
 	for i in range(pasts.size()):
 		var past = pasts[i]
 		var future = futures[i]
@@ -47,6 +54,10 @@ func _level_ready(level: Level, push_initial: bool = true):
 		super._level_ready(level, push_initial)
 		process_state(GAMESTATE.worldstate)
 
+
+
+
+
 func save_state() -> StateData:
 	var s = super.save_state()
 	# print("[level_surface] save state for " + self.name + " state: " + str(s.data))
@@ -63,10 +74,15 @@ func on_swap(world_state: WorldState):
 	super.on_swap(world_state)
 	process_state(world_state)
 
+
 func process_state(world_state: WorldState):
 	if world_state:
-		past_root.hide()
-		future_root.show()
+		past_from_future.hide()
+		past_to_future.hide()
+		future_from_past.show()
+		future_to_past.show()
 	else:
-		past_root.show()
-		future_root.hide()
+		past_from_future.show()
+		past_to_future.show()
+		future_from_past.hide()
+		future_to_past.hide()

@@ -1,6 +1,30 @@
 extends CanvasLayer
 
 @export var vignette: TextureRect
+@export var dialog : AnimationPlayer
+@export var dialog_label : Label
+@export var dialog_bg : AnimationPlayer
+
+enum DialogEmotion {
+	Neutral,
+	Surprised,
+	Sad,
+	Confused,
+	Beg,
+	Point
+}
+
+class DialogMsg:
+	var text : String
+	var emotion : DialogEmotion
+
+
+var word_dialog_time = 0.6
+var meow_prefix = 0.2
+
+func show_dialog(msgs: Array[DialogMsg]):
+	pass
+
 
 func _ready() -> void:
 	GAMESTATE.vignette = self

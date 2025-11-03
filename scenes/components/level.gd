@@ -1,6 +1,6 @@
 extends STRUCTS.Level
 
-var powers_unlocked = false
+var powers_unlocked = true
 
 func checkpoint():
 	pass

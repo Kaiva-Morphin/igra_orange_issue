@@ -258,7 +258,7 @@ visible = false
 modulate = Color(0.9999998, 0.845044, 0.7061551, 1)
 texture = ExtResource("3_0tgdg")
 
-[node name="Sprite2D2" type="Sprite2D" parent="CutsceneUtils/PlayerPosOverride"]
+[node name="AnimPreview" type="Sprite2D" parent="CutsceneUtils/PlayerPosOverride"]
 visible = false
 position = Vector2(0, -3.9742966)
 texture = ExtResource("4_4e5s0")

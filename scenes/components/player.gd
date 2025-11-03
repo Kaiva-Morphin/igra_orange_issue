@@ -108,13 +108,15 @@ func stop_anim():
 
 var c = 0
 func _process(delta: float) -> void:
-	if anim_paused: return
-	c += delta
-	if c > anim_speed:
-		c -= anim_speed
-		anim_frame = (anim_frame + 1) % anim_frames
-		update_sprite()
-		
+	if !suppressed && Input.is_action_just_pressed("meow"):
+		meow()
+	if !anim_paused:
+		c += delta
+		if c > anim_speed:
+			c -= anim_speed
+			anim_frame = (anim_frame + 1) % anim_frames
+			update_sprite()
+			
 
 
 
@@ -183,3 +185,9 @@ func process_suppress(s: bool):
 	#     return
 	# in_move = true
 	# tween_move(player, dst, func(): in_move = false)
+
+@onready var meow_node = $Meow
+
+func meow():
+	meow_node.pitch_scale = randf_range(0.86, 1.2)
+	meow_node.play()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://u3xhep13ucw4"]
+[gd_scene load_steps=17 format=3 uid="uid://u3xhep13ucw4"]
 
 [ext_resource type="Script" uid="uid://d1qwscxc6v1d4" path="res://scenes/components/player.gd" id="1_6mmc7"]
 [ext_resource type="Texture2D" uid="uid://te0hulw7hbws" path="res://assets/textures/player.png" id="2_h3cwf"]
@@ -6,222 +6,13 @@
 [ext_resource type="Texture2D" uid="uid://bxm600063oqff" path="res://assets/textures/cloud.png" id="4_ps70n"]
 [ext_resource type="Texture2D" uid="uid://dtf0jolhclcf7" path="res://assets/textures/emotions.png" id="5_v4i73"]
 [ext_resource type="Texture2D" uid="uid://dyn1tp1e832mo" path="res://assets/textures/question.png" id="6_v4i73"]
+[ext_resource type="AudioStream" uid="uid://dr8ew1o7nvcdy" path="res://assets/sounds/meow-sound-cat.mp3" id="7_ypwcc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v4i73"]
 radius = 5.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_acvb7"]
 shader = ExtResource("3_sjsxr")
-
-[sub_resource type="Animation" id="Animation_h3cwf"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite/Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite/Sprite2D2:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite/Sprite2D2:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 20)]
-}
-
-[sub_resource type="Animation" id="Animation_lkd77"]
-resource_name = "test"
-length = 0.8
-loop_mode = 1
-
-[sub_resource type="Animation" id="Animation_sjsxr"]
-resource_name = "walk_down"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite/Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite/Sprite2D2:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite/Sprite2D2:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 19)]
-}
-
-[sub_resource type="Animation" id="Animation_v4i73"]
-resource_name = "walk_left"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite/Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [12, 13, 14, 15, 12]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite/Sprite2D2:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [12, 13, 14, 15, 12]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite/Sprite2D2:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 13)]
-}
-
-[sub_resource type="Animation" id="Animation_acvb7"]
-resource_name = "walk_right"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite/Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [4, 5, 6, 7, 4]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite/Sprite2D2:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [4, 5, 6, 7, 4]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite/Sprite2D2:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 13)]
-}
-
-[sub_resource type="Animation" id="Animation_ps70n"]
-resource_name = "walk_up"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite/Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [8, 9, 10, 11, 8]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite/Sprite2D2:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [8, 9, 10, 11, 8]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite/Sprite2D2:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 17)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_v4i73"]
-_data = {
-&"RESET": SubResource("Animation_h3cwf"),
-&"test": SubResource("Animation_lkd77"),
-&"walk_down": SubResource("Animation_sjsxr"),
-&"walk_left": SubResource("Animation_v4i73"),
-&"walk_right": SubResource("Animation_acvb7"),
-&"walk_up": SubResource("Animation_ps70n")
-}
 
 [sub_resource type="Animation" id="Animation_2l1sc"]
 length = 0.001
@@ -367,19 +158,13 @@ hframes = 4
 vframes = 12
 
 [node name="Sprite2D2" type="Sprite2D" parent="Sprite"]
-visible = false
 y_sort_enabled = true
 material = SubResource("ShaderMaterial_acvb7")
-position = Vector2(0, 20)
+position = Vector2(0, 14)
 texture = ExtResource("2_h3cwf")
 flip_v = true
 hframes = 4
 vframes = 12
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_v4i73")
-}
 
 [node name="EmotionPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -443,5 +228,8 @@ texture = ExtResource("5_v4i73")
 hframes = 5
 frame = 1
 
-[node name="AudioListener2D" type="AudioListener2D" parent="."]
-current = true
+[node name="Meow" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_ypwcc")
+volume_db = -23.772
+pitch_scale = 1.21
+bus = &"ENVIRONMENT"
