@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://7uv76nxqe7nu"]
+[gd_scene load_steps=15 format=3 uid="uid://7uv76nxqe7nu"]
 
 [ext_resource type="PackedScene" uid="uid://cxpycm8cc7sgl" path="res://scenes/components/level.tscn" id="1_u81e1"]
 [ext_resource type="PackedScene" uid="uid://u3xhep13ucw4" path="res://scenes/components/player.tscn" id="2_b6bv0"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://dxdja74mi1bky" path="res://scenes/levels/icehell.tscn" id="11_2xkjh"]
 [ext_resource type="PackedScene" uid="uid://b67b2qteqlcs0" path="res://scenes/levels/labirintik.tscn" id="12_dj21o"]
 [ext_resource type="PackedScene" uid="uid://cvuujc153tak6" path="res://scenes/levels/afterclock.tscn" id="13_dj21o"]
+[ext_resource type="PackedScene" uid="uid://cdgnpqme058om" path="res://puzzle_ice.tscn" id="14_6ui35"]
 
 [node name="main" type="Node2D"]
 
@@ -64,10 +65,13 @@ position = Vector2(992, 960)
 position = Vector2(1056, 1344)
 
 [node name="Node2D2" parent="Level" instance=ExtResource("11_2xkjh")]
-position = Vector2(2880, 1680)
+position = Vector2(2672, 2000)
+
+[node name="PuzzleIce" parent="Level" instance=ExtResource("14_6ui35")]
+position = Vector2(1280, 1696)
 
 [node name="Node2D4" parent="Level" instance=ExtResource("12_dj21o")]
-position = Vector2(2224, 1376)
+position = Vector2(2016, 1696)
 
 [editable path="Level"]
 [editable path="Level/lab"]
