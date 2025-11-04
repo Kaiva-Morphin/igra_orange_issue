@@ -83,6 +83,11 @@ layout_mode = 2
 bus = "ENVIRONMENT"
 label_text = "Эффекты времени"
 
+[node name="SoundEditor7" parent="VBoxContainer/ScrollContainer/VBoxContainer/FoldableContainer/VBoxContainer" instance=ExtResource("2_37860")]
+layout_mode = 2
+bus = "MUSIC"
+label_text = "Эффекты времени"
+
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 z_index = 1
 layout_mode = 0

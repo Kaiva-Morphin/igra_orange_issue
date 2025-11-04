@@ -25,7 +25,7 @@ var dialogs = {
 			DialogEmotion.Confused
 		),
 		DialogMsg.new(
-			"Это ты, котик",
+			"О! Это ты, котик",
 			DialogEmotion.Surprised
 		),
 		DialogMsg.new(
@@ -34,26 +34,34 @@ var dialogs = {
 		),
 		DialogMsg.new(
 			"Это же экспериментальное устройство,",
+			DialogEmotion.Surprised
+		),
+		DialogMsg.new(
+			"которое я использовал для перемещения между параллельными мирами",
+			DialogEmotion.Surprised
+		),
+		DialogMsg.new(
+			"Но в результате парадокса миры связались воедино и",
 			DialogEmotion.Point
 		),
 		DialogMsg.new(
-			"которое я использовал для связывания времен",
-			DialogEmotion.Point
-		),
-		DialogMsg.new(
-			"Но в результате парадокса оно просто исчезло",
+			"Стали зависимы друг от друга",
 			DialogEmotion.Confused
+		),
+		DialogMsg.new(
+			"А оно потерялось где-то между",
+			DialogEmotion.Sad
 		),
 		DialogMsg.new(
 			"Как хорошо что ты его нашел!",
 			DialogEmotion.Point
 		),
 		DialogMsg.new(
-			"То есть ты как-то смог активировать машину?",
+			"Но это значит что ты как-то смог активировать машину?",
 			DialogEmotion.Confused
 		),
 		DialogMsg.new(
-			"Двигайся дальше пока я буду искать решение",
+			"Двигайся дальше пока я буду думать как тебя вытащить",
 			DialogEmotion.Beg
 		)
 	]

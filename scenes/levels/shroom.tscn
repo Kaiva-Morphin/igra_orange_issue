@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dju00pjaklrx5"]
+
+[ext_resource type="PackedScene" uid="uid://ddyi0gms06xau" path="res://scenes/components/level_surface.tscn" id="1_6e10s"]
+
+[node name="shroom" type="Node2D"]
+
+[node name="LevelSurface" parent="." instance=ExtResource("1_6e10s")]

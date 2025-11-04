@@ -1,24 +1,24 @@
-[gd_scene load_steps=37 format=4 uid="uid://ccvyelicelqg"]
+[gd_scene load_steps=38 format=4 uid="uid://cue5a7li6yyy0"]
 
-[ext_resource type="Texture2D" uid="uid://nj860mptfh7m" path="res://assets/textures/lab.png" id="1_3e1xo"]
-[ext_resource type="Script" uid="uid://u61acrq7l3k4" path="res://lab.gd" id="1_dtsd6"]
-[ext_resource type="Texture2D" uid="uid://defceehmotqis" path="res://assets/noises/Circular_03-256x256.png" id="2_6kv01"]
-[ext_resource type="PackedScene" uid="uid://chyebkasse78b" path="res://scenes/components/objects/invisible_collider.tscn" id="3_uw7jv"]
-[ext_resource type="Script" uid="uid://cflb6lsl4kdnj" path="res://scenes/components/room.gd" id="4_e2xd3"]
-[ext_resource type="Script" uid="uid://iukce77fxqgw" path="res://scenes/components/cutscene_controller.gd" id="6_j8bva"]
-[ext_resource type="Script" uid="uid://ca05bbiniab3v" path="res://scenes/components/cutscene_utils.gd" id="7_64rup"]
-[ext_resource type="Texture2D" uid="uid://te0hulw7hbws" path="res://assets/textures/player.png" id="9_svsek"]
-[ext_resource type="Texture2D" uid="uid://cf3vsgy4b65u1" path="res://assets/particles/map.png" id="10_jx3gx"]
-[ext_resource type="AudioStream" uid="uid://b48p6l7s4iguv" path="res://assets/sounds/b75497cd070210f.mp3" id="11_64rup"]
-[ext_resource type="Texture2D" uid="uid://blxg44qr654no" path="res://assets/textures/lab_man.png" id="11_jx3gx"]
-[ext_resource type="Texture2D" uid="uid://bt5sfexhww3is" path="res://assets/textures/time_machine.png" id="12_nm8l8"]
-[ext_resource type="Texture2D" uid="uid://cbdnfljc4pvc8" path="res://assets/textures/wires.png" id="13_svsek"]
-[ext_resource type="Script" uid="uid://b6eo2ykcvp68v" path="res://scenes/time_machine_tp.gd" id="14_jx3gx"]
-[ext_resource type="AudioStream" uid="uid://2n1cqa6rm3df" path="res://assets/sounds/time_machine_on.ogg" id="15_l0k52"]
-[ext_resource type="AudioStream" uid="uid://dr7i505thbc8m" path="res://assets/sounds/high-voltage-electric-arcs-4.mp3" id="16_brn2n"]
+[ext_resource type="Script" uid="uid://u61acrq7l3k4" path="res://scenes/levels/lab.gd" id="1_5vvoy"]
+[ext_resource type="Texture2D" uid="uid://nj860mptfh7m" path="res://assets/textures/lab.png" id="2_d11ch"]
+[ext_resource type="Texture2D" uid="uid://defceehmotqis" path="res://assets/noises/Circular_03-256x256.png" id="3_vvwy1"]
+[ext_resource type="PackedScene" uid="uid://chyebkasse78b" path="res://scenes/components/objects/invisible_collider.tscn" id="4_jh1l7"]
+[ext_resource type="Script" uid="uid://cflb6lsl4kdnj" path="res://scenes/components/room.gd" id="5_npa1g"]
+[ext_resource type="Script" uid="uid://iukce77fxqgw" path="res://scenes/components/cutscene_controller.gd" id="6_hiu7i"]
+[ext_resource type="Script" uid="uid://ca05bbiniab3v" path="res://scenes/components/cutscene_utils.gd" id="7_rbro7"]
+[ext_resource type="Texture2D" uid="uid://te0hulw7hbws" path="res://assets/textures/player.png" id="8_6ww1s"]
+[ext_resource type="Texture2D" uid="uid://cf3vsgy4b65u1" path="res://assets/particles/map.png" id="9_4hcvw"]
+[ext_resource type="Texture2D" uid="uid://blxg44qr654no" path="res://assets/textures/lab_man.png" id="10_3bnxu"]
+[ext_resource type="AudioStream" uid="uid://b48p6l7s4iguv" path="res://assets/sounds/b75497cd070210f.mp3" id="11_27hab"]
+[ext_resource type="Script" uid="uid://b6eo2ykcvp68v" path="res://scenes/time_machine_tp.gd" id="12_6hu0q"]
+[ext_resource type="Texture2D" uid="uid://bt5sfexhww3is" path="res://assets/textures/time_machine.png" id="13_eqkqg"]
+[ext_resource type="Texture2D" uid="uid://cbdnfljc4pvc8" path="res://assets/textures/wires.png" id="14_uoq5i"]
+[ext_resource type="AudioStream" uid="uid://2n1cqa6rm3df" path="res://assets/sounds/time_machine_on.ogg" id="15_0i3jn"]
+[ext_resource type="AudioStream" uid="uid://dr7i505thbc8m" path="res://assets/sounds/high-voltage-electric-arcs-4.mp3" id="16_svktn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6kv01"]
-texture = ExtResource("1_3e1xo")
+texture = ExtResource("2_d11ch")
 0:0/0 = 0
 0:0/0/z_index = 2
 2:0/0 = 0
@@ -166,6 +166,9 @@ polygon = PackedVector2Array(84, 96, 84, -32, 92, -32, 92, 96)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_6kv01"]
 polygon = PackedVector2Array(80, 96, 80, -32, 92, -32, 92, 96)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_brn2n"]
+polygon = PackedVector2Array(80, -32, 80, -40, 192, -40, 192, -32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dtsd6"]
 size = Vector2(240, 256)
@@ -458,7 +461,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("7_64rup")]
+"values": [ExtResource("7_rbro7")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -654,55 +657,55 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("MainLight:texture_scale")
+tracks/6/path = NodePath("../AudioStreamPlayer2D3:playing")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.5]
+"update": 1,
+"values": [false]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("../AudioStreamPlayer2D3:playing")
+tracks/7/path = NodePath("../AudioStreamPlayer2D:volume_db")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [-14.416]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("../AudioStreamPlayer2D:volume_db")
+tracks/8/path = NodePath("../AudioStreamPlayer2D3:volume_db")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [-14.416]
+"values": [9.782]
 }
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("../AudioStreamPlayer2D3:volume_db")
+tracks/9/path = NodePath("../../../Sounds/Env:playing")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [9.782]
+"update": 1,
+"values": [false]
 }
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("../../../Sounds/Env:playing")
+tracks/10/path = NodePath("../asd:visible")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -710,18 +713,6 @@ tracks/10/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
-}
-tracks/11/type = "value"
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/path = NodePath("MainLight:enabled")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_jx3gx"]
@@ -802,46 +793,22 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("MainLight:enabled")
+tracks/6/path = NodePath("../AudioStreamPlayer2D2:playing")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0, 1.2333333),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("MainLight:texture_scale")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(1.2, 1.4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.01, 0.5]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("../AudioStreamPlayer2D2:playing")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
 "times": PackedFloat32Array(0, 1.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
 }
-tracks/9/type = "method"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("../..")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
+tracks/7/type = "method"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("../..")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
 "times": PackedFloat32Array(4.8, 5.3),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
@@ -852,53 +819,65 @@ tracks/9/keys = {
 "method": &"tp"
 }]
 }
-tracks/10/type = "value"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("../AudioStreamPlayer2D3:playing")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = {
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("../AudioStreamPlayer2D3:playing")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
 "times": PackedFloat32Array(1.2, 2.2000003, 3.2000003, 4.2, 5.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [true, true, true, true, true]
 }
-tracks/11/type = "value"
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/path = NodePath("../AudioStreamPlayer2D:volume_db")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/keys = {
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("../AudioStreamPlayer2D:volume_db")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
 "times": PackedFloat32Array(0.43333334, 1.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [-31.598999999999997, -14.416]
 }
-tracks/12/type = "value"
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/path = NodePath("../AudioStreamPlayer2D3:volume_db")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/keys = {
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("../AudioStreamPlayer2D3:volume_db")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
 "times": PackedFloat32Array(1.206809, 3.2666667, 5.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [-3.1329999999999956, 9.782, 17.447000000000003]
 }
-tracks/13/type = "value"
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/path = NodePath("../../../Sounds/Env:playing")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/keys = {
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("../../../Sounds/Env:playing")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
 "times": PackedFloat32Array(5.233333),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("../asd:visible")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_l0k52"]
@@ -915,10 +894,10 @@ tags = {
 "title": "clock ticking spd ramp down"
 }
 
-[node name="lab" type="Node2D"]
+[node name="lab2" type="Node2D"]
 modulate = Color(0.31061712, 0.31061712, 0.3106171, 1)
 y_sort_enabled = true
-script = ExtResource("1_dtsd6")
+script = ExtResource("1_5vvoy")
 
 [node name="Floor" type="TileMapLayer" parent="."]
 z_index = -2
@@ -955,7 +934,7 @@ scale = Vector2(0.75000006, 0.57692313)
 color = Color(0, 1, 0, 1)
 energy = 1.11
 shadow_enabled = true
-texture = ExtResource("2_6kv01")
+texture = ExtResource("3_vvwy1")
 metadata/_edit_lock_ = true
 
 [node name="PointLight2D2" type="PointLight2D" parent="."]
@@ -966,7 +945,7 @@ scale = Vector2(0.75000006, 0.57692313)
 color = Color(0.99215686, 0, 1, 1)
 energy = 1.11
 shadow_enabled = true
-texture = ExtResource("2_6kv01")
+texture = ExtResource("3_vvwy1")
 metadata/_edit_lock_ = true
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
@@ -983,653 +962,658 @@ position = Vector2(-96, 0)
 occluder = SubResource("OccluderPolygon2D_6kv01")
 metadata/_edit_lock_ = true
 
+[node name="LightOccluder2D4" type="LightOccluder2D" parent="."]
+position = Vector2(-96, 0)
+occluder = SubResource("OccluderPolygon2D_brn2n")
+metadata/_edit_lock_ = true
+
 [node name="inv" type="Node2D" parent="."]
 
-[node name="InvisibleCollider2" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider2" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(-8, -8)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider4" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider4" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(136, 88)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider3" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider3" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(-8, 8)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider13" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider13" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(-8, 40)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider14" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider14" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(-8, 24)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider15" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider15" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(-8, 72)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider16" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider16" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(-8, 56)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider17" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider17" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(-8, 104)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider23" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider23" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(24, 120)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider78" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider78" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(40, 120)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider82" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider82" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(56, 120)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider83" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider83" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(72, 120)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider86" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider86" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(40, 136)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider87" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider87" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(56, 136)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider89" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider89" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(40, 152)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider90" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider90" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(56, 152)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider88" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider88" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(72, 136)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider84" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider84" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(88, 120)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider85" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider85" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(88, 136)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider18" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider18" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(-8, 88)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider19" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider19" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(8, 136)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider20" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider20" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(8, 120)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider37" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider37" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(216, 24)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider38" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider38" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(216, 8)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider41" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider41" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(216, 56)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider42" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider42" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(216, 40)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider43" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider43" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(216, 88)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider44" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider44" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(216, 72)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider45" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider45" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(216, 120)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider46" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider46" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(216, 104)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider47" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider47" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(216, 152)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider91" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider91" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(216, 168)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider48" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider48" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(232, 136)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider64" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider64" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(248, 152)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider65" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider65" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(248, 168)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider21" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider21" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(8, 168)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider22" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider22" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(8, 152)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider24" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider24" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(-8, 184)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider5" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider5" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(88, 24)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider6" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider6" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(88, 8)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider7" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider7" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(88, 56)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider11" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider11" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(72, 72)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider8" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider8" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(88, 40)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider9" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider9" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(88, -8)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider10" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider10" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(72, -8)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider25" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider25" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(56, -8)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider26" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider26" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(40, -8)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider27" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider27" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(24, -8)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider28" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider28" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(8, -8)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider12" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider12" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(72, 40)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider51" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider51" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(56, 40)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider92" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider92" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(40, 40)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider93" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider93" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(24, 40)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider94" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider94" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(8, 40)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider29" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider29" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(184, 8)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider30" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider30" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(168, 8)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider31" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider31" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(152, 8)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider32" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider32" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(136, -8)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider33" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider33" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(120, -8)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider34" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider34" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(104, 8)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider35" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider35" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(104, 24)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider36" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider36" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(104, 40)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider49" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider49" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(104, 56)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider50" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider50" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(120, 56)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider52" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider52" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(184, 40)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider53" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider53" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(200, 40)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider54" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider54" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(200, 56)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider55" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider55" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(184, 56)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider56" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider56" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(152, 136)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider57" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider57" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(152, 120)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider58" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider58" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(168, 152)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider59" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider59" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(168, 120)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider60" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider60" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(184, 152)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider61" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider61" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(184, 120)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider62" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider62" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(200, 152)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider66" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider66" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(56, 184)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider67" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider67" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(8, 200)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider68" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider68" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(24, 200)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider69" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider69" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(40, 184)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider70" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider70" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(120, 184)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider71" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider71" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(72, 184)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider72" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider72" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(88, 184)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider73" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider73" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(104, 184)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider74" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider74" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(232, 184)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider75" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider75" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(184, 184)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider76" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider76" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(200, 184)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider77" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider77" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(216, 184)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider79" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider79" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(136, 200)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider80" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider80" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(152, 184)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider81" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider81" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(168, 184)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider63" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider63" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(200, 120)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider39" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider39" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(216, -8)
 collide_player_in_future = true
 collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider40" parent="inv" instance=ExtResource("3_uw7jv")]
+[node name="InvisibleCollider40" parent="inv" instance=ExtResource("4_jh1l7")]
 position = Vector2(200, 8)
 collide_player_in_future = true
 collide_movable_in_future = true
@@ -1639,7 +1623,7 @@ collide_movable_in_past = true
 [node name="Room" type="Area2D" parent="."]
 visible = false
 position = Vector2(104, 76)
-script = ExtResource("4_e2xd3")
+script = ExtResource("5_npa1g")
 prefer_zoom = 4.5
 metadata/_edit_lock_ = true
 
@@ -1652,7 +1636,7 @@ debug_color = Color(0.7500655, 0.36097035, 0.73325014, 0.41960785)
 
 [node name="InitCutscene" type="Node2D" parent="." node_paths=PackedStringArray("animator")]
 position = Vector2(52, 88)
-script = ExtResource("6_j8bva")
+script = ExtResource("6_hiu7i")
 animator = NodePath("Animation")
 anim = "LabIntro"
 
@@ -1673,14 +1657,14 @@ shape = SubResource("RectangleShape2D_j8bva")
 debug_color = Color(0.9372549, 0, 0, 0.41960785)
 
 [node name="CutsceneUtils" type="Node2D" parent="InitCutscene"]
-script = ExtResource("7_64rup")
+script = ExtResource("7_rbro7")
 
 [node name="PlayerPosOverride" type="Node2D" parent="InitCutscene/CutsceneUtils"]
 position = Vector2(168, 72)
 
 [node name="AnimPreview" type="Sprite2D" parent="InitCutscene/CutsceneUtils/PlayerPosOverride"]
 position = Vector2(-8, -8)
-texture = ExtResource("9_svsek")
+texture = ExtResource("8_6ww1s")
 hframes = 4
 vframes = 12
 frame = 8
@@ -1688,14 +1672,14 @@ frame = 8
 [node name="Particles" type="Sprite2D" parent="InitCutscene/CutsceneUtils"]
 z_index = 5
 z_as_relative = false
-texture = ExtResource("10_jx3gx")
+texture = ExtResource("9_4hcvw")
 hframes = 3
 vframes = 3
 
 [node name="LabMan" type="Sprite2D" parent="InitCutscene/CutsceneUtils"]
 z_index = 2
 position = Vector2(39, -71)
-texture = ExtResource("11_jx3gx")
+texture = ExtResource("10_3bnxu")
 hframes = 5
 vframes = 6
 
@@ -1724,7 +1708,7 @@ bus = &"ENVIRONMENT"
 
 [node name="AudioStreamPlayer2D3" type="AudioStreamPlayer2D" parent="Sounds"]
 position = Vector2(104, 32)
-stream = ExtResource("11_64rup")
+stream = ExtResource("11_27hab")
 volume_db = 2.386
 max_distance = 200.0
 attenuation = 5.856333
@@ -1732,7 +1716,7 @@ bus = &"ENVIRONMENT"
 
 [node name="AudioStreamPlayer2D5" type="AudioStreamPlayer2D" parent="Sounds"]
 position = Vector2(56, 128)
-stream = ExtResource("11_64rup")
+stream = ExtResource("11_27hab")
 volume_db = 2.386
 max_distance = 200.0
 attenuation = 5.856333
@@ -1740,7 +1724,7 @@ bus = &"ENVIRONMENT"
 
 [node name="AudioStreamPlayer2D6" type="AudioStreamPlayer2D" parent="Sounds"]
 position = Vector2(40, 128)
-stream = ExtResource("11_64rup")
+stream = ExtResource("11_27hab")
 volume_db = 2.386
 max_distance = 200.0
 attenuation = 5.856333
@@ -1748,7 +1732,7 @@ bus = &"ENVIRONMENT"
 
 [node name="AudioStreamPlayer2D7" type="AudioStreamPlayer2D" parent="Sounds"]
 position = Vector2(232, 124)
-stream = ExtResource("11_64rup")
+stream = ExtResource("11_27hab")
 volume_db = 2.386
 max_distance = 200.0
 attenuation = 5.856333
@@ -1756,7 +1740,7 @@ bus = &"ENVIRONMENT"
 
 [node name="AudioStreamPlayer2D8" type="AudioStreamPlayer2D" parent="Sounds"]
 position = Vector2(72, -20)
-stream = ExtResource("11_64rup")
+stream = ExtResource("11_27hab")
 volume_db = 2.386
 max_distance = 200.0
 attenuation = 5.856333
@@ -1764,7 +1748,7 @@ bus = &"ENVIRONMENT"
 
 [node name="AudioStreamPlayer2D9" type="AudioStreamPlayer2D" parent="Sounds"]
 position = Vector2(8, -20)
-stream = ExtResource("11_64rup")
+stream = ExtResource("11_27hab")
 volume_db = 2.386
 max_distance = 200.0
 attenuation = 5.856333
@@ -1772,7 +1756,7 @@ bus = &"ENVIRONMENT"
 
 [node name="AudioStreamPlayer2D4" type="AudioStreamPlayer2D" parent="Sounds"]
 position = Vector2(152, 128)
-stream = ExtResource("11_64rup")
+stream = ExtResource("11_27hab")
 volume_db = 2.386
 max_distance = 200.0
 attenuation = 5.856333
@@ -1780,7 +1764,7 @@ bus = &"ENVIRONMENT"
 
 [node name="AudioStreamPlayer2D10" type="AudioStreamPlayer2D" parent="Sounds"]
 position = Vector2(60, 180)
-stream = ExtResource("11_64rup")
+stream = ExtResource("11_27hab")
 volume_db = 2.386
 max_distance = 200.0
 attenuation = 5.856333
@@ -1788,7 +1772,7 @@ bus = &"ENVIRONMENT"
 
 [node name="AudioStreamPlayer2D11" type="AudioStreamPlayer2D" parent="Sounds"]
 position = Vector2(84, 180)
-stream = ExtResource("11_64rup")
+stream = ExtResource("11_27hab")
 volume_db = 2.386
 max_distance = 200.0
 attenuation = 5.856333
@@ -1801,7 +1785,7 @@ bus = &"ENVIRONMENT"
 
 [node name="TimeMachineTP" type="Node2D" parent="."]
 y_sort_enabled = true
-script = ExtResource("14_jx3gx")
+script = ExtResource("12_6hu0q")
 
 [node name="Area2D" type="Area2D" parent="TimeMachineTP"]
 
@@ -1812,24 +1796,28 @@ shape = SubResource("RectangleShape2D_jx3gx")
 [node name="TimeMachine" type="Node2D" parent="TimeMachineTP"]
 y_sort_enabled = true
 
+[node name="asd" type="Node2D" parent="TimeMachineTP/TimeMachine"]
+visible = false
+position = Vector2(44, 20)
+
+[node name="MainLight" type="PointLight2D" parent="TimeMachineTP/TimeMachine/asd"]
+position = Vector2(0, 8)
+color = Color(1, 0.28403398, 0.8230717, 1)
+energy = 4.0
+shadow_enabled = true
+texture = ExtResource("3_vvwy1")
+
 [node name="TimeMachine" type="Sprite2D" parent="TimeMachineTP/TimeMachine"]
 y_sort_enabled = true
 position = Vector2(44, 20)
-texture = ExtResource("12_nm8l8")
+texture = ExtResource("13_eqkqg")
 hframes = 2
 
 [node name="Flash" type="PointLight2D" parent="TimeMachineTP/TimeMachine/TimeMachine"]
 position = Vector2(-4, 1)
 enabled = false
 energy = 16.0
-texture = ExtResource("2_6kv01")
-
-[node name="MainLight" type="PointLight2D" parent="TimeMachineTP/TimeMachine/TimeMachine"]
-position = Vector2(0, 8)
-color = Color(1, 0.28403398, 0.8230717, 1)
-energy = 4.0
-texture = ExtResource("2_6kv01")
-texture_scale = 0.5
+texture = ExtResource("3_vvwy1")
 
 [node name="Lights2" type="Node2D" parent="TimeMachineTP/TimeMachine/TimeMachine"]
 visible = false
@@ -1838,56 +1826,56 @@ visible = false
 position = Vector2(-20, -20)
 color = Color(1, 0, 0, 1)
 energy = 3.0
-texture = ExtResource("2_6kv01")
+texture = ExtResource("3_vvwy1")
 texture_scale = 0.2
 
 [node name="PointLight2D2" type="PointLight2D" parent="TimeMachineTP/TimeMachine/TimeMachine/Lights2"]
 position = Vector2(16, -20)
 color = Color(0, 0.6475884, 0.17875671, 1)
 energy = 3.0
-texture = ExtResource("2_6kv01")
+texture = ExtResource("3_vvwy1")
 texture_scale = 0.2
 
 [node name="PointLight2D3" type="PointLight2D" parent="TimeMachineTP/TimeMachine/TimeMachine/Lights2"]
 position = Vector2(16, -16)
 color = Color(0, 0.6475884, 0.17875671, 1)
 energy = 3.0
-texture = ExtResource("2_6kv01")
+texture = ExtResource("3_vvwy1")
 texture_scale = 0.2
 
 [node name="Small" type="PointLight2D" parent="TimeMachineTP/TimeMachine/TimeMachine/Lights2"]
 position = Vector2(-24, -16)
 color = Color(0.37470293, 0.6135182, 1.92523e-07, 1)
 energy = 3.0
-texture = ExtResource("2_6kv01")
+texture = ExtResource("3_vvwy1")
 texture_scale = 0.1
 
 [node name="Small2" type="PointLight2D" parent="TimeMachineTP/TimeMachine/TimeMachine/Lights2"]
 position = Vector2(20, -8)
 color = Color(0.9975093, 0, 0.057292, 1)
 energy = 3.0
-texture = ExtResource("2_6kv01")
+texture = ExtResource("3_vvwy1")
 texture_scale = 0.1
 
 [node name="Small3" type="PointLight2D" parent="TimeMachineTP/TimeMachine/TimeMachine/Lights2"]
 position = Vector2(24, -12)
 color = Color(0.9975093, 0, 0.057292, 1)
 energy = 3.0
-texture = ExtResource("2_6kv01")
+texture = ExtResource("3_vvwy1")
 texture_scale = 0.1
 
 [node name="Wire1" type="Sprite2D" parent="TimeMachineTP/TimeMachine"]
 z_index = 2
 y_sort_enabled = true
 position = Vector2(4, 0)
-texture = ExtResource("13_svsek")
+texture = ExtResource("14_uoq5i")
 hframes = 4
 
 [node name="Wire2" type="Sprite2D" parent="TimeMachineTP/TimeMachine"]
 z_index = 2
 y_sort_enabled = true
 position = Vector2(8, -20)
-texture = ExtResource("13_svsek")
+texture = ExtResource("14_uoq5i")
 hframes = 4
 frame = 1
 
@@ -1895,7 +1883,7 @@ frame = 1
 z_index = 2
 y_sort_enabled = true
 position = Vector2(72, -16)
-texture = ExtResource("13_svsek")
+texture = ExtResource("14_uoq5i")
 hframes = 4
 frame = 2
 
@@ -1903,7 +1891,7 @@ frame = 2
 z_index = 2
 y_sort_enabled = true
 position = Vector2(72, 4)
-texture = ExtResource("13_svsek")
+texture = ExtResource("14_uoq5i")
 hframes = 4
 frame = 3
 
@@ -1915,7 +1903,7 @@ libraries = {
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="TimeMachineTP/TimeMachine"]
 position = Vector2(41, 21)
-stream = ExtResource("15_l0k52")
+stream = ExtResource("15_0i3jn")
 volume_db = -14.416
 pitch_scale = 0.67
 max_distance = 242.0
@@ -1923,7 +1911,7 @@ attenuation = 0.5946036
 
 [node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="TimeMachineTP/TimeMachine"]
 position = Vector2(41, 21)
-stream = ExtResource("16_brn2n")
+stream = ExtResource("16_svktn")
 volume_db = -29.346
 pitch_scale = 0.79
 max_distance = 242.0

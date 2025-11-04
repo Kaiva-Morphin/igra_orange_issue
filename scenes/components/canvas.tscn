@@ -42,7 +42,7 @@ shader_parameter/small_scanlines_opacity = 1.0
 shader_parameter/scanlines_opacity = 1.0
 shader_parameter/scanlines_speed = 1.0
 shader_parameter/scanline_thickness = 0.5
-shader_parameter/scanlines_spacing = 0.37000001035629004
+shader_parameter/scanlines_spacing = 0.3700000103562901
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_i23cq"]
 shader = ExtResource("4_i23cq")
@@ -490,7 +490,7 @@ _data = {
 script = ExtResource("1_vnem3")
 vignette = NodePath("vignette")
 dialog = NodePath("EmotionAnimation")
-dialog_label = NodePath("Node2D/Label")
+dialog_label = NodePath("")
 dialog_bg = NodePath("AnimationPlayer")
 rewind = NodePath("rewind")
 
@@ -550,9 +550,6 @@ grow_vertical = 2
 texture = ExtResource("2_i23cq")
 metadata/_edit_use_anchors_ = true
 
-[node name="Pause" parent="." instance=ExtResource("3_vnem3")]
-visible = false
-
 [node name="rewind" type="ColorRect" parent="."]
 visible = false
 material = SubResource("ShaderMaterial_yu7fl")
@@ -570,6 +567,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_i23cq")
+
+[node name="Pause" parent="." instance=ExtResource("3_vnem3")]
+visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

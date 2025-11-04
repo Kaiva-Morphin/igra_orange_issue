@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://dvhwkm5duu5i"]
+
+[ext_resource type="Script" uid="uid://4dkvy852yxm6" path="res://scenes/components/objects/mouse_grass.gd" id="1_xo7jc"]
+[ext_resource type="Texture2D" uid="uid://bcc271h6xx83t" path="res://assets/textures/mousegrass.png" id="2_033e2"]
+[ext_resource type="Shader" uid="uid://bolnlv3rdsyh" path="res://resources/shaders/reflection.gdshader" id="3_033e2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c8syv"]
+shader = ExtResource("3_033e2")
+
+[node name="MouseGrass" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_xo7jc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, -8)
+texture = ExtResource("2_033e2")
+hframes = 4
+frame = 2
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+y_sort_enabled = true
+material = SubResource("ShaderMaterial_c8syv")
+position = Vector2(0, 8)
+texture = ExtResource("2_033e2")
+flip_v = true
+hframes = 4
+frame = 2

@@ -14,6 +14,7 @@ func _ready() -> void:
 func _on_body_entered(body):
 	if !body.is_in_group("player"): return
 	CAMERA.room_bound_rects.append([prefer_zoom, rect])
+	GAMESTATE.level_ref.checkpoint()
 	var parent = get_parent();
 	print("[room] player")
 	print("[room] parent", parent)

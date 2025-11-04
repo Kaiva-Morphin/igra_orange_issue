@@ -1,11 +1,11 @@
-[gd_scene load_steps=23 format=3 uid="uid://hqdryxc766fs"]
+[gd_scene load_steps=20 format=3 uid="uid://hqdryxc766fs"]
 
 [ext_resource type="Theme" uid="uid://c4tnmjnv1swxg" path="res://resources/ui/main_theme.tres" id="1_klgdb"]
 [ext_resource type="Script" uid="uid://ciepjgslvoe36" path="res://scenes/menu/menu_controller.gd" id="2_e0arn"]
 [ext_resource type="Theme" uid="uid://7vvxi1od5y83" path="res://resources/ui/button.tres" id="2_mcvr8"]
+[ext_resource type="Texture2D" uid="uid://cyhca3xtrxo2c" path="res://assets/textures/menu.png" id="3_f2fum"]
 [ext_resource type="AudioStream" uid="uid://45seydecif80" path="res://assets/sounds/shapeforms/WHOOSH_AIRY_FLUTTER_01.wav" id="3_k48pe"]
-[ext_resource type="Texture2D" uid="uid://cnqambmc0c3pp" path="res://resources/ui/bg.png" id="3_y1o0p"]
-[ext_resource type="Texture2D" uid="uid://bmvipnloc3x1y" path="res://assets/particles/cloud.png" id="4_037ec"]
+[ext_resource type="Shader" uid="uid://cctgygvowewya" path="res://resources/shaders/menu.gdshader" id="3_kaijy"]
 [ext_resource type="AudioStream" uid="uid://bksx4qer1bjb6" path="res://assets/sounds/shapeforms/Tablet_Tap_07.wav" id="4_k48pe"]
 [ext_resource type="AudioStream" uid="uid://dcj5q48alcc57" path="res://assets/sounds/kenney/click2.ogg" id="5_f2fum"]
 [ext_resource type="AudioStream" uid="uid://ccl48un6bn75c" path="res://assets/sounds/shapeforms/PC Keyboard_Keystroke_28.wav" id="6_kaijy"]
@@ -13,21 +13,13 @@
 [ext_resource type="PackedScene" uid="uid://dxlupbpywxun7" path="res://scenes/menu/settings.tscn" id="11_f2fum"]
 [ext_resource type="Script" uid="uid://cx2eqddx6y6uu" path="res://scenes/menu/creds.gd" id="12_kaijy"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_037ec"]
-atlas = ExtResource("4_037ec")
-region = Rect2(0, 0, 35, 18)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_y1o0p"]
-atlas = ExtResource("4_037ec")
-region = Rect2(35, 0, 35, 18)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_r8yej"]
-atlas = ExtResource("4_037ec")
-region = Rect2(35, 18, 35, 18)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3y2rt"]
-atlas = ExtResource("4_037ec")
-region = Rect2(0, 18, 35, 18)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y4i35"]
+shader = ExtResource("3_kaijy")
+shader_parameter/progress = 0.574000027265
+shader_parameter/width = 0.0
+shader_parameter/feather = 0.4830000229425
+shader_parameter/up = Color(0.62722665, 0.61060005, 0.86, 0.13333334)
+shader_parameter/bottom = Color(1, 0.53800005, 0.23000002, 0.10980392)
 
 [sub_resource type="Animation" id="Animation_r8yej"]
 length = 0.001
@@ -205,80 +197,11 @@ next_root = NodePath("NEXT")
 player = NodePath("SwapPlayer")
 
 [node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_y4i35")
 layout_mode = 0
 offset_right = 200.0
 offset_bottom = 150.0
-texture = ExtResource("3_y1o0p")
-
-[node name="Particles" type="Node2D" parent="."]
-
-[node name="CPUParticles2D" type="CPUParticles2D" parent="Particles"]
-self_modulate = Color(0.19607843, 0.19607843, 0.19607843, 1)
-position = Vector2(225.5, 140.75)
-texture = SubResource("AtlasTexture_037ec")
-lifetime = 25.0
-preprocess = 100.0
-randomness = 0.5
-emission_shape = 3
-emission_rect_extents = Vector2(0, 10)
-direction = Vector2(-1, 0)
-spread = 0.0
-gravity = Vector2(0, 0)
-initial_velocity_min = 10.0
-initial_velocity_max = 20.0
-scale_amount_min = 4.0
-scale_amount_max = 4.0
-
-[node name="CPUParticles2D2" type="CPUParticles2D" parent="Particles"]
-self_modulate = Color(0.25, 0.25, 0.25, 1)
-position = Vector2(225.5, 136.25)
-texture = SubResource("AtlasTexture_y1o0p")
-lifetime = 25.0
-preprocess = 100.0
-randomness = 0.5
-emission_shape = 3
-emission_rect_extents = Vector2(0, 10)
-direction = Vector2(-1, 0)
-spread = 0.0
-gravity = Vector2(0, 0)
-initial_velocity_min = 10.0
-initial_velocity_max = 20.0
-scale_amount_min = 4.0
-scale_amount_max = 4.0
-
-[node name="CPUParticles2D3" type="CPUParticles2D" parent="Particles"]
-self_modulate = Color(0.3, 0.3, 0.3, 1)
-position = Vector2(225.5, 131.75)
-texture = SubResource("AtlasTexture_r8yej")
-lifetime = 25.0
-preprocess = 100.0
-randomness = 0.5
-emission_shape = 3
-emission_rect_extents = Vector2(0, 10)
-direction = Vector2(-1, 0)
-spread = 0.0
-gravity = Vector2(0, 0)
-initial_velocity_min = 10.0
-initial_velocity_max = 20.0
-scale_amount_min = 4.0
-scale_amount_max = 4.0
-
-[node name="CPUParticles2D4" type="CPUParticles2D" parent="Particles"]
-self_modulate = Color(0.35, 0.35, 0.35, 1)
-position = Vector2(225.5, 125.75)
-texture = SubResource("AtlasTexture_3y2rt")
-lifetime = 25.0
-preprocess = 100.0
-randomness = 0.5
-emission_shape = 3
-emission_rect_extents = Vector2(0, 10)
-direction = Vector2(-1, 0)
-spread = 0.0
-gravity = Vector2(0, 0)
-initial_velocity_min = 10.0
-initial_velocity_max = 20.0
-scale_amount_min = 4.0
-scale_amount_max = 4.0
+texture = ExtResource("3_f2fum")
 
 [node name="SwapPlayer" type="AnimationPlayer" parent="."]
 libraries = {

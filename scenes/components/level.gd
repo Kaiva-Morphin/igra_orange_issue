@@ -4,6 +4,7 @@ extends STRUCTS.Level
 @onready var call_sound = $Call
 @onready var cant_sound = $Cant
 @onready var rewind_sound = $Rewind
+@onready var theme_music = $MainTheme
 
 
 
@@ -41,7 +42,7 @@ func _ready() -> void:
 	CAMERA.on_ready()
 	start_new_step()
 	get_tree().call_group(STRUCTS.SWAP_REACTION_GROUP, "on_swap", GAMESTATE.worldstate, true)
-	GAMESTATE.vignette.animate(0.0, 0.3, 5.0)
+	# GAMESTATE.vignette.animate(0.0, 0.3, 5.0)
 
 
 
@@ -107,6 +108,8 @@ func _process(_dt: float) -> void:
 			spawn_dbg(UTILS.from_grid(i.pos), Color(1, 0, 0))
 		for i in movable_collider_store.pos_to_collider.keys():
 			spawn_dbg(Vector2(UTILS.from_grid(i)) + Vector2(8, 8), Color(1, 0, 1))
+		for i in mouse_collider_store.pos_to_collider.keys():
+			spawn_dbg(Vector2(UTILS.from_grid(i)) + Vector2(8, 8), Color(1, 0.7, 0.8))
 		# for i in static_collider_store.pos_to_collider.values():
 		# 	spawn_dbg(UTILS.from_grid(i.pos), Color(1, 1, 0))
 		# for i in static_collider_store.pos_to_collider.keys():
@@ -165,6 +168,7 @@ func _process(_dt: float) -> void:
 		player.push_step()
 		player.suppressed = suppressed
 		UTILS.log_print("[level instance] swap")
+		$Swap.play()
 		GAMESTATE.swap()
 		return
 	
@@ -221,6 +225,22 @@ func _process(_dt: float) -> void:
 			cant_sound.play()
 		return
 	
+	# check mouse :D
+	var to_check = [
+		dst_grid, 
+		dst_grid + Vector2i(1, 0), 
+		dst_grid + Vector2i(-1, 0), 
+		dst_grid + Vector2i(0, 1), 
+		dst_grid + Vector2i(0, -1)
+	]
+	var mouse_on_path = []
+	for i in to_check:
+		var mc = mouse_collider_store.get_collider(i)
+		if mc:
+			mouse_on_path.append(mc)
+
+
+
 	var m = movable_collider_store.get_collider(dst_grid)
 	var i = ice_store.get_collider(dst_grid)
 	var p_i = ice_store.get_collider(grid_pos)
@@ -286,6 +306,7 @@ func _process(_dt: float) -> void:
 		player.resume_anim()
 		var t = get_tree().create_timer(0.25);
 		t.timeout.connect(func(): player.stop_anim())
+		for mo in mouse_on_path: mo.react_player(dst_grid)
 		UTILS.tween_move(player, UTILS.from_grid(end), func(): processing_step = false, dist * UTILS.speed_per_tile)
 		processing_step = true
 		from_prev_step = 0.0
@@ -305,6 +326,7 @@ func _process(_dt: float) -> void:
 	from_prev_step = 0.0
 	player.push_step()
 	player.pos = player.pos + i_dir
+	for mo in mouse_on_path: mo.react_player(dst_grid)
 	UTILS.tween_move(player, dst, func(): processing_step = false)
 
 

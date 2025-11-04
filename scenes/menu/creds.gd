@@ -46,6 +46,7 @@ var creds = [
 	{"asset": "interface-sfx-pack-1", "author": "obsydianx", "link": "https://obsydianx.itch.io/interface-sfx-pack-1", "types": [TYPE.Sound]},
 	{"asset": "Немного всякого", "author": "kenney", "link": "https://kenney.nl", "types": [TYPE.Sound]},
 	{"asset": "Tabletop clock ticking, speed ramp down (followup)", "author": "ycbcr", "link": "https://freesound.org/people/ycbcr/sounds/556991/", "types": [TYPE.Sound]},
+	{"asset": "16-Bit Starter Pack - Bit By Bit Sound", "author": "Bit By Bit", "link": "https://bit-by-bit-sound.itch.io/16-bit-starter-pack", "types": [TYPE.Sound]},
 
 
 	{"asset": "Top-Down Forest Tileset (Edited)", "author": "gametoolkit", "link": "https://gametoolkit.itch.io/top-down-forest-tileset", "types": [TYPE.Image]},

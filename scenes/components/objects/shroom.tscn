@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://dqikyi0lrvni8"]
+
+[ext_resource type="Script" uid="uid://cj2us2acx7eny" path="res://scenes/components/objects/shroom.gd" id="1_u76ld"]
+[ext_resource type="Texture2D" uid="uid://dmppgnx6ph42s" path="res://assets/textures/shroom.png" id="2_u76ld"]
+[ext_resource type="Shader" uid="uid://bolnlv3rdsyh" path="res://resources/shaders/reflection.gdshader" id="3_kmpvg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c8syv"]
+shader = ExtResource("3_kmpvg")
+
+[node name="Shroom" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_u76ld")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, -8)
+texture = ExtResource("2_u76ld")
+hframes = 3
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+y_sort_enabled = true
+material = SubResource("ShaderMaterial_c8syv")
+position = Vector2(0, 8)
+texture = ExtResource("2_u76ld")
+flip_v = true
+hframes = 3
+frame = 2
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+visible = false
+y_sort_enabled = true
+position = Vector2(0, -8)
+texture = ExtResource("2_u76ld")
+hframes = 3
+frame = 2

@@ -1,19 +1,39 @@
-[gd_scene load_steps=15 format=3 uid="uid://7uv76nxqe7nu"]
+[gd_scene load_steps=27 format=3 uid="uid://7uv76nxqe7nu"]
 
 [ext_resource type="PackedScene" uid="uid://cxpycm8cc7sgl" path="res://scenes/components/level.tscn" id="1_u81e1"]
 [ext_resource type="PackedScene" uid="uid://u3xhep13ucw4" path="res://scenes/components/player.tscn" id="2_b6bv0"]
-[ext_resource type="AudioStream" uid="uid://o7ypuj86s0dd" path="res://assets/sounds/swap.ogg" id="2_rssyh"]
 [ext_resource type="PackedScene" uid="uid://b5lssn8aobfev" path="res://scenes/components/canvas.tscn" id="3_ubwgw"]
 [ext_resource type="PackedScene" uid="uid://bnjbnki21opm8" path="res://scenes/levels/puzzle_ice_1.tscn" id="4_vkq25"]
 [ext_resource type="PackedScene" uid="uid://k0d3rjnhq25v" path="res://scenes/levels/cave.tscn" id="5_7lrji"]
 [ext_resource type="PackedScene" uid="uid://dfs77egu2ooq6" path="res://scenes/levels/cave_exit.tscn" id="6_b6bv0"]
 [ext_resource type="PackedScene" uid="uid://b4l7xofqvc3a1" path="res://scenes/levels/first_ice.tscn" id="7_ubwgw"]
-[ext_resource type="PackedScene" uid="uid://ccvyelicelqg" path="res://lab.tscn" id="8_vkq25"]
+[ext_resource type="PackedScene" uid="uid://brc7cxlek8yso" path="res://scenes/components/room.tscn" id="8_qy6q0"]
+[ext_resource type="PackedScene" uid="uid://ccvyelicelqg" path="res://scenes/levels/lab.tscn" id="8_vkq25"]
 [ext_resource type="PackedScene" uid="uid://gf8ysc5wolvi" path="res://scenes/levels/clock.tscn" id="9_7lrji"]
 [ext_resource type="PackedScene" uid="uid://dxdja74mi1bky" path="res://scenes/levels/icehell.tscn" id="11_2xkjh"]
 [ext_resource type="PackedScene" uid="uid://b67b2qteqlcs0" path="res://scenes/levels/labirintik.tscn" id="12_dj21o"]
 [ext_resource type="PackedScene" uid="uid://cvuujc153tak6" path="res://scenes/levels/afterclock.tscn" id="13_dj21o"]
-[ext_resource type="PackedScene" uid="uid://cdgnpqme058om" path="res://puzzle_ice.tscn" id="14_6ui35"]
+[ext_resource type="PackedScene" uid="uid://cue5a7li6yyy0" path="res://scenes/levels/lab_fin.tscn" id="13_im81g"]
+[ext_resource type="PackedScene" uid="uid://cdgnpqme058om" path="res://scenes/levels/puzzle_ice.tscn" id="14_6ui35"]
+[ext_resource type="PackedScene" uid="uid://dr1yh1wqidsxu" path="res://scenes/levels/final.tscn" id="15_y56qp"]
+[ext_resource type="Texture2D" uid="uid://cd8b4t6r2atm2" path="res://assets/textures/dialog_bg.png" id="16_qgoyv"]
+[ext_resource type="Theme" uid="uid://c4tnmjnv1swxg" path="res://resources/ui/main_theme.tres" id="17_px1c8"]
+[ext_resource type="PackedScene" uid="uid://ks8k8to6m8cf" path="res://scenes/levels/puzzle_easy_ice.tscn" id="18_qgoyv"]
+[ext_resource type="Texture2D" uid="uid://blxg44qr654no" path="res://assets/textures/lab_man.png" id="18_xgklb"]
+[ext_resource type="PackedScene" uid="uid://cr72veahutdvh" path="res://scenes/levels/first_mouse.tscn" id="19_px1c8"]
+[ext_resource type="PackedScene" uid="uid://bpts6axeegtyu" path="res://scenes/levels/ice_3.tscn" id="20_xgklb"]
+[ext_resource type="PackedScene" uid="uid://t6c7011s8l62" path="res://scenes/components/objects/mouse.tscn" id="21_5wre2"]
+[ext_resource type="Texture2D" uid="uid://4vdxneay8v8e" path="res://assets/textures/f.png" id="23_ykry0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_im81g"]
+size = Vector2(480.5, 336)
+
+[sub_resource type="LabelSettings" id="LabelSettings_j122s"]
+outline_size = 4
+outline_color = Color(0.693625, 0.44250003, 0.75, 1)
+shadow_size = 7
+shadow_color = Color(0.72749996, 0.48, 0.75, 0.5921569)
+shadow_offset = Vector2(0, 0)
 
 [node name="main" type="Node2D"]
 
@@ -22,14 +42,14 @@
 [node name="Tick" parent="Level" index="1"]
 volume_db = -26.294
 
-[node name="AudioStreamPlayer4" parent="Level" index="4"]
-stream = ExtResource("2_rssyh")
+[node name="MainTheme" parent="Level" index="8"]
+volume_db = -14.857
 
 [node name="CaveExit" parent="Level" instance=ExtResource("6_b6bv0")]
 position = Vector2(-384, 192)
 
 [node name="Player" parent="Level" instance=ExtResource("2_b6bv0")]
-position = Vector2(1256, 1328)
+position = Vector2(2400, 1208)
 
 [node name="Camera2D" type="Camera2D" parent="Level" groups=["camera"]]
 position = Vector2(8, 8)
@@ -40,38 +60,121 @@ current = true
 
 [node name="Canvas" parent="Level" instance=ExtResource("3_ubwgw")]
 
-[node name="PuzzleIce1" parent="Level" instance=ExtResource("4_vkq25")]
+[node name="ice_3" parent="Level" instance=ExtResource("20_xgklb")]
+position = Vector2(1872, 1312)
+
+[node name="Mouse" parent="Level" instance=ExtResource("21_5wre2")]
+position = Vector2(-96, -192)
+
+[node name="Room" parent="Level/Mouse" instance=ExtResource("8_qy6q0")]
+visible = true
+position = Vector2(2712, 1448)
+
+[node name="AREA" parent="Level/Mouse/Room" index="0"]
+position = Vector2(-8.25, -144)
+shape = SubResource("RectangleShape2D_im81g")
+
+[node name="FirstMouse" parent="Level" instance=ExtResource("19_px1c8")]
+position = Vector2(2368, 1280)
+
+[node name="Done" type="Node2D" parent="Level"]
+y_sort_enabled = true
+metadata/_edit_lock_ = true
+
+[node name="PuzzleIce1" parent="Level/Done" instance=ExtResource("4_vkq25")]
 position = Vector2(944, 752)
 
-[node name="FirstIce" parent="Level" instance=ExtResource("7_ubwgw")]
+[node name="FirstIce" parent="Level/Done" instance=ExtResource("7_ubwgw")]
 position = Vector2(304, 336)
 
-[node name="Cave" parent="Level" instance=ExtResource("5_7lrji")]
+[node name="Cave" parent="Level/Done" instance=ExtResource("5_7lrji")]
 position = Vector2(-336, -288)
 
-[node name="lab" parent="Level" instance=ExtResource("8_vkq25")]
+[node name="lab" parent="Level/Done" instance=ExtResource("8_vkq25")]
 position = Vector2(-384, 400)
 
-[node name="TimeMachineTP" parent="Level/lab" index="13" node_paths=PackedStringArray("tp_pos")]
+[node name="TimeMachineTP" parent="Level/Done/lab" index="14" node_paths=PackedStringArray("tp_pos")]
 tp_pos = NodePath("../../TpFromLab")
 
-[node name="TpFromLab" type="Node2D" parent="Level"]
+[node name="lab_fin" parent="Level/Done" instance=ExtResource("13_im81g")]
+position = Vector2(4224, 2176)
+
+[node name="TpFromLab" type="Node2D" parent="Level/Done"]
 position = Vector2(-160, -448)
 
-[node name="Node2D" parent="Level" instance=ExtResource("9_7lrji")]
+[node name="Node2D" parent="Level/Done" instance=ExtResource("9_7lrji")]
 position = Vector2(992, 960)
 
-[node name="Node2D3" parent="Level" instance=ExtResource("13_dj21o")]
+[node name="Node2D3" parent="Level/Done" instance=ExtResource("13_dj21o")]
 position = Vector2(1056, 1344)
 
-[node name="Node2D2" parent="Level" instance=ExtResource("11_2xkjh")]
-position = Vector2(2672, 2000)
+[node name="Node2D2" parent="Level/Done" instance=ExtResource("11_2xkjh")]
+position = Vector2(3104, 1472)
 
-[node name="PuzzleIce" parent="Level" instance=ExtResource("14_6ui35")]
-position = Vector2(1280, 1696)
+[node name="PuzzleIce" parent="Level/Done" instance=ExtResource("14_6ui35")]
+position = Vector2(3776, 2016)
 
-[node name="Node2D4" parent="Level" instance=ExtResource("12_dj21o")]
-position = Vector2(2016, 1696)
+[node name="Node2D5" parent="Level/Done" instance=ExtResource("15_y56qp")]
+position = Vector2(4304, 1792)
+
+[node name="Node2D4" parent="Level/Done" instance=ExtResource("12_dj21o")]
+position = Vector2(1408, 1376)
+
+[node name="Node2D6" type="Node2D" parent="Level/Done"]
+z_index = 20
+position = Vector2(1264, 1136)
+
+[node name="DialogBg" type="Sprite2D" parent="Level/Done/Node2D6"]
+position = Vector2(-96, 96)
+scale = Vector2(2, 2)
+texture = ExtResource("16_qgoyv")
+hframes = 2
+vframes = 2
+
+[node name="Label" type="Label" parent="Level/Done/Node2D6"]
+offset_left = -168.0
+offset_top = 48.0
+offset_right = -32.0
+offset_bottom = 157.0
+theme = ExtResource("17_px1c8")
+text = "E - Сменить проявление мира
+Q - шаг назад
+CTRL + R - перемотка
+CTRL + SHIFT + R - быстрая перемотка
+"
+label_settings = SubResource("LabelSettings_j122s")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Ded" type="Sprite2D" parent="Level/Done/Node2D6"]
+position = Vector2(-160, 48)
+scale = Vector2(2, 2)
+texture = ExtResource("18_xgklb")
+hframes = 5
+vframes = 6
+frame = 21
+
+[node name="DedE" type="Sprite2D" parent="Level/Done/Node2D6/Ded"]
+position = Vector2(8, 4)
+texture = ExtResource("18_xgklb")
+hframes = 10
+vframes = 12
+frame = 101
+
+[node name="Node2D7" parent="Level/Done" instance=ExtResource("18_qgoyv")]
+position = Vector2(1872, 1728)
+
+[node name="F" type="Sprite2D" parent="."]
+position = Vector2(-128, -208)
+texture = ExtResource("23_ykry0")
+
+[node name="F2" type="Sprite2D" parent="."]
+position = Vector2(880, 760)
+texture = ExtResource("23_ykry0")
 
 [editable path="Level"]
-[editable path="Level/lab"]
+[editable path="Level/Mouse/Room"]
+[editable path="Level/FirstMouse"]
+[editable path="Level/FirstMouse/LevelSurface"]
+[editable path="Level/Done/lab"]

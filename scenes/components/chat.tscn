@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=3 uid="uid://bflq2cpshssnh"]
+
+[ext_resource type="Texture2D" uid="uid://cd8b4t6r2atm2" path="res://assets/textures/dialog_bg.png" id="1_7lg8w"]
+[ext_resource type="Theme" uid="uid://c4tnmjnv1swxg" path="res://resources/ui/main_theme.tres" id="2_xbsv5"]
+[ext_resource type="Texture2D" uid="uid://blxg44qr654no" path="res://assets/textures/lab_man.png" id="3_pl44x"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_j122s"]
+outline_size = 4
+outline_color = Color(0.693625, 0.44250003, 0.75, 1)
+shadow_size = 7
+shadow_color = Color(0.72749996, 0.48, 0.75, 0.5921569)
+shadow_offset = Vector2(0, 0)
+
+[node name="Node2D" type="Node2D"]
+visible = false
+
+[node name="DialogBg" type="Sprite2D" parent="."]
+position = Vector2(-152, 136)
+scale = Vector2(4, 4)
+texture = ExtResource("1_7lg8w")
+hframes = 2
+vframes = 2
+
+[node name="Label" type="Label" parent="."]
+offset_left = -264.0
+offset_top = 112.0
+offset_right = -156.0
+offset_bottom = 157.0
+scale = Vector2(2, 2)
+theme = ExtResource("2_xbsv5")
+text = "Кот че ты делаешь
+Как ты там оказался?"
+label_settings = SubResource("LabelSettings_j122s")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Ded" type="Sprite2D" parent="."]
+position = Vector2(596, 152)
+scale = Vector2(4, 4)
+texture = ExtResource("3_pl44x")
+hframes = 5
+vframes = 6
+frame = 21
+
+[node name="DedE" type="Sprite2D" parent="Ded"]
+position = Vector2(5, -3)
+texture = ExtResource("3_pl44x")
+hframes = 10
+vframes = 12
+frame = 100

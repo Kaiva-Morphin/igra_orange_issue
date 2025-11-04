@@ -19,15 +19,21 @@ class Level extends Node2D:
 	var initial_state: Array[StateData] = []
 	var step = 0
 	var static_collider_store : StaticColliderStore
+	var mousegrass_collider_store : StaticColliderStore
 	var movable_collider_store : MovableColliderStore
+	var mouse_collider_store : MovableColliderStore
 	var ice_store : IceStore
 
 	func _ready() -> void:
 		history = []
 		static_collider_store = StaticColliderStore.new()
 		add_child(static_collider_store)
+		mousegrass_collider_store = StaticColliderStore.new()
+		add_child(mousegrass_collider_store)
 		movable_collider_store = MovableColliderStore.new()
 		add_child(movable_collider_store)
+		mouse_collider_store = MovableColliderStore.new()
+		add_child(mouse_collider_store)
 		ice_store = IceStore.new()
 		add_child(ice_store)
 		# UTILS.log_print("[level] level ready")

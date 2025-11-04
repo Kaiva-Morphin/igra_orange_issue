@@ -1,9 +1,14 @@
-[gd_scene load_steps=5 format=4 uid="uid://p03i8wc7jxvj"]
+[gd_scene load_steps=10 format=4 uid="uid://p03i8wc7jxvj"]
 
 [ext_resource type="PackedScene" uid="uid://cxpycm8cc7sgl" path="res://scenes/components/level.tscn" id="1_bl13t"]
 [ext_resource type="PackedScene" uid="uid://u3xhep13ucw4" path="res://scenes/components/player.tscn" id="3_iyx0m"]
+[ext_resource type="PackedScene" uid="uid://dqikyi0lrvni8" path="res://scenes/components/objects/shroom.tscn" id="5_at5dv"]
 [ext_resource type="PackedScene" uid="uid://b5lssn8aobfev" path="res://scenes/components/canvas.tscn" id="5_j5jx5"]
 [ext_resource type="PackedScene" uid="uid://ddyi0gms06xau" path="res://scenes/components/level_surface.tscn" id="5_lpvoh"]
+[ext_resource type="PackedScene" uid="uid://4l033lsf7pxu" path="res://scenes/components/objects/ice.tscn" id="6_lpvoh"]
+[ext_resource type="PackedScene" uid="uid://t6c7011s8l62" path="res://scenes/components/objects/mouse.tscn" id="7_at5dv"]
+[ext_resource type="PackedScene" uid="uid://dvhwkm5duu5i" path="res://scenes/components/objects/mouse_grass.tscn" id="8_jcd4p"]
+[ext_resource type="PackedScene" uid="uid://cr72veahutdvh" path="res://scenes/levels/first_mouse.tscn" id="9_uacia"]
 
 [node name="Test" type="Node2D"]
 
@@ -13,7 +18,7 @@ dbg_render = true
 [node name="Camera2D" type="Camera2D" parent="Level" groups=["camera"]]
 
 [node name="Player" parent="Level" instance=ExtResource("3_iyx0m")]
-position = Vector2(-40, -8)
+position = Vector2(33, -63)
 
 [node name="Canvas" parent="Level" instance=ExtResource("5_j5jx5")]
 
@@ -21,5 +26,25 @@ position = Vector2(-40, -8)
 
 [node name="FutureGround" parent="Level/LevelSurface/FutureDraw" index="1"]
 tile_map_data = PackedByteArray("AAABAP7/AAACAAIAAAABAP3/AAACAAAAAAAAAP7/AAABAAIAAAAAAP3/AAABAAAAAAD///7/AAAAAAIAAAD///3/AAAAAAAAAAA=")
+
+[node name="PastGround" parent="Level/LevelSurface/Past" index="1"]
+tile_map_data = PackedByteArray("AAAEAAIAAAADAAMAAAAFAAEAAAADAAMAAAAEAAAAAAADAAMAAAA=")
+
+[node name="Shroom" parent="Level" instance=ExtResource("5_at5dv")]
+position = Vector2(40, -8)
+
+[node name="Ice" parent="Level" instance=ExtResource("6_lpvoh")]
+position = Vector2(8, -8)
+
+[node name="MouseGrass" parent="Level" instance=ExtResource("8_jcd4p")]
+position = Vector2(120, -56)
+
+[node name="MouseGrass2" parent="Level" instance=ExtResource("8_jcd4p")]
+position = Vector2(56, -56)
+
+[node name="Mouse" parent="Level" instance=ExtResource("7_at5dv")]
+position = Vector2(88, -56)
+
+[node name="FirstMouse" parent="Level" instance=ExtResource("9_uacia")]
 
 [editable path="Level/LevelSurface"]
