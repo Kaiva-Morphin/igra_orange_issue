@@ -139,3 +139,9 @@ func _process(_delta: float) -> void:
 		stage = Stage.Done
 		GAMESTATE.player.suppressed = false
 		GAMESTATE.level_ref.checkpoint()
+
+func meow():
+	GAMESTATE.player.meow()
+
+func to_menu():
+	get_tree().change_scene_to_packed(STORE.menu_scene)

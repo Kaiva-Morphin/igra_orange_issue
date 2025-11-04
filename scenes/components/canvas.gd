@@ -54,7 +54,7 @@ func _show_next_msg() -> void:
 	var emotion_name := str(DIALOGS.DialogEmotion.keys()[msg.emotion]).to_lower()
 	if dialog.has_animation(emotion_name):
 		dialog.play(emotion_name)
-	
+
 	# Запускаем таймер: сначала мяу за meow_prefix до конца
 	var meow_time = max(total_time - meow_prefix, 0.1)
 	dialog_timer.set_meta("data", {"step": "meow", "msg": msg})

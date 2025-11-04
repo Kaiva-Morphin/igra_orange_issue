@@ -180,6 +180,18 @@ tracks/3/keys = {
 "update": 0,
 "values": [Vector2(5, -3)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Node2D/Ded/DedE:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_wvuej"]
 resource_name = "beg"
@@ -273,59 +285,6 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [104]
-}
-
-[sub_resource type="Animation" id="Animation_64saq"]
-resource_name = "impressed"
-length = 0.8
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Node2D/Ded:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [20]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Node2D/Ded:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.39999998),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [Vector2(-152, 80), Vector2(-152, 76)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Node2D/Ded/DedE:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [100]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Node2D/Ded/DedE:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.20000002, 0.40263337, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [Vector2(5, -3), Vector2(5, -2), Vector2(5, -1), Vector2(5, -2)]
 }
 
 [sub_resource type="Animation" id="Animation_j122s"]
@@ -475,22 +434,62 @@ tracks/3/keys = {
 "values": [Vector2(5, -3), Vector2(5, -2), Vector2(5, -1), Vector2(5, -2)]
 }
 
+[sub_resource type="Animation" id="Animation_64saq"]
+resource_name = "surprised"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node2D/Ded:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [22]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node2D/Ded:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.39999998),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2(-152, 80), Vector2(-152, 76)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Node2D/Ded/DedE:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_j7sgu"]
 _data = {
 &"RESET": SubResource("Animation_j7sgu"),
 &"beg": SubResource("Animation_wvuej"),
 &"confused": SubResource("Animation_yu7fl"),
-&"impressed": SubResource("Animation_64saq"),
 &"neutral": SubResource("Animation_j122s"),
 &"point": SubResource("Animation_k1e1j"),
-&"sad": SubResource("Animation_8t1ss")
+&"sad": SubResource("Animation_8t1ss"),
+&"surprised": SubResource("Animation_64saq")
 }
 
 [node name="Canvas" type="CanvasLayer" node_paths=PackedStringArray("vignette", "dialog", "dialog_label", "dialog_bg", "rewind")]
 script = ExtResource("1_vnem3")
 vignette = NodePath("vignette")
 dialog = NodePath("EmotionAnimation")
-dialog_label = NodePath("")
+dialog_label = NodePath("Node2D/Label")
 dialog_bg = NodePath("AnimationPlayer")
 rewind = NodePath("rewind")
 
@@ -528,6 +527,7 @@ vframes = 6
 frame = 21
 
 [node name="DedE" type="Sprite2D" parent="Node2D/Ded"]
+visible = false
 position = Vector2(5, -3)
 texture = ExtResource("3_315fb")
 hframes = 10

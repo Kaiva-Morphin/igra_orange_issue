@@ -64,22 +64,29 @@ var dialogs = {
 			"Двигайся дальше пока я буду думать как тебя вытащить",
 			DialogEmotion.Beg
 		)
+	],
+	"keep_moving": [
+		DialogMsg.new(
+			"Я вижу у тебя хорошо получается",
+			DialogEmotion.Surprised
+		),
+		DialogMsg.new(
+			"Продолжай двигаться дальше, я почти настроил приемник",
+			DialogEmotion.Beg
+		)
+	],
+	"already_here": [
+		DialogMsg.new(
+			"Рядом есть место, в котором связь с мирами",
+			DialogEmotion.Confused
+		),
+		DialogMsg.new(
+			"Достаточно стабильна. Ты почти у цели!",
+			DialogEmotion.Point
+		),
+		DialogMsg.new(
+			"Не сдавайся! Осталось совсем немного",
+			DialogEmotion.Beg
+		)
 	]
 }
-
-# DialogMsg.new(
-# 			"Просто невероятно! там небезопасно, надо поскорее вытащить тебя оттуда",
-# 			DialogEmotion.Beg
-# 		),
-# 		DialogMsg.new(
-# 			"Тут плохая связь и я не могу вытащить тебя, но, судя по моим наблюдениям",
-# 			DialogEmotion.Neutral
-# 		),
-# 		DialogMsg.new(
-# 			"Если ты пойдешь дальше, то прибудешь в подходящее место",
-# 			DialogEmotion.Neutral
-# 		),
-# 		DialogMsg.new(
-# 			"И я смогу вытащить тебя",
-# 			DialogEmotion.Neutral
-# 		)

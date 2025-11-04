@@ -42,7 +42,7 @@ func _ready() -> void:
 	CAMERA.on_ready()
 	start_new_step()
 	get_tree().call_group(STRUCTS.SWAP_REACTION_GROUP, "on_swap", GAMESTATE.worldstate, true)
-	# GAMESTATE.vignette.animate(0.0, 0.3, 5.0)
+	GAMESTATE.vignette.animate(0.0, 0.3, 5.0)
 
 
 

@@ -40,7 +40,7 @@ func get_mask(_world: WorldState) -> int:
 	elif mc: # && mc.get_mask(UTILS.reverse_state(_world)) != 0:
 		return 0
 	else:
-		return STATE_COLLIDER_PLAYER_MASK | STATE_COLLIDER_MOVABLE_MASK
+		return STATE_COLLIDER_PLAYER_MASK
 
 func process_swap(world_state: WorldState):
 	mask = get_mask(world_state)
@@ -65,3 +65,4 @@ func process_swap(world_state: WorldState):
 
 func mouse_in():
 	process_swap(GAMESTATE.worldstate)
+	push_step()

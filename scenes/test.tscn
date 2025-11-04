@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://p03i8wc7jxvj"]
+[gd_scene load_steps=9 format=4 uid="uid://p03i8wc7jxvj"]
 
 [ext_resource type="PackedScene" uid="uid://cxpycm8cc7sgl" path="res://scenes/components/level.tscn" id="1_bl13t"]
 [ext_resource type="PackedScene" uid="uid://u3xhep13ucw4" path="res://scenes/components/player.tscn" id="3_iyx0m"]
@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://4l033lsf7pxu" path="res://scenes/components/objects/ice.tscn" id="6_lpvoh"]
 [ext_resource type="PackedScene" uid="uid://t6c7011s8l62" path="res://scenes/components/objects/mouse.tscn" id="7_at5dv"]
 [ext_resource type="PackedScene" uid="uid://dvhwkm5duu5i" path="res://scenes/components/objects/mouse_grass.tscn" id="8_jcd4p"]
-[ext_resource type="PackedScene" uid="uid://cr72veahutdvh" path="res://scenes/levels/first_mouse.tscn" id="9_uacia"]
 
 [node name="Test" type="Node2D"]
 
@@ -44,7 +43,5 @@ position = Vector2(56, -56)
 
 [node name="Mouse" parent="Level" instance=ExtResource("7_at5dv")]
 position = Vector2(88, -56)
-
-[node name="FirstMouse" parent="Level" instance=ExtResource("9_uacia")]
 
 [editable path="Level/LevelSurface"]

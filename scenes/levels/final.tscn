@@ -1,8 +1,210 @@
-[gd_scene load_steps=2 format=4 uid="uid://dr1yh1wqidsxu"]
+[gd_scene load_steps=15 format=4 uid="uid://dr1yh1wqidsxu"]
 
 [ext_resource type="PackedScene" uid="uid://ddyi0gms06xau" path="res://scenes/components/level_surface.tscn" id="1_hedjq"]
+[ext_resource type="Script" uid="uid://bpcp0kp1c7ob1" path="res://scenes/levels/final.gd" id="1_w5t8p"]
+[ext_resource type="Script" uid="uid://iukce77fxqgw" path="res://scenes/components/cutscene_controller.gd" id="2_d3hlp"]
+[ext_resource type="Script" uid="uid://ca05bbiniab3v" path="res://scenes/components/cutscene_utils.gd" id="3_w5t8p"]
+[ext_resource type="Texture2D" uid="uid://byutidsxi5jwu" path="res://assets/textures/invisible_collider.png" id="4_lia11"]
+[ext_resource type="Texture2D" uid="uid://te0hulw7hbws" path="res://assets/textures/player.png" id="5_y0ebc"]
+[ext_resource type="Texture2D" uid="uid://cf3vsgy4b65u1" path="res://assets/particles/map.png" id="6_humeh"]
+[ext_resource type="Texture2D" uid="uid://defceehmotqis" path="res://assets/noises/Circular_03-256x256.png" id="8_lia11"]
 
-[node name="Node2D" type="Node2D"]
+[sub_resource type="Animation" id="Animation_w5t8p"]
+resource_name = "FinalIntro"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"tp"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_ceat7"]
+resource_name = "FirstIceIntro"
+length = 3.0
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CutsceneController")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"to_follow"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CutsceneController/CutsceneUtils")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.20000005),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [0, Vector2(0, -10), Vector2(0, -10), 2.0],
+"method": &"shoot_particle_effect_player"
+}, {
+"args": [],
+"method": &"grab_camera"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_drian"]
+resource_name = "FirstIceMain"
+length = 7.4
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CutsceneController/CutsceneUtils")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.19999999, 0.21, 7.3, 7.366667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"values": [{
+"args": [4, Vector2(0, -10), Vector2(0, -10), 2.0],
+"method": &"shoot_particle_effect_player"
+}, {
+"args": [],
+"method": &"begin_player_follow"
+}, {
+"args": [],
+"method": &"grab_player_anim"
+}, {
+"args": [],
+"method": &"end_player_anim"
+}, {
+"args": [],
+"method": &"end_player_follow"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CutsceneController")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(7.366667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"main_anim_done"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CutsceneController/CutsceneUtils/PlayerPosOverride:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.26666665, 5.166667, 7.366667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(168, 72), Vector2(168, 76), Vector2(168, 76), Vector2(168, 344)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CutsceneController/CutsceneUtils:zoom")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(5.1666665, 6.633333),
+"transitions": PackedFloat32Array(0.3789284, 1),
+"update": 0,
+"values": [3.0, 2.5]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CutsceneController/CutsceneUtils:player_frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.26666668, 0.5768913, 0.83783627, 1.1, 1.3636749, 4.0952406, 4.4356103, 4.8, 5.1666665),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 28, 32, 36, 40, 36, 32, 28, 0]
+}
+
+[sub_resource type="Animation" id="Animation_5waj2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CutsceneController/CutsceneUtils/PlayerPosOverride:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(168, 72)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CutsceneController/CutsceneUtils:script")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_w5t8p")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CutsceneController/CutsceneUtils:zoom")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2.5]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CutsceneController/CutsceneUtils:player_frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_drian"]
+_data = {
+&"FinalIntro": SubResource("Animation_w5t8p"),
+&"FirstIceIntro": SubResource("Animation_ceat7"),
+&"FirstIceMain": SubResource("Animation_drian"),
+&"RESET": SubResource("Animation_5waj2")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gxsnh"]
+size = Vector2(32, 32)
+
+[node name="Final" type="Node2D"]
+script = ExtResource("1_w5t8p")
 
 [node name="LevelSurface" parent="." instance=ExtResource("1_hedjq")]
 metadata/_edit_lock_ = true
@@ -21,5 +223,60 @@ tile_map_data = PackedByteArray("AAD2/wAAAAANAAAAAAD3/wAAAAANAAAAAAD4/wAAAAAOAAA
 
 [node name="FutureCliffsWind" parent="LevelSurface/FutureDraw" index="4"]
 tile_map_data = PackedByteArray("AAD7/wUAAAAEAAQAAAD6/wQAAAAEAAQAAAAEAAMAAAAEAAQAAAABAAUAAAAEAAQAAAACAPv/AAAEAAQAAAD6//3/AAAEAAQAAAD8//v/AAADAAkAAAADAPz/AAADAAkAAAADAAMAAAADAAkAAAD5/wAAAAADAAkAAAABAPr/AAADAAkAAAD8/wMAAAADAAkAAAAGAAEAAAAHAAgAAAACAAIAAAAHAAgAAAD9/wUAAAAHAAgAAAD9//r/AAAHAAgAAAAFAAAAAAAEAAkAAAA=")
+
+[node name="CutsceneController" type="Node2D" parent="." node_paths=PackedStringArray("animator")]
+position = Vector2(40, -8)
+script = ExtResource("2_d3hlp")
+animator = NodePath("Animation")
+init_anim = "FinalIntro"
+
+[node name="Animation" type="AnimationPlayer" parent="CutsceneController"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_drian")
+}
+
+[node name="Area2D" type="Area2D" parent="CutsceneController"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CutsceneController/Area2D"]
+z_index = 25
+position = Vector2(-24, -8)
+shape = SubResource("RectangleShape2D_gxsnh")
+debug_color = Color(0.9372549, 0, 0, 0.41960785)
+
+[node name="CutsceneUtils" type="Node2D" parent="CutsceneController"]
+script = ExtResource("3_w5t8p")
+
+[node name="PlayerPosOverride" type="Node2D" parent="CutsceneController/CutsceneUtils"]
+position = Vector2(168, 72)
+
+[node name="Sprite2D" type="Sprite2D" parent="CutsceneController/CutsceneUtils/PlayerPosOverride"]
+visible = false
+modulate = Color(0.9999998, 0.845044, 0.7061551, 1)
+texture = ExtResource("4_lia11")
+
+[node name="AnimPreview" type="Sprite2D" parent="CutsceneController/CutsceneUtils/PlayerPosOverride"]
+visible = false
+position = Vector2(0, -3.9742966)
+texture = ExtResource("5_y0ebc")
+hframes = 4
+vframes = 12
+frame = 8
+
+[node name="Particles" type="Sprite2D" parent="CutsceneController/CutsceneUtils"]
+z_index = 5
+z_as_relative = false
+texture = ExtResource("6_humeh")
+hframes = 3
+vframes = 3
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(16, -16)
+color = Color(0.7166667, 1, 0, 0.7137255)
+energy = 0.5
+texture = ExtResource("8_lia11")
+texture_scale = 0.65
+
+[connection signal="body_entered" from="CutsceneController/Area2D" to="CutsceneController" method="_on_area_2d_body_entered"]
 
 [editable path="LevelSurface"]

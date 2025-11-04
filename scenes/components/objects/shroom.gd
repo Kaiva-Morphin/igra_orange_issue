@@ -5,7 +5,7 @@ extends STRUCTS.StateCollider
 @onready var in_past_sprite = $Sprite2D3
 
 func _init() -> void:
-	super._init(STATE_COLLIDER_PLAYER_MASK | STATE_COLLIDER_MOVABLE_MASK)
+	super._init(0)
 
 func _level_ready(level: Level, push_initial: bool = true):
 	pos = UTILS.to_grid(global_position)
@@ -28,13 +28,14 @@ func restore_state(old_state: StateData):
 	process_swap(GAMESTATE.worldstate)
 
 func get_mask(_world: WorldState) -> int:
+	print("[shroom] get_mask " + str(_world))
 	var mc = level_ref.movable_collider_store.get_collider(pos)
 	if _world == STRUCTS.WorldState.Past:
-		return 0
+		return 2
 	elif mc && mc.get_mask(UTILS.reverse_state(_world)) != 0:
 		return 0
 	else:
-		return STATE_COLLIDER_PLAYER_MASK | STATE_COLLIDER_MOVABLE_MASK
+		return 3
 
 func process_swap(world_state: WorldState):
 	mask = get_mask(world_state)

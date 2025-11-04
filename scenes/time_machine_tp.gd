@@ -5,7 +5,8 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if !body.is_in_group("player"): return
 	if shooted : return
 	shooted = true
-	$TimeMachine/AnimationPlayer.play("Run")
+	var n = get_node("TimeMachine/AnimationPlayer")
+	if n: n.play("Run")
 
 @export var tp_pos : Node2D
 func tp():

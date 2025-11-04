@@ -68,3 +68,9 @@ func end_player_anim():
 
 func start_dialog(dialog_name: String):
 	GAMESTATE.canvas.start_dialog(DIALOGS.dialogs[dialog_name])
+
+func hide_player():
+	GAMESTATE.player.hide()
+
+func show_player():
+	GAMESTATE.player.show()

@@ -6,6 +6,8 @@ extends Control
 @export var current_root : Control
 @export var next_root : Control
 @export var player : AnimationPlayer
+@export var music_player : AudioStreamPlayer
+
 @onready var all_screens = [
 	main_screen,
 	settings_screen,

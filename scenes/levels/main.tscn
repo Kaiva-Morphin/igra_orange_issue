@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://7uv76nxqe7nu"]
+[gd_scene load_steps=31 format=3 uid="uid://7uv76nxqe7nu"]
 
 [ext_resource type="PackedScene" uid="uid://cxpycm8cc7sgl" path="res://scenes/components/level.tscn" id="1_u81e1"]
 [ext_resource type="PackedScene" uid="uid://u3xhep13ucw4" path="res://scenes/components/player.tscn" id="2_b6bv0"]
@@ -24,6 +24,8 @@
 [ext_resource type="PackedScene" uid="uid://bpts6axeegtyu" path="res://scenes/levels/ice_3.tscn" id="20_xgklb"]
 [ext_resource type="PackedScene" uid="uid://t6c7011s8l62" path="res://scenes/components/objects/mouse.tscn" id="21_5wre2"]
 [ext_resource type="Texture2D" uid="uid://4vdxneay8v8e" path="res://assets/textures/f.png" id="23_ykry0"]
+[ext_resource type="PackedScene" uid="uid://blme6uyjol8uj" path="res://shroom_corner.tscn" id="23_ysjpo"]
+[ext_resource type="Script" uid="uid://belq4bs3pexg5" path="res://scenes/levels/dialog_trigger.gd" id="25_gexqn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_im81g"]
 size = Vector2(480.5, 336)
@@ -34,6 +36,12 @@ outline_color = Color(0.693625, 0.44250003, 0.75, 1)
 shadow_size = 7
 shadow_color = Color(0.72749996, 0.48, 0.75, 0.5921569)
 shadow_offset = Vector2(0, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ysjpo"]
+size = Vector2(34, 96)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gexqn"]
+size = Vector2(56, 16)
 
 [node name="main" type="Node2D"]
 
@@ -49,7 +57,7 @@ volume_db = -14.857
 position = Vector2(-384, 192)
 
 [node name="Player" parent="Level" instance=ExtResource("2_b6bv0")]
-position = Vector2(2400, 1208)
+position = Vector2(1008, 1128)
 
 [node name="Camera2D" type="Camera2D" parent="Level" groups=["camera"]]
 position = Vector2(8, 8)
@@ -77,6 +85,9 @@ shape = SubResource("RectangleShape2D_im81g")
 [node name="FirstMouse" parent="Level" instance=ExtResource("19_px1c8")]
 position = Vector2(2368, 1280)
 
+[node name="shoom" parent="Level" instance=ExtResource("23_ysjpo")]
+position = Vector2(2320, 1696)
+
 [node name="Done" type="Node2D" parent="Level"]
 y_sort_enabled = true
 metadata/_edit_lock_ = true
@@ -96,6 +107,9 @@ position = Vector2(-384, 400)
 [node name="TimeMachineTP" parent="Level/Done/lab" index="14" node_paths=PackedStringArray("tp_pos")]
 tp_pos = NodePath("../../TpFromLab")
 
+[node name="TimeMachine" parent="Level/Done/lab/TimeMachineTP/TimeMachine" index="1"]
+hframes = 3
+
 [node name="lab_fin" parent="Level/Done" instance=ExtResource("13_im81g")]
 position = Vector2(4224, 2176)
 
@@ -114,8 +128,9 @@ position = Vector2(3104, 1472)
 [node name="PuzzleIce" parent="Level/Done" instance=ExtResource("14_6ui35")]
 position = Vector2(3776, 2016)
 
-[node name="Node2D5" parent="Level/Done" instance=ExtResource("15_y56qp")]
+[node name="Node2D5" parent="Level/Done" node_paths=PackedStringArray("tp_pos") instance=ExtResource("15_y56qp")]
 position = Vector2(4304, 1792)
+tp_pos = NodePath("../../Tp")
 
 [node name="Node2D4" parent="Level/Done" instance=ExtResource("12_dj21o")]
 position = Vector2(1408, 1376)
@@ -165,6 +180,27 @@ frame = 101
 [node name="Node2D7" parent="Level/Done" instance=ExtResource("18_qgoyv")]
 position = Vector2(1872, 1728)
 
+[node name="Tp" type="Node2D" parent="Level"]
+position = Vector2(4280, 2232)
+
+[node name="DialogTrigger" type="Area2D" parent="Level"]
+position = Vector2(3824, 1656)
+script = ExtResource("25_gexqn")
+dialog_name = "almost_thereй"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/DialogTrigger"]
+position = Vector2(7, -8)
+shape = SubResource("RectangleShape2D_ysjpo")
+
+[node name="DialogTrigger2" type="Area2D" parent="Level"]
+position = Vector2(2152, 1272)
+script = ExtResource("25_gexqn")
+dialog_name = "keep_moving"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/DialogTrigger2"]
+position = Vector2(12, 0)
+shape = SubResource("RectangleShape2D_gexqn")
+
 [node name="F" type="Sprite2D" parent="."]
 position = Vector2(-128, -208)
 texture = ExtResource("23_ykry0")
@@ -178,3 +214,4 @@ texture = ExtResource("23_ykry0")
 [editable path="Level/FirstMouse"]
 [editable path="Level/FirstMouse/LevelSurface"]
 [editable path="Level/Done/lab"]
+[editable path="Level/Done/lab_fin"]

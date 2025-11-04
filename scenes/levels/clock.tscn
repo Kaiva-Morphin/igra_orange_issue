@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://gf8ysc5wolvi"]
+[gd_scene load_steps=19 format=4 uid="uid://gf8ysc5wolvi"]
 
 [ext_resource type="PackedScene" uid="uid://ddyi0gms06xau" path="res://scenes/components/level_surface.tscn" id="1_ayimw"]
 [ext_resource type="Script" uid="uid://iukce77fxqgw" path="res://scenes/components/cutscene_controller.gd" id="1_ejp3y"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://ca05bbiniab3v" path="res://scenes/components/cutscene_utils.gd" id="2_lp3n3"]
 [ext_resource type="Texture2D" uid="uid://byutidsxi5jwu" path="res://assets/textures/invisible_collider.png" id="3_s82cf"]
 [ext_resource type="Texture2D" uid="uid://te0hulw7hbws" path="res://assets/textures/player.png" id="4_6lsp4"]
+[ext_resource type="AudioStream" uid="uid://ce61ychhrmf5h" path="res://assets/sounds/pickup.ogg" id="4_w2amg"]
 [ext_resource type="Texture2D" uid="uid://cf3vsgy4b65u1" path="res://assets/particles/map.png" id="5_w2amg"]
 [ext_resource type="Texture2D" uid="uid://ds3wq807xp1ia" path="res://assets/textures/clock.png" id="6_lp3n3"]
 
@@ -207,6 +208,18 @@ tracks/8/keys = {
 "method": &"acquire_power"
 }]
 }
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("LevelSurface/CutsceneController/Pickup:playing")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(3),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_ceat7"]
 resource_name = "FirstIceIntro"
@@ -365,6 +378,18 @@ tracks/7/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("LevelSurface/CutsceneController/Pickup:playing")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_drian"]
 _data = {
@@ -432,6 +457,13 @@ animator = NodePath("Animation")
 path = NodePath("Path2D")
 init_anim = "ClockIntro"
 anim = "ClockMain"
+
+[node name="Pickup" type="AudioStreamPlayer2D" parent="LevelSurface/CutsceneController"]
+position = Vector2(160, 64)
+stream = ExtResource("4_w2amg")
+volume_db = -22.566
+pitch_scale = 1.23
+attenuation = 6.964403
 
 [node name="Animation" type="AnimationPlayer" parent="LevelSurface/CutsceneController"]
 root_node = NodePath("../../..")
