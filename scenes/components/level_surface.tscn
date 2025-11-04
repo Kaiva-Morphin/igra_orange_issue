@@ -47,29 +47,29 @@ tile_set = ExtResource("1_7fnnd")
 [node name="AutoPast" type="Node2D" parent="."]
 y_sort_enabled = true
 
-[node name="FutureSurface" type="TileMapLayer" parent="AutoPast"]
+[node name="PastSurface" type="TileMapLayer" parent="AutoPast"]
 z_index = -5
 tile_set = ExtResource("1_7fnnd")
 
-[node name="FutureGround" type="TileMapLayer" parent="AutoPast"]
+[node name="PastGround" type="TileMapLayer" parent="AutoPast"]
 z_index = -4
 y_sort_enabled = true
 tile_set = ExtResource("1_7fnnd")
 
-[node name="FutureDetails" type="TileMapLayer" parent="AutoPast"]
+[node name="PastDetails" type="TileMapLayer" parent="AutoPast"]
 y_sort_enabled = true
 tile_set = ExtResource("1_7fnnd")
 
-[node name="FutureCliffs" type="TileMapLayer" parent="AutoPast"]
+[node name="PastCliffs" type="TileMapLayer" parent="AutoPast"]
 y_sort_enabled = true
 tile_set = ExtResource("1_7fnnd")
 
-[node name="FutureCliffsWind" type="TileMapLayer" parent="AutoPast"]
+[node name="PastCliffsWind" type="TileMapLayer" parent="AutoPast"]
 y_sort_enabled = true
-material = SubResource("ShaderMaterial_poujk")
+material = SubResource("ShaderMaterial_kfq4i")
 tile_set = ExtResource("1_7fnnd")
 
-[node name="FutureCliffsDetails" type="TileMapLayer" parent="AutoPast"]
+[node name="PastCliffsDetails" type="TileMapLayer" parent="AutoPast"]
 z_index = 2
 y_sort_enabled = true
 tile_set = ExtResource("1_7fnnd")

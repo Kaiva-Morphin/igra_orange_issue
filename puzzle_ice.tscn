@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdgnpqme058om"]
+
+[ext_resource type="PackedScene" uid="uid://ddyi0gms06xau" path="res://scenes/components/level_surface.tscn" id="1_v44ki"]
+
+[node name="PuzzleIce" type="Node2D"]
+
+[node name="LevelSurface" parent="." instance=ExtResource("1_v44ki")]

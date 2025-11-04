@@ -94,7 +94,6 @@ var screenshot: Texture2D
 var cant_sound_since = 0
 var from_prev_step = 0
 func _process(_dt: float) -> void:
-	prints("In past", GAMESTATE.worldstate == WorldState.Past)
 	cant_sound_since += _dt
 	from_prev_step += _dt
 	CAMERA.update(_dt)
@@ -292,7 +291,6 @@ func _process(_dt: float) -> void:
 		from_prev_step = 0.0
 		return
 	player.look_dir(i_dir)
-	UTILS.log_print("[push] move")
 
 	# if i_dir.x == 0 and i_dir.y == -1:
 	# 	player.look_up()

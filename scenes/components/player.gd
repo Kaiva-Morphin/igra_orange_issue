@@ -1,6 +1,6 @@
 extends STRUCTS.SwapReaction
 
-var suppressed = false
+var suppressed = true
 var pos : Vector2i
 @onready var sprites : Node2D = $Sprite
 @onready var sprite : Sprite2D = $Sprite/Sprite2D
