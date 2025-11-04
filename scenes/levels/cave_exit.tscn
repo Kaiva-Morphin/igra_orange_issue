@@ -316,26 +316,6 @@ collide_movable_in_future = true
 collide_player_in_past = true
 collide_movable_in_past = true
 
-[node name="InvisibleCollider62" parent="LevelSurface/Inv" instance=ExtResource("3_npddi")]
-position = Vector2(664, 8)
-collide_movable_in_future = true
-collide_movable_in_past = true
-
-[node name="InvisibleCollider63" parent="LevelSurface/Inv" instance=ExtResource("3_npddi")]
-position = Vector2(664, -8)
-collide_movable_in_future = true
-collide_movable_in_past = true
-
-[node name="InvisibleCollider64" parent="LevelSurface/Inv" instance=ExtResource("3_npddi")]
-position = Vector2(664, -24)
-collide_movable_in_future = true
-collide_movable_in_past = true
-
-[node name="InvisibleCollider65" parent="LevelSurface/Inv" instance=ExtResource("3_npddi")]
-position = Vector2(664, -40)
-collide_movable_in_future = true
-collide_movable_in_past = true
-
 [node name="InvisibleCollider5" parent="LevelSurface/Inv" instance=ExtResource("3_npddi")]
 position = Vector2(648, 24)
 collide_player_in_future = true

@@ -6,12 +6,13 @@ var player
 var camera
 var level_controller : STRUCTS.Level
 var vignette
+var canvas
 
 func swap():
 	push_step()
 	var new_state = UTILS.reverse_state(worldstate)
 	print("[gamestate] swap to", new_state)
-	get_tree().call_group(STRUCTS.SWAP_REACTION_GROUP, "on_swap", new_state)
+	get_tree().call_group(STRUCTS.SWAP_REACTION_GROUP, "on_swap", new_state, true)
 	worldstate = new_state
 
 func save_state() -> STRUCTS.StateData:
@@ -25,4 +26,5 @@ func restore_state(old_state: STRUCTS.StateData):
 	super.restore_state(old_state)
 	print("[level instance] restore state", old_state.data)
 	worldstate = old_state.data["worldstate"]
-	# get_tree().call_group(STRUCTS.SWAP_REACTION_GROUP, "on_swap", worldstate)
+
+	get_tree().call_group(STRUCTS.SWAP_REACTION_GROUP, "on_swap", worldstate, false)

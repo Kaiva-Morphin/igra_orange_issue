@@ -46,6 +46,7 @@ func main_anim_done():
 	stage = Stage.LatePath
 
 
+
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if !body.is_in_group("player"): return
 	if shooted:
@@ -137,3 +138,4 @@ func _process(_delta: float) -> void:
 	if stage == Stage.PreDone:
 		stage = Stage.Done
 		GAMESTATE.player.suppressed = false
+		GAMESTATE.level_ref.checkpoint()

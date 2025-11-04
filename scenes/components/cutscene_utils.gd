@@ -6,6 +6,7 @@ extends Node2D
 @export var zoom : float = 2.5
 
 @onready var p_anim : Sprite2D = $PlayerPosOverride/AnimPreview
+
 func _ready() -> void:
 	p_anim.hide()
 	particle_template.hide()
@@ -63,3 +64,7 @@ func grab_player_anim():
 
 func end_player_anim():
 	player_anim_grabbed = false
+
+
+func start_dialog(dialog_name: String):
+	GAMESTATE.canvas.start_dialog(DIALOGS.dialogs[dialog_name])

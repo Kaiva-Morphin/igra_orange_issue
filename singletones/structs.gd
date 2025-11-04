@@ -38,16 +38,24 @@ class Level extends Node2D:
 	func reset():
 		for s : StateData in initial_state:
 			s.revert()
+		# get_tree().call_group(SWAP_REACTION_GROUP, "on_swap", GAMESTATE.worldstate)
 		history = []
 		step = 0
 	
-	func take_snapshot():
+	func take_snapshot() -> Array[StateData]:
 		var h = history
 		history = [[]]
 		get_tree().call_group(LEVELSTATE_REACTION_GROUP, "push_step")
 		var snapshot = take_history()
 		history = h
-		return snapshot
+
+		var result: Array[StateData] = []
+		if snapshot.size() > 0:
+			for item in snapshot[0]:
+				if item is StateData:
+					result.append(item)
+		return result
+
 
 	func take_history():
 		var h = history
@@ -141,7 +149,7 @@ class SwapReaction extends LevelstateReaction:
 		super.restore_state(old_state)
 		# is_future = old_state.data["is_future"]
 	
-	func on_swap(_world_state: WorldState):
+	func on_swap(_world_state: WorldState, _push: bool = true):
 		# is_future = world_state == WorldState.Future
 		pass
 
@@ -329,9 +337,9 @@ class CollideInFuture extends STRUCTS.StateCollider:
 	func _init() -> void:
 		super._init(STATE_COLLIDER_PLAYER_MASK | STATE_COLLIDER_MOVABLE_MASK)
 	
-	func on_swap(world_state: WorldState):
-		push_step()
-		super.on_swap(world_state)
+	func on_swap(world_state: WorldState, push_step_needed: bool = true):
+		if push_step_needed: push_step()
+		super.on_swap(world_state, push_step_needed)
 		mask = get_mask(world_state)
 	
 	func get_mask(_world: WorldState) -> int:
@@ -347,9 +355,9 @@ class CollideInPast extends STRUCTS.StateCollider:
 	func _init() -> void:
 		super._init(STATE_COLLIDER_PLAYER_MASK | STATE_COLLIDER_MOVABLE_MASK)
 
-	func on_swap(world_state: WorldState):
-		push_step()
-		super.on_swap(world_state)
+	func on_swap(world_state: WorldState, push_step_needed: bool = true):
+		if push_step_needed: push_step()
+		super.on_swap(world_state, push_step_needed)
 		mask = get_mask(world_state)
 	
 	func get_mask(_world: WorldState) -> int:

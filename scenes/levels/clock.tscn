@@ -1,16 +1,394 @@
-[gd_scene load_steps=5 format=4 uid="uid://gf8ysc5wolvi"]
+[gd_scene load_steps=18 format=4 uid="uid://gf8ysc5wolvi"]
 
 [ext_resource type="PackedScene" uid="uid://ddyi0gms06xau" path="res://scenes/components/level_surface.tscn" id="1_ayimw"]
-[ext_resource type="PackedScene" uid="uid://us81xvl7q633" path="res://scenes/components/cutscene_controller.tscn" id="1_fe6sj"]
+[ext_resource type="Script" uid="uid://iukce77fxqgw" path="res://scenes/components/cutscene_controller.gd" id="1_ejp3y"]
+[ext_resource type="Script" uid="uid://bo31f8du6clea" path="res://scenes/levels/clock.gd" id="1_s82cf"]
 [ext_resource type="PackedScene" uid="uid://brc7cxlek8yso" path="res://scenes/components/room.tscn" id="2_isv6t"]
+[ext_resource type="Script" uid="uid://ca05bbiniab3v" path="res://scenes/components/cutscene_utils.gd" id="2_lp3n3"]
+[ext_resource type="Texture2D" uid="uid://byutidsxi5jwu" path="res://assets/textures/invisible_collider.png" id="3_s82cf"]
+[ext_resource type="Texture2D" uid="uid://te0hulw7hbws" path="res://assets/textures/player.png" id="4_6lsp4"]
+[ext_resource type="Texture2D" uid="uid://cf3vsgy4b65u1" path="res://assets/particles/map.png" id="5_w2amg"]
+[ext_resource type="Texture2D" uid="uid://ds3wq807xp1ia" path="res://assets/textures/clock.png" id="6_lp3n3"]
+
+[sub_resource type="Animation" id="Animation_ejp3y"]
+resource_name = "ClockIntro"
+length = 3.0
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LevelSurface/CutsceneController")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"to_follow"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LevelSurface/CutsceneController/CutsceneUtils")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.20000005),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [0, Vector2(0, -10), Vector2(0, -10), 2.0],
+"method": &"shoot_particle_effect_player"
+}, {
+"args": [],
+"method": &"grab_camera"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("LevelSurface/CutsceneController/CutsceneUtils:zoom")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.7),
+"transitions": PackedFloat32Array(0.07179359, 0.2773923),
+"update": 0,
+"values": [3.0, 3.5]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("LevelSurface/CutsceneController/Camera2D:zoom")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.9333333),
+"transitions": PackedFloat32Array(0.3789284, 1),
+"update": 0,
+"values": [Vector2(3, 3), Vector2(3.5, 3.5)]
+}
+
+[sub_resource type="Animation" id="Animation_drian"]
+resource_name = "ClockMain"
+length = 7.0
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LevelSurface/CutsceneController/CutsceneUtils")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0001, 0.06666667, 0.13333334, 6.9, 6.952058, 6.9666667, 7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"values": [{
+"args": [],
+"method": &"grab_player_anim"
+}, {
+"args": [],
+"method": &"grab_camera"
+}, {
+"args": [4, Vector2(0, -20), Vector2(0, -10), 2.0],
+"method": &"shoot_particle_effect_player"
+}, {
+"args": [],
+"method": &"begin_player_follow"
+}, {
+"args": [],
+"method": &"end_player_anim"
+}, {
+"args": [],
+"method": &"end_player_follow"
+}, {
+"args": ["clock"],
+"method": &"start_dialog"
+}, {
+"args": [],
+"method": &"release_camera"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LevelSurface/CutsceneController")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(7),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"main_anim_done"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("LevelSurface/CutsceneController/CutsceneUtils/PlayerPosOverride:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(160, 64)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("LevelSurface/CutsceneController/CutsceneUtils:zoom")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.0333333, 1.5, 6.0000005, 7),
+"transitions": PackedFloat32Array(0.3789284, 0.3789284, 1, 1, 0.3789284),
+"update": 0,
+"values": [3.5, 3.5, 4.0, 4.0, 3.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("LevelSurface/CutsceneController/CutsceneUtils/PlayerPosOverride/AnimPreview:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1, 1.2, 1.4000001, 1.6000001, 1.8000001, 2, 2.2000003, 2.4, 3.0000002),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [9, 21, 13, 21, 13, 21, 13, 21, 13, 9]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("LevelSurface/CutsceneController/Sprite2D:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1.2, 1.3, 1.4, 1.5, 1.5999999, 1.6999998, 1.8, 1.8999999, 1.9999999, 2.1, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(159, 59), Vector2(159, 59), Vector2(158, 59), Vector2(160, 59), Vector2(159, 59), Vector2(158, 59), Vector2(160, 59), Vector2(159, 58), Vector2(158, 58), Vector2(160, 58), Vector2(159, 58), Vector2(159, 55)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("LevelSurface/CutsceneController/Sprite2D:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("LevelSurface/CutsceneController/Sprite2D:z_index")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 3.0000002),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+tracks/8/type = "method"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath(".")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(7),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"acquire_power"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_ceat7"]
+resource_name = "FirstIceIntro"
+length = 3.0
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LevelSurface/CutsceneController")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"to_follow"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LevelSurface/CutsceneController/CutsceneUtils")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.20000005),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [0, Vector2(0, -10), Vector2(0, -10), 2.0],
+"method": &"shoot_particle_effect_player"
+}, {
+"args": [],
+"method": &"grab_camera"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("LevelSurface/CutsceneController/CutsceneUtils:zoom")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2, 1.7),
+"transitions": PackedFloat32Array(0.07179359, 0.2773923),
+"update": 0,
+"values": [2.5, 3.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("LevelSurface/CutsceneController/Camera2D:zoom")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.9333333),
+"transitions": PackedFloat32Array(0.3789284, 1),
+"update": 0,
+"values": [Vector2(3, 3), Vector2(2.5, 2.5)]
+}
+
+[sub_resource type="Animation" id="Animation_5waj2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LevelSurface/CutsceneController/CutsceneUtils/PlayerPosOverride:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(168, 72)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LevelSurface/CutsceneController/CutsceneUtils:script")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_lp3n3")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("LevelSurface/CutsceneController/CutsceneUtils:zoom")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2.5]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("LevelSurface/CutsceneController/Camera2D:zoom")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("LevelSurface/CutsceneController/CutsceneUtils/PlayerPosOverride/AnimPreview:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("LevelSurface/CutsceneController/Sprite2D:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(159, 59)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("LevelSurface/CutsceneController/Sprite2D:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("LevelSurface/CutsceneController/Sprite2D:z_index")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_drian"]
+_data = {
+&"ClockIntro": SubResource("Animation_ejp3y"),
+&"ClockMain": SubResource("Animation_drian"),
+&"FirstIceIntro": SubResource("Animation_ceat7"),
+&"RESET": SubResource("Animation_5waj2")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ejp3y"]
+size = Vector2(120, 20)
+
+[sub_resource type="Curve2D" id="Curve2D_drian"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 72, 24, 0, 0, 0, 0, 112, 24, 0, 0, 0, 0, 112, 64, 0, 0, 0, 0, 160, 64)
+}
+point_count = 4
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fe6sj"]
 size = Vector2(320, 336)
 
 [node name="Clock" type="Node2D"]
 y_sort_enabled = true
-
-[node name="CutsceneController" parent="." instance=ExtResource("1_fe6sj")]
+script = ExtResource("1_s82cf")
 
 [node name="LevelSurface" parent="." instance=ExtResource("1_ayimw")]
 metadata/_edit_lock_ = true
@@ -48,12 +426,71 @@ metadata/_edit_lock_ = true
 [node name="PastCliffsDetails" parent="LevelSurface/Past" index="5"]
 metadata/_edit_lock_ = true
 
+[node name="CutsceneController" type="Node2D" parent="LevelSurface" node_paths=PackedStringArray("animator", "path")]
+script = ExtResource("1_ejp3y")
+animator = NodePath("Animation")
+path = NodePath("Path2D")
+init_anim = "ClockIntro"
+anim = "ClockMain"
+
+[node name="Animation" type="AnimationPlayer" parent="LevelSurface/CutsceneController"]
+root_node = NodePath("../../..")
+libraries = {
+&"": SubResource("AnimationLibrary_drian")
+}
+
+[node name="Area2D" type="Area2D" parent="LevelSurface/CutsceneController"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelSurface/CutsceneController/Area2D"]
+z_index = 25
+position = Vector2(24, -6)
+shape = SubResource("RectangleShape2D_ejp3y")
+debug_color = Color(0.9372549, 0, 0, 0.41960785)
+
+[node name="Path2D" type="Path2D" parent="LevelSurface/CutsceneController"]
+curve = SubResource("Curve2D_drian")
+
+[node name="CutsceneUtils" type="Node2D" parent="LevelSurface/CutsceneController"]
+script = ExtResource("2_lp3n3")
+player_frame = 28
+
+[node name="PlayerPosOverride" type="Node2D" parent="LevelSurface/CutsceneController/CutsceneUtils"]
+position = Vector2(168, 72)
+
+[node name="Sprite2D" type="Sprite2D" parent="LevelSurface/CutsceneController/CutsceneUtils/PlayerPosOverride"]
+visible = false
+modulate = Color(0.9999998, 0.845044, 0.7061551, 1)
+texture = ExtResource("3_s82cf")
+
+[node name="AnimPreview" type="Sprite2D" parent="LevelSurface/CutsceneController/CutsceneUtils/PlayerPosOverride"]
+position = Vector2(-8, -8)
+texture = ExtResource("4_6lsp4")
+hframes = 4
+vframes = 12
+frame = 8
+
+[node name="Particles" type="Sprite2D" parent="LevelSurface/CutsceneController/CutsceneUtils"]
+z_index = 5
+z_as_relative = false
+texture = ExtResource("5_w2amg")
+hframes = 3
+vframes = 3
+
+[node name="Camera2D" type="Camera2D" parent="LevelSurface/CutsceneController"]
+enabled = false
+
+[node name="Sprite2D" type="Sprite2D" parent="LevelSurface/CutsceneController"]
+position = Vector2(159, 59)
+texture = ExtResource("6_lp3n3")
+
 [node name="Room" parent="." instance=ExtResource("2_isv6t")]
 position = Vector2(80, -16)
 
 [node name="AREA" parent="Room" index="0"]
 position = Vector2(16, -8)
 shape = SubResource("RectangleShape2D_fe6sj")
+
+[connection signal="body_entered" from="LevelSurface/CutsceneController/Area2D" to="LevelSurface/CutsceneController" method="_on_area_2d_body_entered"]
 
 [editable path="LevelSurface"]
 [editable path="Room"]

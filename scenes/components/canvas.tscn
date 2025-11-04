@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://b5lssn8aobfev"]
+[gd_scene load_steps=26 format=3 uid="uid://b5lssn8aobfev"]
 
 [ext_resource type="Script" uid="uid://btimc1q7t3cvu" path="res://scenes/components/canvas.gd" id="1_vnem3"]
 [ext_resource type="Shader" uid="uid://gffyjabwf0ut" path="res://resources/shaders/swap.gdshader" id="1_y7jjh"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://buu0llfaduhea" path="res://scenes/components/pause.tscn" id="3_vnem3"]
 [ext_resource type="Shader" uid="uid://drgo586b0daos" path="res://resources/shaders/vignette.gdshader" id="4_i23cq"]
 [ext_resource type="Texture2D" uid="uid://cd8b4t6r2atm2" path="res://assets/textures/dialog_bg.png" id="6_ob6ph"]
+[ext_resource type="Shader" uid="uid://7nui02q0c82f" path="res://resources/shaders/rewind.gdshader" id="8_j7sgu"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_j122s"]
 outline_size = 4
@@ -26,6 +27,22 @@ shader_parameter/width = 0.09999999747
 shader_parameter/width2 = 0.21619999453014
 shader_parameter/feather = 0.26000001235
 shader_parameter/feather2 = 0.1030000048925
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yu7fl"]
+shader = ExtResource("8_j7sgu")
+shader_parameter/curvature = 0.95999997854208
+shader_parameter/skip = 0.07999999821184
+shader_parameter/image_flicker = 0.0
+shader_parameter/sepia_amount = 0.68999998457712
+shader_parameter/vignette_flicker_speed = 0.63999998569472
+shader_parameter/vignette_strength = 0.65999998524768
+shader_parameter/small_scanlines_speed = 1.0
+shader_parameter/small_scanlines_proximity = 1.999999955296
+shader_parameter/small_scanlines_opacity = 1.0
+shader_parameter/scanlines_opacity = 1.0
+shader_parameter/scanlines_speed = 1.0
+shader_parameter/scanline_thickness = 0.5
+shader_parameter/scanlines_spacing = 0.37000001035629004
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_i23cq"]
 shader = ExtResource("4_i23cq")
@@ -50,6 +67,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [0, 1, 2, 3]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_315fb"]
 length = 0.001
@@ -65,52 +94,40 @@ tracks/0/keys = {
 "update": 1,
 "values": [0]
 }
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_315fb"]
-_data = {
-&"AnimDialog": SubResource("Animation_ob6ph"),
-&"RESET": SubResource("Animation_315fb")
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
-[sub_resource type="Animation" id="Animation_j122s"]
-resource_name = "neutral"
-length = 0.8
-loop_mode = 1
+[sub_resource type="Animation" id="Animation_3ceum"]
+resource_name = "hide"
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Node2D/Ded:frame")
+tracks/0/path = NodePath("Node2D:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [20]
+"values": [false]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Node2D/Ded:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.39999998),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [Vector2(-152, 80), Vector2(-152, 76)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Node2D/Ded/DedE:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [104]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_315fb"]
+_data = {
+&"AnimDialog": SubResource("Animation_ob6ph"),
+&"RESET": SubResource("Animation_315fb"),
+&"hide": SubResource("Animation_3ceum")
 }
 
 [sub_resource type="Animation" id="Animation_j7sgu"]
@@ -162,153 +179,6 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(5, -3)]
-}
-
-[sub_resource type="Animation" id="Animation_8t1ss"]
-resource_name = "sad"
-length = 0.8
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Node2D/Ded:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [20]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Node2D/Ded:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.39999998),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [Vector2(-152, 80), Vector2(-152, 76)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Node2D/Ded/DedE:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [100]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Node2D/Ded/DedE:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.20000002, 0.40263337, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [Vector2(5, -3), Vector2(5, -2), Vector2(5, -1), Vector2(5, -2)]
-}
-
-[sub_resource type="Animation" id="Animation_64saq"]
-resource_name = "impressed"
-length = 0.8
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Node2D/Ded:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [20]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Node2D/Ded:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.39999998),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [Vector2(-152, 80), Vector2(-152, 76)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Node2D/Ded/DedE:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [100]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Node2D/Ded/DedE:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.20000002, 0.40263337, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [Vector2(5, -3), Vector2(5, -2), Vector2(5, -1), Vector2(5, -2)]
-}
-
-[sub_resource type="Animation" id="Animation_yu7fl"]
-resource_name = "confused"
-length = 0.8
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Node2D/Ded:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [21]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Node2D/Ded:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [Vector2(-152, 80), Vector2(-152, 76)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Node2D/Ded/DedE:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [104]
 }
 
 [sub_resource type="Animation" id="Animation_wvuej"]
@@ -364,6 +234,141 @@ tracks/3/keys = {
 "values": [Vector2(0, 4), Vector2(0, 5), Vector2(0, 6), Vector2(0, 5)]
 }
 
+[sub_resource type="Animation" id="Animation_yu7fl"]
+resource_name = "confused"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node2D/Ded:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [21]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node2D/Ded:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2(-152, 80), Vector2(-152, 76)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Node2D/Ded/DedE:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [104]
+}
+
+[sub_resource type="Animation" id="Animation_64saq"]
+resource_name = "impressed"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node2D/Ded:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [20]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node2D/Ded:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.39999998),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2(-152, 80), Vector2(-152, 76)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Node2D/Ded/DedE:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [100]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Node2D/Ded/DedE:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.20000002, 0.40263337, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(5, -3), Vector2(5, -2), Vector2(5, -1), Vector2(5, -2)]
+}
+
+[sub_resource type="Animation" id="Animation_j122s"]
+resource_name = "neutral"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node2D/Ded:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [20]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node2D/Ded:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.39999998),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2(-152, 80), Vector2(-152, 76)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Node2D/Ded/DedE:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [104]
+}
+
 [sub_resource type="Animation" id="Animation_k1e1j"]
 resource_name = "point"
 length = 0.8
@@ -417,6 +422,59 @@ tracks/3/keys = {
 "values": [Vector2(3, 3), Vector2(3, 4), Vector2(3, 5), Vector2(3, 4)]
 }
 
+[sub_resource type="Animation" id="Animation_8t1ss"]
+resource_name = "sad"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node2D/Ded:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [20]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node2D/Ded:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.39999998),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2(-152, 80), Vector2(-152, 76)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Node2D/Ded/DedE:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [100]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Node2D/Ded/DedE:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.20000002, 0.40263337, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(5, -3), Vector2(5, -2), Vector2(5, -1), Vector2(5, -2)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_j7sgu"]
 _data = {
 &"RESET": SubResource("Animation_j7sgu"),
@@ -428,18 +486,20 @@ _data = {
 &"sad": SubResource("Animation_8t1ss")
 }
 
-[node name="Canvas" type="CanvasLayer" node_paths=PackedStringArray("vignette", "dialog", "dialog_label", "dialog_bg")]
+[node name="Canvas" type="CanvasLayer" node_paths=PackedStringArray("vignette", "dialog", "dialog_label", "dialog_bg", "rewind")]
 script = ExtResource("1_vnem3")
 vignette = NodePath("vignette")
 dialog = NodePath("EmotionAnimation")
 dialog_label = NodePath("Node2D/Label")
 dialog_bg = NodePath("AnimationPlayer")
+rewind = NodePath("rewind")
 
 [node name="Node2D" type="Node2D" parent="."]
-position = Vector2(800, 0)
+visible = false
+position = Vector2(800, -8)
 
 [node name="DialogBg" type="Sprite2D" parent="Node2D"]
-position = Vector2(-152, 128)
+position = Vector2(-152, 136)
 scale = Vector2(4, 4)
 texture = ExtResource("6_ob6ph")
 hframes = 2
@@ -447,9 +507,9 @@ vframes = 2
 
 [node name="Label" type="Label" parent="Node2D"]
 offset_left = -264.0
-offset_top = 102.0
+offset_top = 112.0
 offset_right = -156.0
-offset_bottom = 147.0
+offset_bottom = 157.0
 scale = Vector2(2, 2)
 theme = ExtResource("2_j122s")
 text = "Кот че ты делаешь
@@ -492,6 +552,15 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Pause" parent="." instance=ExtResource("3_vnem3")]
 visible = false
+
+[node name="rewind" type="ColorRect" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_yu7fl")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="vignette" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_i23cq")

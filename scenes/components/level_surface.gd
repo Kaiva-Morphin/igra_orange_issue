@@ -56,8 +56,6 @@ func gen(from, to, level, push_initial):
 
 
 
-
-
 func save_state() -> StateData:
 	var s = super.save_state()
 	# print("[level_surface] save state for " + self.name + " state: " + str(s.data))
@@ -68,8 +66,8 @@ func restore_state(old_state: STRUCTS.StateData):
 	# print("[level_surface] old " + str(old_state.data) + " state: " + str(is_future))
 	process_state(GAMESTATE.worldstate)
 
-func on_swap(world_state: WorldState):
-	push_step()
+func on_swap(world_state: WorldState, push_step_needed : bool = true):
+	if push_step_needed: push_step()
 	# prints("[level_surface] on_swap", world_state)
 	super.on_swap(world_state)
 	process_state(world_state)

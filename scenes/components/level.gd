@@ -1,13 +1,23 @@
 extends STRUCTS.Level
 
+
+@onready var call_sound = $Call
+@onready var cant_sound = $Cant
+@onready var rewind_sound = $Rewind
+
+
+
 var powers_unlocked = true
 
 func checkpoint():
-	pass
+	history = []
+	var s = take_snapshot()
+	initial_state = s
 
 func load_checkpoint():
 	pass
 
+var cant_sound_delay = 0.25
 
 var processing_step = false
 var requested_swap = false
@@ -30,8 +40,10 @@ func _ready() -> void:
 	tweened_player.global_position = player.global_position
 	CAMERA.on_ready()
 	start_new_step()
-	get_tree().call_group(STRUCTS.SWAP_REACTION_GROUP, "on_swap", GAMESTATE.worldstate)
+	get_tree().call_group(STRUCTS.SWAP_REACTION_GROUP, "on_swap", GAMESTATE.worldstate, true)
 	GAMESTATE.vignette.animate(0.0, 0.3, 5.0)
+
+
 
 var processing_history = []
 var processing_revert_stepping = false
@@ -79,9 +91,11 @@ func spawn_dbg(p: Vector2, color: Color):
 	dbg.append(d)
 
 var screenshot: Texture2D
-
+var cant_sound_since = 0
 var from_prev_step = 0
 func _process(_dt: float) -> void:
+	prints("In past", GAMESTATE.worldstate == WorldState.Past)
+	cant_sound_since += _dt
 	from_prev_step += _dt
 	CAMERA.update(_dt)
 	for v in dbg:
@@ -99,9 +113,13 @@ func _process(_dt: float) -> void:
 		# for i in static_collider_store.pos_to_collider.keys():
 		# 	spawn_dbg(Vector2(UTILS.from_grid(i)) + Vector2(8, 8), Color(1, 1, 1))
 
+	if Input.is_action_just_pressed("checkpoint"):
+		checkpoint()
+
 	if process_revert():
 		return
-
+	rewind_sound.stop()
+	GAMESTATE.canvas.rewind.hide()
 	if Input.is_action_just_pressed("swap") && powers_unlocked:
 		requested_swap = true
 	
@@ -154,9 +172,9 @@ func _process(_dt: float) -> void:
 	if Input.is_action_just_pressed("step_back")  && powers_unlocked:
 		UTILS.log_prints("[level instance] step_back")
 		var h = pop_from_history()
-		if h:
+		if h && h.size() > 0:
+			$Tick.play(1.2)
 			for item in h:
-				$Tick.play(1.2)
 				if smooth_back(item, func(): processing_step = false):
 					processing_step = true
 		return
@@ -168,13 +186,23 @@ func _process(_dt: float) -> void:
 	
 	if Input.is_action_just_pressed("hard_reset")  && powers_unlocked:
 		UTILS.log_print("[level instance] hard reset")
-		reset()
+		processing_step = true
+		GAMESTATE.vignette.animate(0.4, 0.2, 0.4)
+		var t = get_tree().create_timer(0.5)
+		$HardReset.play()
+		t.timeout.connect(
+			func():
+				processing_step = false
+				reset()
+		)
 		return
 	
 	if Input.is_action_just_pressed("reset") && powers_unlocked:
 		UTILS.log_print("[level instance] reset")
 		var hist = take_history()
 		hist.reverse()
+		GAMESTATE.canvas.rewind.show()
+		rewind_sound.play()
 		processing_history = hist
 		processing_revert_step = 0
 		return
@@ -189,6 +217,9 @@ func _process(_dt: float) -> void:
 	var grid_pos = player.pos;
 	var dst_grid = grid_pos + i_dir
 	if static_collider_store.is_occupied_for(dst_grid, STATE_COLLIDER_PLAYER_MASK):
+		if cant_sound_delay < cant_sound_since:
+			cant_sound_since = 0
+			cant_sound.play()
 		return
 	
 	var m = movable_collider_store.get_collider(dst_grid)
@@ -197,6 +228,9 @@ func _process(_dt: float) -> void:
 	if m && m.is_occupied_for(STATE_COLLIDER_PLAYER_MASK):
 		if !movable_collider_store.can_push(m, i_dir, STATE_COLLIDER_PLAYER_MASK):
 			UTILS.log_print("[level instance] push blocked")
+			if cant_sound_delay < cant_sound_since:
+				cant_sound_since = 0
+				cant_sound.play()
 			return
 		start_new_step()
 		var m_dst = m.pos + i_dir
@@ -204,6 +238,7 @@ func _process(_dt: float) -> void:
 
 		# // p_i || (
 		if m_i and GAMESTATE.worldstate == WorldState.Past:
+
 			m_dst = get_slide_end(m_dst, i_dir)
 			var d = m_dst - grid_pos
 			var dist = max(abs(d.x), abs(d.y))

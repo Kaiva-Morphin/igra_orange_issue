@@ -40,10 +40,6 @@ func save_state() -> StateData:
 func push_step():
 	super.push_step()
 
-@onready var anim : AnimationPlayer = $AnimationPlayer
-
-
-
 var anim_frame = 0
 var anim_idx = 2
 var looking_dir = 0
@@ -107,6 +103,7 @@ func stop_anim():
 
 
 var c = 0
+var prev_play = false
 func _process(delta: float) -> void:
 	if !suppressed && Input.is_action_just_pressed("meow"):
 		meow()
@@ -116,12 +113,17 @@ func _process(delta: float) -> void:
 			c -= anim_speed
 			anim_frame = (anim_frame + 1) % anim_frames
 			update_sprite()
+			prev_play = !prev_play
+			if prev_play:
+				$Step.pitch_scale = randf_range(0.8, 1.2)
+				$Step.play()
+
 			
 
 
 
-func on_swap(world_state: WorldState):
-	super.on_swap(world_state)
+func on_swap(world_state: WorldState, push_step_needed : bool = true):
+	super.on_swap(world_state, push_step_needed)
 	process_suppress(self.suppressed)
 
 func process_suppress(s: bool):

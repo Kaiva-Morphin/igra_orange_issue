@@ -17,8 +17,9 @@ func _level_ready(level: Level, push_initial: bool = true):
 	super._level_ready(level, push_initial)
 	process_swap(GAMESTATE.worldstate)
 
-func on_swap(world_state: WorldState):
-	push_step()
+func on_swap(world_state: WorldState, push_step_needed : bool = true):
+	if push_step_needed:
+		push_step()
 	super.on_swap(world_state)
 	UTILS.log_print("[ice] on_swap " + str(world_state))
 	process_swap(world_state)
