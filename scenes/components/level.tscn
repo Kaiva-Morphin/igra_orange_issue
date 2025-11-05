@@ -41,6 +41,7 @@ texture = ExtResource("5_cdpqt")
 stream = ExtResource("3_grtfn")
 volume_db = -26.0
 pitch_scale = 2.27
+max_polyphony = 2
 bus = &"TIME"
 
 [node name="Rewind" type="AudioStreamPlayer" parent="."]

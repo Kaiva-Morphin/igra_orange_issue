@@ -11,7 +11,7 @@ var meow_prefix := 0.2
 
 var msgs: Array = []
 var current_index := 0
-var dialog_timer: Timer
+# var dialog_timer: Timer
 
 func _ready() -> void:
 	GAMESTATE.vignette = self
@@ -21,10 +21,10 @@ func _ready() -> void:
 	m.set_shader_parameter("progress", 0.0)
 	m.set_shader_parameter("col", Vector4(0.0, 0.0, 0.0, 1.0))
 	
-	dialog_timer = Timer.new()
-	dialog_timer.one_shot = true
-	add_child(dialog_timer)
-	dialog_timer.timeout.connect(_on_dialog_timeout)
+	# dialog_timer = Timer.new()
+	# dialog_timer.one_shot = true
+	# add_child(dialog_timer)
+	# dialog_timer.timeout.connect(_on_dialog_timeout)
 
 
 func start_dialog(new_msgs: Array) -> void:
@@ -38,53 +38,59 @@ func start_dialog(new_msgs: Array) -> void:
 	_show_next_msg()
 
 
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("meow"):
+		_show_next_msg()
+
 func _show_next_msg() -> void:
+	print("show next msg", current_index)
 	if current_index >= msgs.size():
+		print("end dialog")
 		_end_dialog()
 		return
 	
 	var msg = msgs[current_index]
 	
 	# Считаем время показа в зависимости от количества слов
-	var word_count = msg.text.split(" ", false).size()
-	var total_time = word_count * word_dialog_time
+	# var word_count = msg.text.split(" ", false).size()
+	# var total_time = word_count * word_dialog_time
 	
 	# Показываем текст и эмоцию сразу
 	dialog_label.text = msg.text
 	var emotion_name := str(DIALOGS.DialogEmotion.keys()[msg.emotion]).to_lower()
 	if dialog.has_animation(emotion_name):
 		dialog.play(emotion_name)
-
+	current_index += 1
 	# Запускаем таймер: сначала мяу за meow_prefix до конца
-	var meow_time = max(total_time - meow_prefix, 0.1)
-	dialog_timer.set_meta("data", {"step": "meow", "msg": msg})
-	dialog_timer.start(meow_time)
+	# var meow_time = max(total_time - meow_prefix, 0.1)
+	# dialog_timer.set_meta("data", {"step": "meow", "msg": msg})
+	# dialog_timer.start(meow_time)
 
 
-func _on_dialog_timeout() -> void:
-	var data = dialog_timer.get_meta("data")
-	if data == null:
-		return
+# func _on_dialog_timeout() -> void:
+# 	var data = dialog_timer.get_meta("data")
+# 	if data == null:
+# 		return
 	
-	var step = data.step
-	var msg = data.msg
+# 	var step = data.step
+# 	var msg = data.msg
 	
-	if step == "meow":
-		if GAMESTATE.player:
-			GAMESTATE.player.meow()
+# 	if step == "meow":
+# 		if GAMESTATE.player:
+# 			GAMESTATE.player.meow()
 		
-		# теперь ждём до конца фразы (остаток meow_prefix)
-		dialog_timer.set_meta("data", {"step": "next", "msg": msg})
-		dialog_timer.start(meow_prefix)
+# 		# теперь ждём до конца фразы (остаток meow_prefix)
+# 		dialog_timer.set_meta("data", {"step": "next", "msg": msg})
+# 		dialog_timer.start(meow_prefix)
 	
-	elif step == "next":
-		current_index += 1
-		_show_next_msg()
+# 	elif step == "next":
+# 		current_index += 1
+# 		_show_next_msg()
 
 
 func _end_dialog() -> void:
 	dialog_bg.play("hide")
-	dialog_timer.stop()
+	# dialog_timer.stop()
 
 
 func animate(

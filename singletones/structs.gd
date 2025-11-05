@@ -321,11 +321,12 @@ class MovableColliderStore extends StaticColliderStore:
 		moved = []
 	
 	func unchecked_move(from: Vector2i, to: Vector2i):
-		var c = pos_to_collider[from]
-		pos_to_collider.erase(from)
-		pos_to_collider[to] = c
-		collider_to_pos.erase(c)
-		collider_to_pos[c] = to
+		var c = pos_to_collider.get(from)
+		if c:
+			pos_to_collider.erase(from)
+			pos_to_collider[to] = c
+			collider_to_pos.erase(c)
+			collider_to_pos[c] = to
 
 
 class Ground extends STRUCTS.StateCollider:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://hqdryxc766fs"]
+[gd_scene load_steps=21 format=3 uid="uid://hqdryxc766fs"]
 
 [ext_resource type="Theme" uid="uid://c4tnmjnv1swxg" path="res://resources/ui/main_theme.tres" id="1_klgdb"]
 [ext_resource type="Script" uid="uid://ciepjgslvoe36" path="res://scenes/menu/menu_controller.gd" id="2_e0arn"]
@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://dcj5q48alcc57" path="res://assets/sounds/kenney/click2.ogg" id="5_f2fum"]
 [ext_resource type="AudioStream" uid="uid://ccl48un6bn75c" path="res://assets/sounds/shapeforms/PC Keyboard_Keystroke_28.wav" id="6_kaijy"]
 [ext_resource type="AudioStream" uid="uid://bypm53seyi7wx" path="res://assets/sounds/shapeforms/BUTTON_05.wav" id="7_y4i35"]
+[ext_resource type="AudioStream" uid="uid://dvhxue4u72134" path="res://assets/sounds/town04.wav" id="10_y4i35"]
 [ext_resource type="PackedScene" uid="uid://dxlupbpywxun7" path="res://scenes/menu/settings.tscn" id="11_f2fum"]
 [ext_resource type="Script" uid="uid://cx2eqddx6y6uu" path="res://scenes/menu/creds.gd" id="12_kaijy"]
 
@@ -237,6 +238,10 @@ stream = ExtResource("7_y4i35")
 volume_db = -37.278
 pitch_scale = 1.27
 bus = &"UI"
+
+[node name="Music" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("10_y4i35")
+volume_db = -27.145
 
 [node name="Main" type="Control" parent="."]
 layout_mode = 1

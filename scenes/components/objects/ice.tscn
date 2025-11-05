@@ -22,7 +22,7 @@ region_rect = Rect2(0, 32, 16, 16)
 z_index = -1
 y_sort_enabled = true
 material = SubResource("ShaderMaterial_a1ram")
-position = Vector2(0, 14)
+position = Vector2(0, 13)
 scale = Vector2(1, -1)
 texture = ExtResource("2_qan7x")
 offset = Vector2(0, -8)
@@ -31,7 +31,6 @@ frame = 2
 region_rect = Rect2(0, 32, 16, 16)
 
 [node name="Puddle" type="Sprite2D" parent="."]
-visible = false
 z_index = -1
 position = Vector2(0, 8)
 scale = Vector2(1, -1)

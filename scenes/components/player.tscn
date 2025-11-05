@@ -237,6 +237,7 @@ frame = 1
 stream = ExtResource("7_ypwcc")
 volume_db = -23.772
 pitch_scale = 1.21
+max_polyphony = 3
 bus = &"ENVIRONMENT"
 
 [node name="Step" type="AudioStreamPlayer2D" parent="."]

@@ -21,6 +21,10 @@ class DialogMsg:
 var dialogs = {
 	"clock": [
 		DialogMsg.new(
+			"Кто на связи? (нажми F)",
+			DialogEmotion.Surprised
+		),
+		DialogMsg.new(
 			"Давно я не получал сигналы от этого устройства",
 			DialogEmotion.Confused
 		),
@@ -59,6 +63,35 @@ var dialogs = {
 		DialogMsg.new(
 			"Но это значит что ты как-то смог активировать машину?",
 			DialogEmotion.Confused
+		),
+		DialogMsg.new(
+			"Сейчас это не важно!",
+			DialogEmotion.Sad
+		),
+		DialogMsg.new(
+			"Небольшое обучение, как им пользоваться",
+			DialogEmotion.Sad
+		),
+
+		DialogMsg.new(
+			"Q - шаг назад",
+			DialogEmotion.Sad
+		),
+		DialogMsg.new(
+			"CTRL + R - перемотка",
+			DialogEmotion.Sad
+		),
+		DialogMsg.new(
+			"CTRL + SHIFT + R - быстрая перемотка",
+			DialogEmotion.Sad
+		),
+		DialogMsg.new(
+			"И, основная функция - ",
+			DialogEmotion.Sad
+		),
+		DialogMsg.new(
+			"E - Сменить проявление мира",
+			DialogEmotion.Sad
 		),
 		DialogMsg.new(
 			"Двигайся дальше пока я буду думать как тебя вытащить",

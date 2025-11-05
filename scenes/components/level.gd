@@ -7,16 +7,19 @@ extends STRUCTS.Level
 @onready var theme_music = $MainTheme
 
 
-
-var powers_unlocked = true
+var powers_unlocked = false
 
 func checkpoint():
 	history = []
 	var s = take_snapshot()
 	initial_state = s
 
-func load_checkpoint():
-	pass
+func soft_hard_reset():
+	var hist = take_history()
+	hist.reverse()
+	for h in hist:
+		for p : StateData in h:
+			p.revert()	
 
 var cant_sound_delay = 0.25
 
@@ -95,6 +98,8 @@ var screenshot: Texture2D
 var cant_sound_since = 0
 var from_prev_step = 0
 func _process(_dt: float) -> void:
+	if Input.is_action_just_pressed("aquire_powers"):
+		powers_unlocked = true
 	cant_sound_since += _dt
 	from_prev_step += _dt
 	CAMERA.update(_dt)
@@ -196,7 +201,7 @@ func _process(_dt: float) -> void:
 		t.timeout.connect(
 			func():
 				processing_step = false
-				reset()
+				soft_hard_reset()
 		)
 		return
 	

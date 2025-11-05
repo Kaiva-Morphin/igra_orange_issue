@@ -57,7 +57,19 @@ volume_db = -14.857
 position = Vector2(-384, 192)
 
 [node name="Player" parent="Level" instance=ExtResource("2_b6bv0")]
-position = Vector2(1008, 1128)
+position = Vector2(-200, 472)
+
+[node name="F" type="Sprite2D" parent="Level"]
+y_sort_enabled = true
+position = Vector2(-128, -224)
+texture = ExtResource("23_ykry0")
+offset = Vector2(0, 16)
+
+[node name="F2" type="Sprite2D" parent="Level"]
+y_sort_enabled = true
+position = Vector2(840, 736)
+texture = ExtResource("23_ykry0")
+offset = Vector2(0, 16)
 
 [node name="Camera2D" type="Camera2D" parent="Level" groups=["camera"]]
 position = Vector2(8, 8)
@@ -113,6 +125,9 @@ hframes = 3
 [node name="lab_fin" parent="Level/Done" instance=ExtResource("13_im81g")]
 position = Vector2(4224, 2176)
 
+[node name="TextureRect" parent="Level/Done/lab_fin/CanvasLayer" index="1"]
+offset_left = 0.0
+
 [node name="TpFromLab" type="Node2D" parent="Level/Done"]
 position = Vector2(-160, -448)
 
@@ -136,6 +151,7 @@ tp_pos = NodePath("../../Tp")
 position = Vector2(1408, 1376)
 
 [node name="Node2D6" type="Node2D" parent="Level/Done"]
+visible = false
 z_index = 20
 position = Vector2(1264, 1136)
 
@@ -186,7 +202,7 @@ position = Vector2(4280, 2232)
 [node name="DialogTrigger" type="Area2D" parent="Level"]
 position = Vector2(3824, 1656)
 script = ExtResource("25_gexqn")
-dialog_name = "almost_thereй"
+dialog_name = "already_here"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level/DialogTrigger"]
 position = Vector2(7, -8)
@@ -200,14 +216,6 @@ dialog_name = "keep_moving"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level/DialogTrigger2"]
 position = Vector2(12, 0)
 shape = SubResource("RectangleShape2D_gexqn")
-
-[node name="F" type="Sprite2D" parent="."]
-position = Vector2(-128, -208)
-texture = ExtResource("23_ykry0")
-
-[node name="F2" type="Sprite2D" parent="."]
-position = Vector2(880, 760)
-texture = ExtResource("23_ykry0")
 
 [editable path="Level"]
 [editable path="Level/Mouse/Room"]

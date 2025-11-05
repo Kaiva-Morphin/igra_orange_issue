@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://dr1yh1wqidsxu"]
+[gd_scene load_steps=17 format=4 uid="uid://dr1yh1wqidsxu"]
 
 [ext_resource type="PackedScene" uid="uid://ddyi0gms06xau" path="res://scenes/components/level_surface.tscn" id="1_hedjq"]
 [ext_resource type="Script" uid="uid://bpcp0kp1c7ob1" path="res://scenes/levels/final.gd" id="1_w5t8p"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://te0hulw7hbws" path="res://assets/textures/player.png" id="5_y0ebc"]
 [ext_resource type="Texture2D" uid="uid://cf3vsgy4b65u1" path="res://assets/particles/map.png" id="6_humeh"]
 [ext_resource type="Texture2D" uid="uid://defceehmotqis" path="res://assets/noises/Circular_03-256x256.png" id="8_lia11"]
+[ext_resource type="Script" uid="uid://cflb6lsl4kdnj" path="res://scenes/components/room.gd" id="9_y0ebc"]
 
 [sub_resource type="Animation" id="Animation_w5t8p"]
 resource_name = "FinalIntro"
@@ -203,7 +204,11 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gxsnh"]
 size = Vector2(32, 32)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_humeh"]
+size = Vector2(320, 320)
+
 [node name="Final" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_w5t8p")
 
 [node name="LevelSurface" parent="." instance=ExtResource("1_hedjq")]
@@ -277,6 +282,18 @@ energy = 0.5
 texture = ExtResource("8_lia11")
 texture_scale = 0.65
 
+[node name="Room" type="Area2D" parent="."]
+script = ExtResource("9_y0ebc")
+
+[node name="AREA" type="CollisionShape2D" parent="Room"]
+z_index = 20
+z_as_relative = false
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_humeh")
+debug_color = Color(0.7500655, 0.36097035, 0.73325014, 0.41960785)
+
 [connection signal="body_entered" from="CutsceneController/Area2D" to="CutsceneController" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Room" to="Room" method="_on_body_entered"]
+[connection signal="body_exited" from="Room" to="Room" method="_on_body_exited"]
 
 [editable path="LevelSurface"]
