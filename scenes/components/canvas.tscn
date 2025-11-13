@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://b5lssn8aobfev"]
+[gd_scene load_steps=41 format=3 uid="uid://b5lssn8aobfev"]
 
 [ext_resource type="Script" uid="uid://btimc1q7t3cvu" path="res://scenes/components/canvas.gd" id="1_vnem3"]
 [ext_resource type="Shader" uid="uid://gffyjabwf0ut" path="res://resources/shaders/swap.gdshader" id="1_y7jjh"]
@@ -9,6 +9,12 @@
 [ext_resource type="Shader" uid="uid://drgo586b0daos" path="res://resources/shaders/vignette.gdshader" id="4_i23cq"]
 [ext_resource type="Texture2D" uid="uid://cd8b4t6r2atm2" path="res://assets/textures/dialog_bg.png" id="6_ob6ph"]
 [ext_resource type="Shader" uid="uid://7nui02q0c82f" path="res://resources/shaders/rewind.gdshader" id="8_j7sgu"]
+[ext_resource type="Texture2D" uid="uid://b8otht1ukvge0" path="res://assets/textures/casette-Sheet.png" id="9_8t1ss"]
+[ext_resource type="Script" uid="uid://b5br2thvilgwg" path="res://scenes/components/touch.gd" id="10_yu7fl"]
+[ext_resource type="Texture2D" uid="uid://brghhbuj18d28" path="res://resources/ui/pause.png" id="11_3ceum"]
+[ext_resource type="Texture2D" uid="uid://31rt3ja6304b" path="res://resources/ui/input_cross.png" id="11_wvuej"]
+[ext_resource type="Theme" uid="uid://7vvxi1od5y83" path="res://resources/ui/button.tres" id="12_64saq"]
+[ext_resource type="Texture2D" uid="uid://bidfcadf4tcu2" path="res://resources/ui/buttons.png" id="12_k1e1j"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_j122s"]
 outline_size = 4
@@ -485,6 +491,68 @@ _data = {
 &"surprised": SubResource("Animation_64saq")
 }
 
+[sub_resource type="Animation" id="Animation_pd6tj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SaveCasette:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_yqn22"]
+resource_name = "save"
+length = 3.7
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SaveCasette:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.10000001, 0.20000002, 0.3, 0.40000004, 0.5, 0.6, 0.70000005, 0.8000001, 0.90000004, 1, 1.1, 1.2, 1.3000001, 1.4000001, 1.5000001, 1.6000001, 1.7, 1.8000001, 1.9000001, 2, 2.1000001, 2.2, 2.3000002, 2.4, 2.5000002, 2.6000001, 2.7, 2.8000002, 2.9, 3.0000002, 3.1000001, 3.2000003, 3.3000002, 3.4, 3.5000002, 3.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5run4"]
+_data = {
+&"RESET": SubResource("Animation_pd6tj"),
+&"save": SubResource("Animation_yqn22")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k1e1j"]
+atlas = ExtResource("12_k1e1j")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ceum"]
+atlas = ExtResource("12_k1e1j")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wvuej"]
+atlas = ExtResource("12_k1e1j")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yqn22"]
+atlas = ExtResource("12_k1e1j")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pd6tj"]
+atlas = ExtResource("12_k1e1j")
+region = Rect2(96, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5run4"]
+atlas = ExtResource("12_k1e1j")
+region = Rect2(120, 0, 24, 24)
+
 [node name="Canvas" type="CanvasLayer" node_paths=PackedStringArray("vignette", "dialog", "dialog_label", "dialog_bg", "rewind")]
 script = ExtResource("1_vnem3")
 vignette = NodePath("vignette")
@@ -547,8 +615,8 @@ offset_right = 400.0
 offset_bottom = 300.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("2_i23cq")
-metadata/_edit_use_anchors_ = true
 
 [node name="rewind" type="ColorRect" parent="."]
 visible = false
@@ -558,6 +626,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="vignette" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_i23cq")
@@ -566,10 +635,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("2_i23cq")
-
-[node name="Pause" parent="." instance=ExtResource("3_vnem3")]
-visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -580,3 +647,165 @@ libraries = {
 libraries = {
 &"": SubResource("AnimationLibrary_j7sgu")
 }
+
+[node name="SavePlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_5run4")
+}
+
+[node name="Touch" type="Control" parent="."]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -600.0
+offset_bottom = -450.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(4, 4)
+script = ExtResource("10_yu7fl")
+
+[node name="Menu" type="Button" parent="Touch" groups=["ui_button"]]
+z_index = 2
+z_as_relative = false
+custom_minimum_size = Vector2(18, 0)
+layout_mode = 0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = 24.0
+offset_bottom = 25.0
+mouse_default_cursor_shape = 2
+theme = ExtResource("12_64saq")
+autowrap_trim_flags = 0
+icon_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Touch/Menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("11_3ceum")
+metadata/_edit_use_anchors_ = true
+
+[node name="InputCross" type="TextureButton" parent="Touch"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -56.25
+offset_right = 53.75
+grow_vertical = 0
+action_mode = 0
+texture_normal = ExtResource("11_wvuej")
+stretch_mode = 3
+
+[node name="Meow" type="TextureButton" parent="Touch"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 121.75
+offset_top = -36.5
+offset_right = 145.75
+offset_bottom = -12.5
+grow_vertical = 0
+action_mode = 0
+texture_normal = SubResource("AtlasTexture_k1e1j")
+stretch_mode = 3
+
+[node name="Powers" type="Control" parent="Touch"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="Swap" type="TextureButton" parent="Touch/Powers"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 144.0
+offset_top = 51.25
+offset_right = 168.0
+offset_bottom = 75.25
+grow_vertical = 0
+action_mode = 0
+texture_normal = SubResource("AtlasTexture_3ceum")
+stretch_mode = 3
+
+[node name="Rewind" type="TextureButton" parent="Touch/Powers"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 76.75
+offset_top = -39.25
+offset_right = 100.75
+offset_bottom = -15.25
+grow_vertical = 0
+action_mode = 0
+texture_normal = SubResource("AtlasTexture_wvuej")
+stretch_mode = 3
+
+[node name="Back" type="TextureButton" parent="Touch/Powers"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 165.75
+offset_top = 73.75
+offset_right = 189.75
+offset_bottom = 97.75
+grow_vertical = 0
+action_mode = 0
+texture_normal = SubResource("AtlasTexture_yqn22")
+stretch_mode = 3
+
+[node name="FastRewind" type="TextureButton" parent="Touch/Powers"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 102.25
+offset_top = -39.5
+offset_right = 126.25
+offset_bottom = -15.5
+grow_vertical = 0
+action_mode = 0
+texture_normal = SubResource("AtlasTexture_pd6tj")
+stretch_mode = 3
+
+[node name="TextureRect" type="TextureRect" parent="Touch/Powers"]
+layout_mode = 0
+offset_left = 143.5
+offset_top = 112.0
+offset_right = 167.5
+offset_bottom = 136.0
+mouse_filter = 2
+texture = SubResource("AtlasTexture_5run4")
+
+[node name="Pause" parent="." instance=ExtResource("3_vnem3")]
+visible = false
+z_index = 2
+
+[node name="SaveCasette" type="Sprite2D" parent="."]
+position = Vector2(752, 552)
+scale = Vector2(3, 3)
+texture = ExtResource("9_8t1ss")
+hframes = 37
+
+[connection signal="pressed" from="Touch/Menu" to="Pause" method="pause"]
+[connection signal="gui_input" from="Touch/InputCross" to="Touch" method="_on_input_cross_gui_input"]
+[connection signal="pressed" from="Touch/InputCross" to="Touch" method="_on_input_cross_pressed"]
+[connection signal="pressed" from="Touch/Meow" to="Touch" method="_on_meow_pressed"]
+[connection signal="pressed" from="Touch/Powers/Swap" to="Touch" method="_on_swap_pressed"]
+[connection signal="pressed" from="Touch/Powers/Rewind" to="Touch" method="_on_rewind_pressed"]
+[connection signal="pressed" from="Touch/Powers/Back" to="Touch" method="_on_back_pressed"]
+[connection signal="pressed" from="Touch/Powers/FastRewind" to="Touch" method="_on_fast_rewind_pressed"]
+
+[editable path="Pause"]
+[editable path="Pause/Settings"]

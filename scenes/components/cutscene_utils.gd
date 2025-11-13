@@ -30,6 +30,8 @@ func grab_camera():
 
 func release_camera():
 	camera_grabbed = false
+	CAMERA.prefer_zoom = CAMERA.override_zoom
+	CAMERA.override_zoom = null
 
 var player_following = false
 func begin_player_follow():
@@ -45,6 +47,7 @@ func set_camera_override(node_name : String):
 
 func clear_camera_override():
 	CAMERA.follow_node = GAMESTATE.player
+	
 
 
 func _process(_delta: float) -> void:

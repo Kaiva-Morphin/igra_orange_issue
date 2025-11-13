@@ -41,20 +41,18 @@ func format(i: Dictionary) -> String:
 var creds = [
 	{"asset": "monogram", "author": "datagoblin", "link": "https://datagoblin.itch.io/monogram", "types": [TYPE.Font]},
 	
-
 	{"asset": "Shapeforms Audio Free Sound Effects", "author": "shapeforms", "link": "https://shapeforms.itch.io/shapeforms-audio-free-sfx", "types": [TYPE.Sound]},
 	{"asset": "interface-sfx-pack-1", "author": "obsydianx", "link": "https://obsydianx.itch.io/interface-sfx-pack-1", "types": [TYPE.Sound]},
 	{"asset": "Немного всякого", "author": "kenney", "link": "https://kenney.nl", "types": [TYPE.Sound]},
 	{"asset": "Tabletop clock ticking, speed ramp down (followup)", "author": "ycbcr", "link": "https://freesound.org/people/ycbcr/sounds/556991/", "types": [TYPE.Sound]},
 	{"asset": "16-Bit Starter Pack - Bit By Bit Sound", "author": "Bit By Bit", "link": "https://bit-by-bit-sound.itch.io/16-bit-starter-pack", "types": [TYPE.Sound]},
 	{"asset": "Moody's Free Music Pack", "author": "Bit By Bit", "link": "https://bit-by-bit-sound.itch.io/16-bit-starter-pack", "types": [TYPE.Sound]},
-
-
+	
 	{"asset": "Top-Down Forest Tileset (Edited)", "author": "gametoolkit", "link": "https://gametoolkit.itch.io/top-down-forest-tileset", "types": [TYPE.Image]},
 	{"asset": "All Screaming Brain Studios Textures", "author": "All Screaming Brain Studios", "link": "https://screamingbrainstudios.itch.io/", "types": [TYPE.Image]},
-
-
-	{"asset": "Distortion/Shockwave Shader (Edited)", "author": "", "link": "https://godotshaders.com/shader/distortion/", "types": [TYPE.Shader]}
+	
+	{"asset": "Distortion/Shockwave Shader (Edited)", "author": "mrsir8433", "link": "https://godotshaders.com/shader/distortion/", "types": [TYPE.Shader]},
+	{"asset": "VCR Analog Distortions (Edited)", "author": "LazarusOverlook", "link": "https://godotshaders.com/shader/vcr-analog-distortions/", "types": [TYPE.Shader]},
 ]
 
 func header(t: TYPE) -> void:

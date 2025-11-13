@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=4 uid="uid://cr72veahutdvh"]
+[gd_scene load_steps=7 format=4 uid="uid://cr72veahutdvh"]
 
 [ext_resource type="PackedScene" uid="uid://ddyi0gms06xau" path="res://scenes/components/level_surface.tscn" id="1_yjnyl"]
 [ext_resource type="PackedScene" uid="uid://t6c7011s8l62" path="res://scenes/components/objects/mouse.tscn" id="2_3er40"]
 [ext_resource type="PackedScene" uid="uid://dvhwkm5duu5i" path="res://scenes/components/objects/mouse_grass.tscn" id="3_rgufl"]
 [ext_resource type="PackedScene" uid="uid://7cvvbke3uido" path="res://scenes/components/objects/ice_spike.tscn" id="4_r2f1r"]
+[ext_resource type="PackedScene" uid="uid://brc7cxlek8yso" path="res://scenes/components/room.tscn" id="5_pnqcn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oudqj"]
+size = Vector2(480.5, 288)
 
 [node name="FirstMouse" type="Node2D"]
 y_sort_enabled = true
@@ -37,6 +41,9 @@ position = Vector2(360, -136)
 [node name="MouseGrass" parent="LevelSurface" instance=ExtResource("3_rgufl")]
 position = Vector2(168, -120)
 
+[node name="MouseGrass4" parent="LevelSurface" instance=ExtResource("3_rgufl")]
+position = Vector2(168, -104)
+
 [node name="MouseGrass2" parent="LevelSurface" instance=ExtResource("3_rgufl")]
 position = Vector2(360, -32)
 
@@ -52,4 +59,12 @@ position = Vector2(168, -152)
 [node name="IceSpike" parent="LevelSurface" instance=ExtResource("4_r2f1r")]
 position = Vector2(184, -104)
 
+[node name="Room" parent="." instance=ExtResource("5_pnqcn")]
+visible = true
+
+[node name="AREA" parent="Room" index="0"]
+position = Vector2(239.75, -144)
+shape = SubResource("RectangleShape2D_oudqj")
+
 [editable path="LevelSurface"]
+[editable path="Room"]

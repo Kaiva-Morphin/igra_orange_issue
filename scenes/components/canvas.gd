@@ -13,19 +13,22 @@ var msgs: Array = []
 var current_index := 0
 # var dialog_timer: Timer
 
-func _ready() -> void:
+@onready var touch = $Touch
+@onready var pause = $Pause
+
+
+func _ready():
+	self.show()
 	GAMESTATE.vignette = self
 	GAMESTATE.canvas = self
-	
 	var m: ShaderMaterial = vignette.material
 	m.set_shader_parameter("progress", 0.0)
 	m.set_shader_parameter("col", Vector4(0.0, 0.0, 0.0, 1.0))
-	
-	# dialog_timer = Timer.new()
-	# dialog_timer.one_shot = true
-	# add_child(dialog_timer)
-	# dialog_timer.timeout.connect(_on_dialog_timeout)
+	$Touch/Powers.hide()
 
+func on_powers_unlocked():
+	$Pause.on_powers_unlocked()
+	$Touch/Powers.show()
 
 func start_dialog(new_msgs: Array) -> void:
 	if new_msgs.is_empty():
@@ -38,9 +41,16 @@ func start_dialog(new_msgs: Array) -> void:
 	_show_next_msg()
 
 
+var touch_vec := Vector2.ZERO
+
+
 func _process(_delta: float) -> void:
+	#touch_vec.x = int($Touch/Right.button_pressed) - int($Touch/Left.button_pressed)
+	#touch_vec.y = int($Touch/Down.button_pressed) - int($Touch/Up.button_pressed)
+	touch_vec = $Touch.input_vec
 	if Input.is_action_just_pressed("meow"):
 		_show_next_msg()
+
 
 func _show_next_msg() -> void:
 	print("show next msg", current_index)

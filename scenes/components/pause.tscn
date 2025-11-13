@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://buu0llfaduhea"]
+[gd_scene load_steps=17 format=3 uid="uid://buu0llfaduhea"]
 
 [ext_resource type="Theme" uid="uid://c4tnmjnv1swxg" path="res://resources/ui/main_theme.tres" id="1_l63hr"]
 [ext_resource type="Script" uid="uid://c445ke2nmxwej" path="res://scenes/components/pause_controller.gd" id="2_wdnx1"]
@@ -9,6 +9,8 @@
 [ext_resource type="AudioStream" uid="uid://dcj5q48alcc57" path="res://assets/sounds/kenney/click2.ogg" id="7_stxwk"]
 [ext_resource type="AudioStream" uid="uid://ccl48un6bn75c" path="res://assets/sounds/shapeforms/PC Keyboard_Keystroke_28.wav" id="8_wap4a"]
 [ext_resource type="AudioStream" uid="uid://bypm53seyi7wx" path="res://assets/sounds/shapeforms/BUTTON_05.wav" id="9_q6g33"]
+[ext_resource type="Texture2D" uid="uid://beliqhf7ugdn" path="res://assets/textures/powerscroll.png" id="10_wdnx1"]
+[ext_resource type="Texture2D" uid="uid://dokfsvswohlm6" path="res://assets/textures/meow.png" id="11_dc6cb"]
 
 [sub_resource type="Animation" id="Animation_r8yej"]
 length = 0.001
@@ -222,6 +224,7 @@ _data = {
 }
 
 [node name="Pause" type="Control" node_paths=PackedStringArray("main_screen", "settings_screen", "current_root", "next_root", "player")]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -306,7 +309,21 @@ mouse_default_cursor_shape = 2
 theme = ExtResource("3_dc6cb")
 text = "выйти"
 
+[node name="Label" type="Label" parent="Main/VBoxContainer"]
+layout_mode = 2
+
+[node name="Powerscroll" type="Sprite2D" parent="Main"]
+position = Vector2(169, 33)
+texture = ExtResource("10_wdnx1")
+hframes = 2
+frame = 1
+
+[node name="Meow" type="Sprite2D" parent="Main"]
+position = Vector2(33.5, 25.5)
+texture = ExtResource("11_dc6cb")
+
 [node name="Settings" parent="." instance=ExtResource("4_s8h8j")]
+visible = false
 layout_mode = 1
 offset_right = 0.0
 offset_bottom = 0.0

@@ -404,9 +404,9 @@ size = Vector2(120, 20)
 
 [sub_resource type="Curve2D" id="Curve2D_drian"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 72, 24, 0, 0, 0, 0, 112, 24, 0, 0, 0, 0, 112, 64, 0, 0, 0, 0, 160, 64)
+"points": PackedVector2Array(0, 0, 0, 0, 72, 24, 0, 0, 0, 0, 79, 24, 0, 0, 0, 0, 112, 24, 0, 0, 0, 0, 112, 64, 0, 0, 0, 0, 160, 64)
 }
-point_count = 4
+point_count = 5
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fe6sj"]
 size = Vector2(320, 336)

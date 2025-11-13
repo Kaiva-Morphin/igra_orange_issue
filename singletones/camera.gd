@@ -6,7 +6,7 @@ var room_bound_rects = []
 
 
 @export var prefer_zoom = 2.0
-@export var override_zoom : float
+var override_zoom
 
 @export var follow_node : Node2D = null
 @export var override_focus_node : Node2D = null

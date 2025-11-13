@@ -27,6 +27,7 @@ func restore_state(old_state: StateData):
 	sprite2.position = old_state.data.get("offset")
 	suppressed = old_state.data.get("suppressed")
 	process_suppress(suppressed)
+	process_swap(GAMESTATE.worldstate)
 	position = UTILS.from_grid(pos)
 
 func save_state() -> StateData:
@@ -98,34 +99,58 @@ func look_down():
 	looking_dir = 0
 	update_sprite()
 
+
+@onready var right_emitter = $RightParticles
+@onready var left_emitter = $LeftParticles
+@onready var up_emitter = $UpParticles
+@onready var down_emitter = $DownParticles
+@onready var emitters = [right_emitter, left_emitter, up_emitter, down_emitter]
+
 var anim_paused = false
 func stop_anim():
 	anim_paused = true
+	for emitter : CPUParticles2D in emitters:
+		emitter.emitting = false
 
 
 var c = 0
 var prev_play = false
 func _process(delta: float) -> void:
-	if !suppressed && Input.is_action_just_pressed("meow"):
+	if !suppressed && (Input.is_action_just_pressed("meow") || GAMESTATE.touch_meow_just_pressed):
 		meow()
 	if !anim_paused:
 		c += delta
 		if c > anim_speed:
 			c -= anim_speed
 			anim_frame = (anim_frame + 1) % anim_frames
+			for emitter : CPUParticles2D in emitters:
+				emitter.emitting = false
+			if anim_idx == 2:
+				match looking_dir:
+					0: up_emitter.emitting = true
+					1: left_emitter.emitting = true
+					2: down_emitter.emitting = true
+					3: right_emitter.emitting = true
 			update_sprite()
 			prev_play = !prev_play
 			if prev_play:
 				$Step.pitch_scale = randf_range(0.8, 1.2)
 				$Step.play()
-
-			
+	GAMESTATE.touch_meow_just_pressed = false
 
 
 
 func on_swap(world_state: WorldState, push_step_needed : bool = true):
 	super.on_swap(world_state, push_step_needed)
+	process_swap(world_state)
 	process_suppress(self.suppressed)
+
+func process_swap(to: WorldState):
+	for em : CPUParticles2D in emitters:
+		if to == WorldState.Past:
+			em.color = Color.GRAY
+		else:
+			em.color = Color("3c854e9c")
 
 func process_suppress(s: bool):
 	if s:

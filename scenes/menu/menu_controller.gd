@@ -18,6 +18,7 @@ var next
 var stack = []
 var requested_back = false
 
+
 func swap_to(to: Control) -> void:
 	if to == current: return
 	if to != main_screen: stack.push_back(current)
@@ -32,13 +33,16 @@ func swap_to(to: Control) -> void:
 	player.play("swap")
 	$Sounds/Swap.play()
 
+
 func back_to_main() -> void:
 	stack = []
 	swap_to(main_screen)
 
+
 func back() -> void:
 	if stack.size() == 0: return back_to_main()
 	swap_to(stack.pop_back())
+
 
 func detach() -> void:
 	current.hide()
@@ -48,6 +52,7 @@ func detach() -> void:
 		requested_back = false
 		back()
 
+
 func _process(_dt):
 	if Input.is_action_pressed("back"):
 		if player.is_playing():
@@ -55,7 +60,10 @@ func _process(_dt):
 		else:
 			back()
 
+
 func _ready() -> void:
+	if DisplayServer.is_touchscreen_available() && !GAMESTATE.touch_inited:
+		$Touch.show()
 	current = main_screen
 	for screen in all_screens:
 		if screen == current:
@@ -71,11 +79,16 @@ func _ready() -> void:
 			#node.connect("mouse_entered", _on_btn_unfocus)
 			#node.connect("mouse_exited", _on_btn_focus)
 
+
 func _on_play_pressed() -> void:
+	get_tree().paused = false
 	get_tree().change_scene_to_packed(STORE.game_scene)
+
 
 func _on_settings_pressed() -> void:
 	swap_to(settings_screen)
+
+
 func _on_cred_pressed() -> void:
 	swap_to(creds_screen)
 
@@ -83,15 +96,29 @@ func _on_cred_pressed() -> void:
 func _on_exit_pressed() -> void:
 	get_tree().quit()
 
-
 func _on_btn_down():
 	$Sounds/Pressed.play()
+
 
 func _on_btn_up():
 	$Sounds/Released.play()
 
+
 func _on_btn_unfocus():
 	$Sounds/Unhover.play()
 
+
 func _on_btn_focus():
 	$Sounds/Hover.play()
+
+
+func _on_yes_pressed() -> void:
+	GAMESTATE.touch_enabled = true
+	GAMESTATE.touch_inited = true
+	$Touch.hide()
+
+
+func _on_no_pressed() -> void:
+	GAMESTATE.touch_enabled = false
+	GAMESTATE.touch_inited = false
+	$Touch.hide()

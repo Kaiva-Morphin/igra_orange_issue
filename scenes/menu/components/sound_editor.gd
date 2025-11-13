@@ -12,7 +12,7 @@ func _ready() -> void:
 	label.text = label_text
 	var volume_db = AudioServer.get_bus_volume_db(AudioServer.get_bus_index(bus))
 	slider.value = db_to_linear(volume_db) * cnv_mul
-	line_edit.text = str(float(slider.value))
+	line_edit.text = str(int(float(slider.value + 0.01)))
 
 
 func _on_line_edit_text_changed(new_text: String) -> void:
@@ -29,7 +29,7 @@ func _on_line_edit_text_changed(new_text: String) -> void:
 		value = float(sanitized)
 	value = clamp(value, 0.0, 1.0)
 	slider.value = value
-	line_edit.text = sanitized
+	line_edit.text = int(sanitized)
 	set_bus_volume(value)
 
 
@@ -38,7 +38,7 @@ func _on_line_edit_text_submitted(new_text: String) -> void:
 
 
 func _on_slider_value_changed(value: float) -> void:
-	var t = str(value)
+	var t = str(int(value))
 	if value >= 100: t = str(int(value))
 	line_edit.text = t
 	set_bus_volume(value)

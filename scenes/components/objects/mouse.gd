@@ -1,7 +1,7 @@
 extends STRUCTS.MovableCollider
 
 @onready var sprite = $Sprite2D
-@onready var reflection = $Sprite2D2
+#@onready var reflection = $Sprite2D2
 
 func _init() -> void:
 	super._init(0)
@@ -19,10 +19,9 @@ func on_swap(world_state: WorldState, push_step_needed : bool = true):
 	if push_step_needed:
 		push_step()
 	super.on_swap(world_state, push_step_needed)
-
 	process_swap(world_state)
-	if world_state == STRUCTS.WorldState.Future && (GAMESTATE.player.pos - pos).length() <= 1:
-		react_player(GAMESTATE.player.pos, true)
+	#if world_state == STRUCTS.WorldState.Future && (GAMESTATE.player.pos - pos).length() <= 1:
+		#react_player(GAMESTATE.player.pos, true)
 		
 
 func save_state() -> StateData:
@@ -33,9 +32,9 @@ func save_state() -> StateData:
 func restore_state(old_state: StateData):
 	super.restore_state(old_state)
 	pos = old_state.data["pos"]
-	sprite.frame = old_state.data["frame"]
 	global_position = UTILS.from_grid(pos)
 	process_swap(GAMESTATE.worldstate)
+	sprite.frame = old_state.data["frame"]
 
 func get_mask(_world: WorldState) -> int:
 	if _world == STRUCTS.WorldState.Future:
@@ -44,18 +43,20 @@ func get_mask(_world: WorldState) -> int:
 		return STATE_COLLIDER_PLAYER_MASK | STATE_COLLIDER_MOVABLE_MASK
 	
 func process_swap(world_state: WorldState):
-	mask = get_mask(world_state)
+	var c = level_ref.mousegrass_collider_store.get_collider(pos)
+	sprite.show()
 	if world_state == STRUCTS.WorldState.Future:
-		sprite.frame = 0
-		reflection.frame = 0
+		if c:
+			sprite.frame = 5
+		else:
+			sprite.frame = 0
 	else:
-		if mask == 0:
+		if c:
 			sprite.frame = 3
-			reflection.frame = 3
+			sprite.hide()
 		else:
 			sprite.frame = 4
-			reflection.frame = 4
-
+		
 func react_player(next_player_pos: Vector2i, unchecked = false) -> float:
 	if GAMESTATE.worldstate == STRUCTS.WorldState.Past && !unchecked:
 		return -1
@@ -103,20 +104,22 @@ func react_player(next_player_pos: Vector2i, unchecked = false) -> float:
 	level_ref.mouse_collider_store.save_delta(pos, dst)
 	level_ref.mouse_collider_store.push_step()
 	level_ref.mouse_collider_store.unchecked_move(pos, dst)
+	#var p = level_ref.mousegrass_collider_store.get_collider(pos)
+	#if p:
+		#p.mouse_in()
+	var n = level_ref.mousegrass_collider_store.get_collider(dst)
 	push_step()
-	var p = level_ref.mousegrass_collider_store.get_collider(pos)
-	if p:
-		p.mouse_in()
-	pos = dst
-	var n = level_ref.mousegrass_collider_store.get_collider(pos)
 	if n:
-		self.z_index = -1
-		n.mouse_in()
+		#self.z_index = -1
+		#n.mouse_in()
+		sprite.frame = 5
 	else:
-		self.z_index = 0
+		look_dir(dir)
+		#self.z_index = 0
+	pos = dst
 	
 	UTILS.tween_move(self, UTILS.from_grid(dst), func(): pass, UTILS.speed_per_tile)
-	look_dir(dir)
+	#look_dir(dir)
 	return UTILS.speed_per_tile
 
 func look_dir(dir: Vector2):

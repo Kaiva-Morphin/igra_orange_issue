@@ -70,12 +70,14 @@ func tween_move(what: Node, dst: Vector2, on_end = null, time=speed_per_tile):
 # 		what.global_position = proxy.global_position
 
 
+var DBG = false
+
 func log_print(msg):
-	if OS.is_debug_build(): 
+	if DBG && OS.is_debug_build(): 
 		print(msg)
 
 func log_prints(...msg):
-	if OS.is_debug_build():
+	if DBG && OS.is_debug_build():
 		prints(msg)
 
 func dir_to_anim(dir: Vector2i):
@@ -109,14 +111,15 @@ func _update_press_times():
 
 
 func get_input_dir() -> Vector2i:
+	var v = Vector2i(GAMESTATE.canvas.touch_vec)
+	if v != Vector2i.ZERO:
+		return v
 	var active := []
 	for action in _press_times.keys():
 		if Input.is_action_pressed(action):
 			active.append(action)
-
 	if active.is_empty():
 		return Vector2i.ZERO
-
 	# Выбираем последнюю нажатую клавишу
 	var last_action = active[0]
 	for action in active:
@@ -136,7 +139,44 @@ func get_input_dir() -> Vector2i:
 
 
 func get_hold_time(action: String) -> float:
-	# Возвращает время удержания в секундах
 	if _press_times[action] < 0.0:
 		return 0.0
 	return (Time.get_ticks_msec() / 1000.0) - _press_times[action]
+
+func get_save_path(filename: String) -> String:
+	return "user://" + filename
+
+
+func save_data(key: String, data: Dictionary):
+	var p = get_save_path(key)
+	var file = FileAccess.open(p, FileAccess.WRITE)
+	if file:
+		file.store_string(JSON.stringify(data, "  "))  # "  " = pretty print
+		file.close()
+		print("Game saved to:", p)
+	else:
+		push_error("Failed to save game!")
+
+func load_data(key: String):
+	var p = get_save_path(key)
+	var file = FileAccess.open(p, FileAccess.READ)
+	if file:
+		var data = JSON.parse_string(file.get_as_text())
+		file.close()
+		return data if data != null else {}
+	else:
+		return null
+
+
+var _nodes_by_id: Dictionary = {}
+
+func register_node(node: Node, id: String) -> void:
+	if _nodes_by_id.has(id):
+		push_warning("Node ID '%s' already registered!" % id)
+	_nodes_by_id[id] = node
+
+func unregister_node(id: String) -> void:
+	_nodes_by_id.erase(id)
+
+func get_node_by_id(id: String) -> Node:
+	return _nodes_by_id.get(id, null)

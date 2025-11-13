@@ -2,9 +2,11 @@ extends Control
 
 
 func unpause():
+	get_tree().paused = false
 	self.hide()
 
 func pause():
+	get_tree().paused = true
 	self.show()
 
 @export var main_screen : Control
@@ -12,6 +14,7 @@ func pause():
 @export var current_root : Control
 @export var next_root : Control
 @export var player : AnimationPlayer
+@onready var power_scroll = $Main/Powerscroll
 @onready var all_screens = [
 	main_screen,
 	settings_screen,
@@ -24,9 +27,14 @@ var requested_back = false
 
 func _ready():
 	self.hide()
+	power_scroll.frame = 1
 	reset()
 
+func on_powers_unlocked():
+	power_scroll.frame = 0
+
 func _on_exit_pressed() -> void:
+	#unpause()
 	get_tree().change_scene_to_packed(STORE.menu_scene)
 
 func reset():
@@ -75,6 +83,7 @@ func _on_continue_pressed() -> void:
 	unpause()
 
 func back_to_main() -> void:
+	unpause()
 	stack = []
 	swap_to(main_screen)
 

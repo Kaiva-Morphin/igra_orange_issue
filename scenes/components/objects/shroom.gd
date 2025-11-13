@@ -16,7 +16,6 @@ func _level_ready(level: Level, push_initial: bool = true):
 func on_swap(world_state: WorldState, push_step_needed : bool = true):
 	if push_step_needed: push_step()
 	super.on_swap(world_state, push_step_needed)
-	UTILS.log_print("[ice] on_swap " + str(world_state))
 	process_swap(world_state)
 
 func save_state() -> StateData:
@@ -28,7 +27,6 @@ func restore_state(old_state: StateData):
 	process_swap(GAMESTATE.worldstate)
 
 func get_mask(_world: WorldState) -> int:
-	print("[shroom] get_mask " + str(_world))
 	var mc = level_ref.movable_collider_store.get_collider(pos)
 	if _world == STRUCTS.WorldState.Past:
 		return 2

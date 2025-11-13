@@ -38,8 +38,24 @@ class Level extends Node2D:
 		add_child(ice_store)
 		# UTILS.log_print("[level] level ready")
 		
+		# Fill up with data.
 		get_tree().call_group(LEVELSTATE_REACTION_GROUP, "_level_ready", self)
 		get_tree().call_group(LEVELSTATE_REACTION_GROUP, "_post_level_ready")
+		# Replace with savedata
+		
+		#var data = UTILS.load_data("level")
+		#if data:
+			#var typed_initial: Array[StateData] = []
+			#for item_data in data["initial"]:
+				#typed_initial.append(item_data)
+			#initial_state = data["initial"]
+			#
+			#for item in initial_state:
+				#item.revert()
+		#else:
+			#pass
+	
+	
 	
 	func reset():
 		for s : StateData in initial_state:

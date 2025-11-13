@@ -35,7 +35,7 @@ func restore_state(old_state: StateData):
 
 func get_mask(_world: WorldState) -> int:
 	var mc = level_ref.mouse_collider_store.get_collider(pos)
-	if _world == STRUCTS.WorldState.Future and !mc:
+	if _world == STRUCTS.WorldState.Future: # and !mc:
 		return STATE_COLLIDER_PLAYER_MASK
 	elif mc: # && mc.get_mask(UTILS.reverse_state(_world)) != 0:
 		return 0

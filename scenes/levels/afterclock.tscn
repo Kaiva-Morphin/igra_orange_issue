@@ -29,8 +29,10 @@ tile_map_data = PackedByteArray("AADu//z/AAAHABUAAAD3//n/AAAEABEAAAD4/wgAAAAEABE
 
 [node name="Room" parent="." instance=ExtResource("2_af33c")]
 visible = true
+prefer_zoom = 2.0
 
 [node name="AREA" parent="Room" index="0"]
+visible = false
 position = Vector2(-64, -32)
 shape = SubResource("RectangleShape2D_npbde")
 

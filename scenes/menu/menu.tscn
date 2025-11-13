@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://hqdryxc766fs"]
+[gd_scene load_steps=25 format=3 uid="uid://hqdryxc766fs"]
 
 [ext_resource type="Theme" uid="uid://c4tnmjnv1swxg" path="res://resources/ui/main_theme.tres" id="1_klgdb"]
 [ext_resource type="Script" uid="uid://ciepjgslvoe36" path="res://scenes/menu/menu_controller.gd" id="2_e0arn"]
@@ -8,6 +8,7 @@
 [ext_resource type="Shader" uid="uid://cctgygvowewya" path="res://resources/shaders/menu.gdshader" id="3_kaijy"]
 [ext_resource type="AudioStream" uid="uid://bksx4qer1bjb6" path="res://assets/sounds/shapeforms/Tablet_Tap_07.wav" id="4_k48pe"]
 [ext_resource type="AudioStream" uid="uid://dcj5q48alcc57" path="res://assets/sounds/kenney/click2.ogg" id="5_f2fum"]
+[ext_resource type="Texture2D" uid="uid://dok5bkbseihh8" path="res://assets/textures/menu2.png" id="5_rcuxh"]
 [ext_resource type="AudioStream" uid="uid://ccl48un6bn75c" path="res://assets/sounds/shapeforms/PC Keyboard_Keystroke_28.wav" id="6_kaijy"]
 [ext_resource type="AudioStream" uid="uid://bypm53seyi7wx" path="res://assets/sounds/shapeforms/BUTTON_05.wav" id="7_y4i35"]
 [ext_resource type="AudioStream" uid="uid://dvhxue4u72134" path="res://assets/sounds/town04.wav" id="10_y4i35"]
@@ -21,6 +22,12 @@ shader_parameter/width = 0.02669999932449
 shader_parameter/feather = 0.4290000203775
 shader_parameter/up = Color(0.62722665, 0.61060005, 0.86, 0.13333334)
 shader_parameter/bottom = Color(1, 0.53800005, 0.23000002, 0.10980392)
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_64m6r"]
+frames = 2
+frame_0/texture = ExtResource("3_f2fum")
+frame_1/texture = ExtResource("5_rcuxh")
+frame_1/duration = 1.0
 
 [sub_resource type="Animation" id="Animation_r8yej"]
 length = 0.001
@@ -178,7 +185,14 @@ height = 24
 fill_from = Vector2(1, 0)
 fill_to = Vector2(1, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rcuxh"]
+bg_color = Color(0, 0, 0, 0.4862745)
+
+[sub_resource type="Theme" id="Theme_64m6r"]
+Panel/styles/panel = SubResource("StyleBoxFlat_rcuxh")
+
 [node name="Menu" type="Control" node_paths=PackedStringArray("main_screen", "settings_screen", "creds_screen", "current_root", "next_root", "player")]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -202,7 +216,7 @@ material = SubResource("ShaderMaterial_y4i35")
 layout_mode = 0
 offset_right = 200.0
 offset_bottom = 150.0
-texture = ExtResource("3_f2fum")
+texture = SubResource("AnimatedTexture_64m6r")
 
 [node name="SwapPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -314,6 +328,28 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 theme = ExtResource("2_mcvr8")
 text = "выйти"
+
+[node name="Plus" type="RichTextLabel" parent="Main"]
+custom_minimum_size = Vector2(72, 24)
+layout_mode = 0
+offset_left = 37.75
+offset_top = 29.75
+offset_right = 109.75
+offset_bottom = 55.75
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_colors/font_shadow_color = Color(0.1148968, 0.11489681, 0.1148968, 1)
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[wave amp=10.0 freq=5.0][rainbow]plus"
+fit_content = true
+scroll_active = false
+autowrap_trim_flags = 0
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="CURRENT" type="Control" parent="."]
 layout_mode = 1
@@ -433,11 +469,77 @@ mouse_default_cursor_shape = 2
 theme = ExtResource("2_mcvr8")
 text = "<"
 
+[node name="Touch" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_64m6r")
+
+[node name="ColorRect" type="ColorRect" parent="Touch"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6509804)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Touch"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -58.5
+offset_right = 36.0
+offset_bottom = 58.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="Label" type="RichTextLabel" parent="Touch/VBoxContainer"]
+z_index = 1
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_colors/font_shadow_color = Color(0.11372549, 0.11372549, 0.11372549, 1)
+theme_override_constants/shadow_outline_size = 0
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+bbcode_enabled = true
+text = "Включить управление касанием?"
+fit_content = true
+scroll_active = false
+autowrap_trim_flags = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="yes" type="Button" parent="Touch/VBoxContainer" groups=["ui_button"]]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("2_mcvr8")
+text = "Да"
+
+[node name="no" type="Button" parent="Touch/VBoxContainer" groups=["ui_button"]]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("2_mcvr8")
+text = "Нет"
+
 [connection signal="pressed" from="Main/HBoxContainer/VBoxContainer/play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Main/HBoxContainer/VBoxContainer/settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="Main/HBoxContainer/VBoxContainer/cred" to="." method="_on_cred_pressed"]
 [connection signal="pressed" from="Main/HBoxContainer/VBoxContainer/exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="Settings/RichTextLabel/CenterContainer/exit" to="." method="back"]
 [connection signal="pressed" from="Creds/Label/CenterContainer/exit" to="." method="back"]
+[connection signal="pressed" from="Touch/VBoxContainer/yes" to="." method="_on_yes_pressed"]
+[connection signal="pressed" from="Touch/VBoxContainer/no" to="." method="_on_no_pressed"]
 
 [editable path="Settings"]

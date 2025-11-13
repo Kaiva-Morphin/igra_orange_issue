@@ -13,6 +13,7 @@ func checkpoint():
 	history = []
 	var s = take_snapshot()
 	initial_state = s
+	UTILS.save_data("level", {"initial": initial_state})
 
 func soft_hard_reset():
 	var hist = take_history()
@@ -45,7 +46,8 @@ func _ready() -> void:
 	CAMERA.on_ready()
 	start_new_step()
 	get_tree().call_group(STRUCTS.SWAP_REACTION_GROUP, "on_swap", GAMESTATE.worldstate, true)
-	GAMESTATE.vignette.animate(0.0, 0.3, 5.0)
+	#GAMESTATE.vignette.animate(0.0, 0.3, 5.0)
+	GAMESTATE.vignette.animate(0.0, 0.3, 0.0)
 
 
 
@@ -97,7 +99,27 @@ func spawn_dbg(p: Vector2, color: Color):
 var screenshot: Texture2D
 var cant_sound_since = 0
 var from_prev_step = 0
+
+#func show_touch_controls():
+	#$CanvasLayer/Label.text = "touch"
+#
+#func hide_touch_controls():
+	#$CanvasLayer/Label.text = "keyboard"
+
+#func _input(event: InputEvent) -> void:
+	#if event is InputEventScreenTouch or event is InputEventScreenDrag:
+		#show_touch_controls()
+	#elif event is InputEventKey:
+		#hide_touch_controls()
+
 func _process(_dt: float) -> void:
+	process_inner(_dt)
+	GAMESTATE.touch_fastrewind_just_pressed = false
+	GAMESTATE.touch_swap_just_pressed = false
+	GAMESTATE.touch_back_just_pressed = false
+	GAMESTATE.touch_rewind_just_pressed = false
+
+func process_inner(_dt: float):
 	if Input.is_action_just_pressed("aquire_powers"):
 		powers_unlocked = true
 	cant_sound_since += _dt
@@ -112,7 +134,7 @@ func _process(_dt: float) -> void:
 		for i in movable_collider_store.pos_to_collider.values():
 			spawn_dbg(UTILS.from_grid(i.pos), Color(1, 0, 0))
 		for i in movable_collider_store.pos_to_collider.keys():
-			spawn_dbg(Vector2(UTILS.from_grid(i)) + Vector2(8, 8), Color(1, 0, 1))
+			spawn_dbg(Vector2(UTILS.from_grid(i)) + Vector2(8, 8), Color(0.103, 0.729, 0.546, 1.0))
 		for i in mouse_collider_store.pos_to_collider.keys():
 			spawn_dbg(Vector2(UTILS.from_grid(i)) + Vector2(8, 8), Color(1, 0.7, 0.8))
 		# for i in static_collider_store.pos_to_collider.values():
@@ -127,7 +149,7 @@ func _process(_dt: float) -> void:
 		return
 	rewind_sound.stop()
 	GAMESTATE.canvas.rewind.hide()
-	if Input.is_action_just_pressed("swap") && powers_unlocked:
+	if (Input.is_action_just_pressed("swap") || GAMESTATE.touch_swap_just_pressed) && powers_unlocked:
 		requested_swap = true
 	
 	if processing_step:
@@ -177,7 +199,7 @@ func _process(_dt: float) -> void:
 		GAMESTATE.swap()
 		return
 	
-	if Input.is_action_just_pressed("step_back")  && powers_unlocked:
+	if (Input.is_action_just_pressed("step_back") || GAMESTATE.touch_back_just_pressed)  && powers_unlocked:
 		UTILS.log_prints("[level instance] step_back")
 		var h = pop_from_history()
 		if h && h.size() > 0:
@@ -192,7 +214,7 @@ func _process(_dt: float) -> void:
 	
 	player.stop_anim()
 	
-	if Input.is_action_just_pressed("hard_reset")  && powers_unlocked:
+	if (Input.is_action_just_pressed("hard_reset") || GAMESTATE.touch_fastrewind_just_pressed)  && powers_unlocked:
 		UTILS.log_print("[level instance] hard reset")
 		processing_step = true
 		GAMESTATE.vignette.animate(0.4, 0.2, 0.4)
@@ -205,15 +227,16 @@ func _process(_dt: float) -> void:
 		)
 		return
 	
-	if Input.is_action_just_pressed("reset") && powers_unlocked:
+	if (Input.is_action_just_pressed("reset")  || GAMESTATE.touch_rewind_just_pressed) && powers_unlocked:
 		UTILS.log_print("[level instance] reset")
 		var hist = take_history()
-		hist.reverse()
-		GAMESTATE.canvas.rewind.show()
-		rewind_sound.play()
-		processing_history = hist
-		processing_revert_step = 0
-		return
+		if hist.size() != 0:
+			hist.reverse()
+			GAMESTATE.canvas.rewind.show()
+			rewind_sound.play()
+			processing_history = hist
+			processing_revert_step = 0
+			return
 	
 	if from_prev_step < UTILS.input_delay:
 		return

@@ -87,7 +87,7 @@ func _process(_delta: float) -> void:
 			else:
 				dst = Vector2(GAMESTATE.player.global_position.x, g_pos.y)
 			var dist = max(abs(d.x), abs(d.y))
-
+			
 			GAMESTATE.player.look_dir(d)
 			GAMESTATE.player.resume_anim()
 			GAMESTATE.player.play_walk()

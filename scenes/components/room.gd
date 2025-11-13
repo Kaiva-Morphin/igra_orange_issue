@@ -5,6 +5,7 @@ extends Area2D
 var rect : Rect2;
 
 func _ready() -> void:
+	#$AREA.disabled = true
 	self.process_mode = Node.PROCESS_MODE_ALWAYS
 	var pos = area.global_position - UTILS.tile_size * 0.5
 	var size = area.shape.size
@@ -16,10 +17,10 @@ func _on_body_entered(body):
 	CAMERA.room_bound_rects.append([prefer_zoom, rect])
 	GAMESTATE.level_ref.checkpoint()
 	var parent = get_parent();
-	print("[room] player")
-	print("[room] parent", parent)
+	#print("[room] player")
+	#print("[room] parent", parent)
 	var m = parent.get("modulate")
-	print("[room] modulate", m)
+	#print("[room] modulate", m)
 	if m:
 		body.get_parent().modulate = m
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://u3xhep13ucw4"]
+[gd_scene load_steps=19 format=4 uid="uid://u3xhep13ucw4"]
 
 [ext_resource type="Script" uid="uid://d1qwscxc6v1d4" path="res://scenes/components/player.gd" id="1_6mmc7"]
 [ext_resource type="Texture2D" uid="uid://te0hulw7hbws" path="res://assets/textures/player.png" id="2_h3cwf"]
@@ -7,6 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://dtf0jolhclcf7" path="res://assets/textures/emotions.png" id="5_v4i73"]
 [ext_resource type="Texture2D" uid="uid://dyn1tp1e832mo" path="res://assets/textures/question.png" id="6_v4i73"]
 [ext_resource type="AudioStream" uid="uid://dr8ew1o7nvcdy" path="res://assets/sounds/meow-sound-cat.mp3" id="7_ypwcc"]
+
+[sub_resource type="Gradient" id="Gradient_ypwcc"]
+offsets = PackedFloat32Array(0.4433164, 0.8612521)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v4i73"]
 radius = 5.0
@@ -147,6 +151,65 @@ stereo = true
 
 [node name="Player" type="Node2D" groups=["player"]]
 script = ExtResource("1_6mmc7")
+
+[node name="RightParticles" type="CPUParticles2D" parent="."]
+position = Vector2(1, 5)
+emitting = false
+lifetime = 0.25
+explosiveness = 0.79
+randomness = 0.54
+direction = Vector2(1, -0.5)
+spread = 14.6
+gravity = Vector2(0, 98)
+initial_velocity_min = 25.0
+initial_velocity_max = 50.0
+color_ramp = SubResource("Gradient_ypwcc")
+
+[node name="LeftParticles" type="CPUParticles2D" parent="."]
+position = Vector2(-1, 5)
+emitting = false
+lifetime = 0.25
+explosiveness = 0.79
+randomness = 0.54
+direction = Vector2(-1, -0.5)
+spread = 14.6
+gravity = Vector2(0, 98)
+initial_velocity_min = 25.0
+initial_velocity_max = 50.0
+color = Color(1, 0.00999999, 0.32349992, 1)
+color_ramp = SubResource("Gradient_ypwcc")
+
+[node name="UpParticles" type="CPUParticles2D" parent="."]
+position = Vector2(0, -5)
+emitting = false
+lifetime = 0.25
+explosiveness = 0.79
+randomness = 0.54
+emission_shape = 3
+emission_rect_extents = Vector2(2, 0)
+direction = Vector2(0, -0.5)
+spread = 14.6
+gravity = Vector2(0, 98)
+initial_velocity_min = 25.0
+initial_velocity_max = 50.0
+color = Color(1, 0.00999999, 0.32349992, 1)
+color_ramp = SubResource("Gradient_ypwcc")
+
+[node name="DownParticles" type="CPUParticles2D" parent="."]
+position = Vector2(0, 3)
+emitting = false
+lifetime = 0.25
+explosiveness = 0.79
+randomness = 0.54
+emission_shape = 3
+emission_rect_extents = Vector2(2, 0)
+direction = Vector2(0, 0.5)
+spread = 48.38
+gravity = Vector2(0, 98)
+initial_velocity_min = 8.55
+initial_velocity_max = 22.45
+color = Color(1, 0.00999999, 0.32349992, 1)
+color_ramp = SubResource("Gradient_ypwcc")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["player"]]
 

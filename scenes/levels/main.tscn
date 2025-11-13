@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://7uv76nxqe7nu"]
+[gd_scene load_steps=29 format=3 uid="uid://7uv76nxqe7nu"]
 
 [ext_resource type="PackedScene" uid="uid://cxpycm8cc7sgl" path="res://scenes/components/level.tscn" id="1_u81e1"]
 [ext_resource type="PackedScene" uid="uid://u3xhep13ucw4" path="res://scenes/components/player.tscn" id="2_b6bv0"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://k0d3rjnhq25v" path="res://scenes/levels/cave.tscn" id="5_7lrji"]
 [ext_resource type="PackedScene" uid="uid://dfs77egu2ooq6" path="res://scenes/levels/cave_exit.tscn" id="6_b6bv0"]
 [ext_resource type="PackedScene" uid="uid://b4l7xofqvc3a1" path="res://scenes/levels/first_ice.tscn" id="7_ubwgw"]
-[ext_resource type="PackedScene" uid="uid://brc7cxlek8yso" path="res://scenes/components/room.tscn" id="8_qy6q0"]
 [ext_resource type="PackedScene" uid="uid://ccvyelicelqg" path="res://scenes/levels/lab.tscn" id="8_vkq25"]
 [ext_resource type="PackedScene" uid="uid://gf8ysc5wolvi" path="res://scenes/levels/clock.tscn" id="9_7lrji"]
 [ext_resource type="PackedScene" uid="uid://dxdja74mi1bky" path="res://scenes/levels/icehell.tscn" id="11_2xkjh"]
@@ -22,13 +21,16 @@
 [ext_resource type="Texture2D" uid="uid://blxg44qr654no" path="res://assets/textures/lab_man.png" id="18_xgklb"]
 [ext_resource type="PackedScene" uid="uid://cr72veahutdvh" path="res://scenes/levels/first_mouse.tscn" id="19_px1c8"]
 [ext_resource type="PackedScene" uid="uid://bpts6axeegtyu" path="res://scenes/levels/ice_3.tscn" id="20_xgklb"]
-[ext_resource type="PackedScene" uid="uid://t6c7011s8l62" path="res://scenes/components/objects/mouse.tscn" id="21_5wre2"]
 [ext_resource type="Texture2D" uid="uid://4vdxneay8v8e" path="res://assets/textures/f.png" id="23_ykry0"]
 [ext_resource type="PackedScene" uid="uid://blme6uyjol8uj" path="res://shroom_corner.tscn" id="23_ysjpo"]
 [ext_resource type="Script" uid="uid://belq4bs3pexg5" path="res://scenes/levels/dialog_trigger.gd" id="25_gexqn"]
+[ext_resource type="PackedScene" uid="uid://lxtallxb4xwl" path="res://scenes/levels/after_mouse.tscn" id="25_ysjpo"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_im81g"]
-size = Vector2(480.5, 336)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gexqn"]
+size = Vector2(56, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ysjpo"]
+size = Vector2(34, 96)
 
 [sub_resource type="LabelSettings" id="LabelSettings_j122s"]
 outline_size = 4
@@ -37,13 +39,17 @@ shadow_size = 7
 shadow_color = Color(0.72749996, 0.48, 0.75, 0.5921569)
 shadow_offset = Vector2(0, 0)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ysjpo"]
-size = Vector2(34, 96)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gexqn"]
-size = Vector2(56, 16)
-
 [node name="main" type="Node2D"]
+process_mode = 1
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+z_index = -10
+offset_left = -777.0
+offset_top = -680.0
+offset_right = 5581.0
+offset_bottom = 2875.0
+color = Color(0.94509804, 0.9490196, 1, 1)
 
 [node name="Level" parent="." instance=ExtResource("1_u81e1")]
 
@@ -53,11 +59,8 @@ volume_db = -26.294
 [node name="MainTheme" parent="Level" index="8"]
 volume_db = -14.857
 
-[node name="CaveExit" parent="Level" instance=ExtResource("6_b6bv0")]
-position = Vector2(-384, 192)
-
 [node name="Player" parent="Level" instance=ExtResource("2_b6bv0")]
-position = Vector2(-200, 472)
+position = Vector2(3248, 1472)
 
 [node name="F" type="Sprite2D" parent="Level"]
 y_sort_enabled = true
@@ -73,82 +76,95 @@ offset = Vector2(0, 16)
 
 [node name="Camera2D" type="Camera2D" parent="Level" groups=["camera"]]
 position = Vector2(8, 8)
+zoom = Vector2(0.75, 0.75)
 
 [node name="AudioListener2D" type="AudioListener2D" parent="Level/Camera2D"]
 position = Vector2(-8, -8)
 current = true
 
-[node name="Canvas" parent="Level" instance=ExtResource("3_ubwgw")]
+[node name="lab" parent="Level" instance=ExtResource("8_vkq25")]
+position = Vector2(-384, 400)
+metadata/_edit_lock_ = true
 
-[node name="ice_3" parent="Level" instance=ExtResource("20_xgklb")]
+[node name="TimeMachineTP" parent="Level/lab" index="14" node_paths=PackedStringArray("tp_pos")]
+tp_pos = NodePath("../../TpFromLab")
+
+[node name="TimeMachine" parent="Level/lab/TimeMachineTP/TimeMachine" index="1"]
+hframes = 3
+
+[node name="TpFromLab" type="Node2D" parent="Level"]
+position = Vector2(-160, -448)
+
+[node name="Cave" parent="Level" instance=ExtResource("5_7lrji")]
+position = Vector2(-336, -288)
+
+[node name="CaveExit" parent="Level" instance=ExtResource("6_b6bv0")]
+position = Vector2(-384, 192)
+
+[node name="FirstIce" parent="Level" instance=ExtResource("7_ubwgw")]
+position = Vector2(304, 336)
+
+[node name="PuzzleIce1" parent="Level" instance=ExtResource("4_vkq25")]
+position = Vector2(944, 752)
+
+[node name="ClockPowers" parent="Level" instance=ExtResource("9_7lrji")]
+position = Vector2(992, 960)
+
+[node name="AfterClock" parent="Level" instance=ExtResource("13_dj21o")]
+position = Vector2(1056, 1344)
+
+[node name="Labyrynth" parent="Level" instance=ExtResource("12_dj21o")]
+position = Vector2(1408, 1376)
+
+[node name="IceSlideGuide" parent="Level" instance=ExtResource("18_qgoyv")]
+position = Vector2(1872, 1728)
+
+[node name="IceSlide1" parent="Level" instance=ExtResource("20_xgklb")]
 position = Vector2(1872, 1312)
 
-[node name="Mouse" parent="Level" instance=ExtResource("21_5wre2")]
-position = Vector2(-96, -192)
+[node name="DialogTrigger2" type="Area2D" parent="Level/IceSlide1"]
+position = Vector2(280, -40)
+script = ExtResource("25_gexqn")
+dialog_name = "keep_moving"
 
-[node name="Room" parent="Level/Mouse" instance=ExtResource("8_qy6q0")]
-visible = true
-position = Vector2(2712, 1448)
-
-[node name="AREA" parent="Level/Mouse/Room" index="0"]
-position = Vector2(-8.25, -144)
-shape = SubResource("RectangleShape2D_im81g")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/IceSlide1/DialogTrigger2"]
+position = Vector2(12, 0)
+shape = SubResource("RectangleShape2D_gexqn")
 
 [node name="FirstMouse" parent="Level" instance=ExtResource("19_px1c8")]
-position = Vector2(2368, 1280)
+position = Vector2(3296, 1536)
 
-[node name="shoom" parent="Level" instance=ExtResource("23_ysjpo")]
-position = Vector2(2320, 1696)
+[node name="ShroomGuide" parent="Level" instance=ExtResource("23_ysjpo")]
+position = Vector2(4464, 2464)
+
+[node name="TombOfTheIce" parent="Level" instance=ExtResource("11_2xkjh")]
+position = Vector2(2624, 1296)
+
+[node name="LastIcePuzzle" parent="Level" instance=ExtResource("14_6ui35")]
+position = Vector2(4432, 1472)
+
+[node name="DialogTrigger" type="Area2D" parent="Level/LastIcePuzzle"]
+position = Vector2(48, -352)
+script = ExtResource("25_gexqn")
+dialog_name = "already_here"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/LastIcePuzzle/DialogTrigger"]
+position = Vector2(7, -8)
+shape = SubResource("RectangleShape2D_ysjpo")
+
+[node name="FinTp" parent="Level" node_paths=PackedStringArray("tp_pos") instance=ExtResource("15_y56qp")]
+position = Vector2(5056, 1392)
+tp_pos = NodePath("../Tp")
+
+[node name="lab_fin" parent="Level" instance=ExtResource("13_im81g")]
+position = Vector2(4224, 2176)
+metadata/_edit_lock_ = true
+
+[node name="TextureRect" parent="Level/lab_fin/CanvasLayer" index="1"]
+offset_left = 0.0
 
 [node name="Done" type="Node2D" parent="Level"]
 y_sort_enabled = true
-metadata/_edit_lock_ = true
-
-[node name="PuzzleIce1" parent="Level/Done" instance=ExtResource("4_vkq25")]
-position = Vector2(944, 752)
-
-[node name="FirstIce" parent="Level/Done" instance=ExtResource("7_ubwgw")]
-position = Vector2(304, 336)
-
-[node name="Cave" parent="Level/Done" instance=ExtResource("5_7lrji")]
-position = Vector2(-336, -288)
-
-[node name="lab" parent="Level/Done" instance=ExtResource("8_vkq25")]
-position = Vector2(-384, 400)
-
-[node name="TimeMachineTP" parent="Level/Done/lab" index="14" node_paths=PackedStringArray("tp_pos")]
-tp_pos = NodePath("../../TpFromLab")
-
-[node name="TimeMachine" parent="Level/Done/lab/TimeMachineTP/TimeMachine" index="1"]
-hframes = 3
-
-[node name="lab_fin" parent="Level/Done" instance=ExtResource("13_im81g")]
-position = Vector2(4224, 2176)
-
-[node name="TextureRect" parent="Level/Done/lab_fin/CanvasLayer" index="1"]
-offset_left = 0.0
-
-[node name="TpFromLab" type="Node2D" parent="Level/Done"]
-position = Vector2(-160, -448)
-
-[node name="Node2D" parent="Level/Done" instance=ExtResource("9_7lrji")]
-position = Vector2(992, 960)
-
-[node name="Node2D3" parent="Level/Done" instance=ExtResource("13_dj21o")]
-position = Vector2(1056, 1344)
-
-[node name="Node2D2" parent="Level/Done" instance=ExtResource("11_2xkjh")]
-position = Vector2(3104, 1472)
-
-[node name="PuzzleIce" parent="Level/Done" instance=ExtResource("14_6ui35")]
-position = Vector2(3776, 2016)
-
-[node name="Node2D5" parent="Level/Done" node_paths=PackedStringArray("tp_pos") instance=ExtResource("15_y56qp")]
-position = Vector2(4304, 1792)
-tp_pos = NodePath("../../Tp")
-
-[node name="Node2D4" parent="Level/Done" instance=ExtResource("12_dj21o")]
-position = Vector2(1408, 1376)
 
 [node name="Node2D6" type="Node2D" parent="Level/Done"]
 visible = false
@@ -193,33 +209,24 @@ hframes = 10
 vframes = 12
 frame = 101
 
-[node name="Node2D7" parent="Level/Done" instance=ExtResource("18_qgoyv")]
-position = Vector2(1872, 1728)
-
 [node name="Tp" type="Node2D" parent="Level"]
 position = Vector2(4280, 2232)
 
-[node name="DialogTrigger" type="Area2D" parent="Level"]
-position = Vector2(3824, 1656)
-script = ExtResource("25_gexqn")
-dialog_name = "already_here"
+[node name="Canvas" parent="Level" instance=ExtResource("3_ubwgw")]
+layer = 5
+visible = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/DialogTrigger"]
-position = Vector2(7, -8)
-shape = SubResource("RectangleShape2D_ysjpo")
+[node name="AfterMouse" parent="Level" instance=ExtResource("25_ysjpo")]
+position = Vector2(3472, 1968)
 
-[node name="DialogTrigger2" type="Area2D" parent="Level"]
-position = Vector2(2152, 1272)
-script = ExtResource("25_gexqn")
-dialog_name = "keep_moving"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/DialogTrigger2"]
-position = Vector2(12, 0)
-shape = SubResource("RectangleShape2D_gexqn")
+[node name="ScreenshoCam" type="Camera2D" parent="."]
+position = Vector2(-95, -209)
+enabled = false
+zoom = Vector2(0.75, 0.75)
 
 [editable path="Level"]
-[editable path="Level/Mouse/Room"]
+[editable path="Level/lab"]
 [editable path="Level/FirstMouse"]
 [editable path="Level/FirstMouse/LevelSurface"]
-[editable path="Level/Done/lab"]
-[editable path="Level/Done/lab_fin"]
+[editable path="Level/FirstMouse/Room"]
+[editable path="Level/lab_fin"]
