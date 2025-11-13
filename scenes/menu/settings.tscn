@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://dxlupbpywxun7"]
+[gd_scene load_steps=9 format=3 uid="uid://dxlupbpywxun7"]
 
 [ext_resource type="Theme" uid="uid://c4tnmjnv1swxg" path="res://resources/ui/main_theme.tres" id="1_dxr1k"]
 [ext_resource type="Theme" uid="uid://7vvxi1od5y83" path="res://resources/ui/button.tres" id="1_rqcjd"]
 [ext_resource type="Script" uid="uid://be37f00axj5y3" path="res://scenes/menu/touch_setting.gd" id="2_0t5g5"]
 [ext_resource type="PackedScene" uid="uid://c75u0igeymjnv" path="res://scenes/menu/components/sound_editor.tscn" id="2_37860"]
+[ext_resource type="Script" uid="uid://cwe4f07fic6iy" path="res://scenes/menu/clear_save.gd" id="3_occy7"]
 
 [sub_resource type="Theme" id="Theme_37860"]
 
@@ -57,7 +58,7 @@ layout_mode = 2
 
 [node name="FoldableContainer2" type="FoldableContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-title = "Игра"
+title = "Управление"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer/FoldableContainer2"]
 layout_mode = 2
@@ -66,6 +67,35 @@ layout_mode = 2
 layout_mode = 2
 text = "Управление касанием"
 script = ExtResource("2_0t5g5")
+
+[node name="FoldableContainer3" type="FoldableContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+title = "Игра"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer/FoldableContainer3"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer/FoldableContainer3/VBoxContainer"]
+layout_mode = 2
+
+[node name="Control2" type="Control" parent="VBoxContainer/ScrollContainer/VBoxContainer/FoldableContainer3/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/FoldableContainer3/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Удалить сохранение"
+
+[node name="ClearSave" type="Button" parent="VBoxContainer/ScrollContainer/VBoxContainer/FoldableContainer3/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8745098, 0, 0, 1)
+text = "СТЕРЕТЬ"
+script = ExtResource("3_occy7")
+
+[node name="Control" type="Control" parent="VBoxContainer/ScrollContainer/VBoxContainer/FoldableContainer3/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
 
 [node name="FoldableContainer" type="FoldableContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -147,3 +177,4 @@ theme = ExtResource("1_rqcjd")
 text = "<"
 
 [connection signal="toggled" from="VBoxContainer/ScrollContainer/VBoxContainer/FoldableContainer2/VBoxContainer/TouchSetting" to="VBoxContainer/ScrollContainer/VBoxContainer/FoldableContainer2/VBoxContainer/TouchSetting" method="_on_toggled"]
+[connection signal="pressed" from="VBoxContainer/ScrollContainer/VBoxContainer/FoldableContainer3/VBoxContainer/HBoxContainer/ClearSave" to="VBoxContainer/ScrollContainer/VBoxContainer/FoldableContainer3/VBoxContainer/HBoxContainer/ClearSave" method="_on_pressed"]

@@ -146,6 +146,19 @@ func get_hold_time(action: String) -> float:
 func get_save_path(filename: String) -> String:
 	return "user://" + filename
 
+func str_to_vec2i(s: String) -> Vector2i:
+	s = s.strip_edges().replace("(", "").replace(")","")
+	var parts = s.split(",")
+	if parts.size() != 2:
+		return Vector2i()
+	return Vector2i(parts[0].to_int(), parts[1].to_int())
+
+func str_to_vec2(s: String) -> Vector2:
+	s = s.strip_edges().replace("(", "").replace(")","")
+	var parts = s.split(",")
+	if parts.size() != 2:
+		return Vector2()
+	return Vector2(parts[0].to_float(), parts[1].to_float())
 
 func save_data(key: String, data: Dictionary):
 	var p = get_save_path(key)
@@ -167,16 +180,19 @@ func load_data(key: String):
 	else:
 		return null
 
-
-var _nodes_by_id: Dictionary = {}
-
-func register_node(node: Node, id: String) -> void:
-	if _nodes_by_id.has(id):
-		push_warning("Node ID '%s' already registered!" % id)
-	_nodes_by_id[id] = node
-
-func unregister_node(id: String) -> void:
-	_nodes_by_id.erase(id)
-
-func get_node_by_id(id: String) -> Node:
-	return _nodes_by_id.get(id, null)
+func clear_all_save_data():
+	var dir = DirAccess.open("user://")
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if not dir.current_is_dir():
+				var file_path = "user://" + file_name
+				var err = dir.remove(file_path)
+				if err != OK:
+					push_error("Failed to remove: %s" % file_path)
+			file_name = dir.get_next()
+		dir.list_dir_end()
+		print("All saved data cleared!")
+	else:
+		push_error("Failed to open save directory")

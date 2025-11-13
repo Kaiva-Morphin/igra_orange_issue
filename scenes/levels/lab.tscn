@@ -513,7 +513,7 @@ tracks/5/keys = {
 }
 tracks/6/type = "value"
 tracks/6/imported = false
-tracks/6/enabled = true
+tracks/6/enabled = false
 tracks/6/path = NodePath("InitCutscene/CutsceneUtils/LabMan:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
@@ -537,7 +537,7 @@ tracks/7/keys = {
 }
 tracks/8/type = "value"
 tracks/8/imported = false
-tracks/8/enabled = true
+tracks/8/enabled = false
 tracks/8/path = NodePath("InitCutscene/CutsceneUtils/LabMan:visible")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
@@ -1625,6 +1625,7 @@ visible = false
 position = Vector2(104, 76)
 script = ExtResource("4_e2xd3")
 prefer_zoom = 4.5
+suppress_checkpoint = true
 metadata/_edit_lock_ = true
 
 [node name="AREA" type="CollisionShape2D" parent="Room"]
@@ -1678,7 +1679,7 @@ vframes = 3
 
 [node name="LabMan" type="Sprite2D" parent="InitCutscene/CutsceneUtils"]
 z_index = 2
-position = Vector2(39, -71)
+position = Vector2(-228, -56)
 texture = ExtResource("11_jx3gx")
 hframes = 5
 vframes = 6

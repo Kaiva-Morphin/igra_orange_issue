@@ -45,6 +45,13 @@ func main_anim_done():
 		return
 	stage = Stage.LatePath
 
+func _ready():
+	var d = UTILS.load_data("CUTSCENE" + str(self.position))
+	if d:
+		var s = d.get("shooted")
+		if s:
+			shooted = s
+	
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
@@ -64,7 +71,6 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	elif animator && animator.get_animation(anim) != null:
 		animator.play(anim)
 		stage = Stage.Animation
-
 
 var processing = false
 var processing_idx = 0
@@ -139,6 +145,7 @@ func _process(_delta: float) -> void:
 		stage = Stage.Done
 		GAMESTATE.player.suppressed = false
 		GAMESTATE.level_ref.checkpoint()
+		UTILS.save_data("CUTSCENE" + str(self.position), {"shooted": true})
 
 func meow():
 	GAMESTATE.player.meow()

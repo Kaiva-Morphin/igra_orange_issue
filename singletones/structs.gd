@@ -23,7 +23,7 @@ class Level extends Node2D:
 	var movable_collider_store : MovableColliderStore
 	var mouse_collider_store : MovableColliderStore
 	var ice_store : IceStore
-
+	
 	func _ready() -> void:
 		history = []
 		static_collider_store = StaticColliderStore.new()
@@ -55,12 +55,9 @@ class Level extends Node2D:
 		#else:
 			#pass
 	
-	
-	
 	func reset():
 		for s : StateData in initial_state:
 			s.revert()
-		# get_tree().call_group(SWAP_REACTION_GROUP, "on_swap", GAMESTATE.worldstate)
 		history = []
 		step = 0
 	
@@ -77,21 +74,20 @@ class Level extends Node2D:
 				if item is StateData:
 					result.append(item)
 		return result
-
-
+	
 	func take_history():
 		var h = history
 		history = []
 		step = 0
 		return h
-
+	
 	func pop_from_history():
 		if history.size() == 0:
 			# UTILS.log_print("[level] no prev step")
 			return
 		step -= 0
 		return history.pop_back()
-
+	
 	func start_new_step():
 		step += 1
 		history.push_back([])
@@ -108,11 +104,11 @@ class Level extends Node2D:
 		step -= 1
 	
 	func push_initial(data: StateData):
-		# UTILS.log_print("[level] push initial state for " + str(data.ref.name) + " state: " + str(data.data))
 		initial_state.push_back(data)
 	
 	func push_state(data: StateData):
 		history[-1].push_back(data)
+
 
 
 const LEVELSTATE_REACTION_GROUP : String = "levelstate_reaction"

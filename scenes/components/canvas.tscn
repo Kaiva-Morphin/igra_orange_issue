@@ -563,10 +563,10 @@ rewind = NodePath("rewind")
 
 [node name="Node2D" type="Node2D" parent="."]
 visible = false
-position = Vector2(800, -8)
+position = Vector2(800, -16)
 
 [node name="DialogBg" type="Sprite2D" parent="Node2D"]
-position = Vector2(-152, 136)
+position = Vector2(-152, 162)
 scale = Vector2(4, 4)
 texture = ExtResource("6_ob6ph")
 hframes = 2

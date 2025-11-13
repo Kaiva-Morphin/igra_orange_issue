@@ -61,7 +61,46 @@ func _process(_dt):
 			back()
 
 
+var town_music_resource: AudioStreamWAV = preload("res://assets/sounds/town04.wav")
+const MUSIC_NODE_NAME := "TownMusic"
+
+func init_sound() -> void:
+	var root = get_tree().get_root()
+	var music_node = root.get_node_or_null(MUSIC_NODE_NAME)
+	if music_node == null:
+		music_node = AudioStreamPlayer.new()
+		music_node.name = MUSIC_NODE_NAME
+		music_node.stream = town_music_resource
+		music_node.volume_db = -36.0
+		music_node.bus = "MUSIC"
+		music_node.autoplay = false
+		root.call_deferred("add_child", music_node)
+		call_deferred("_play_music_deferred", music_node)
+	else:
+		if music_node.get_parent() != root:
+			music_node.get_parent().remove_child(music_node)
+			root.add_child(music_node)
+		music_node.volume_db = -36.0
+		call_deferred("_play_music_deferred", music_node)
+
+
+func _play_music_deferred(music_node: AudioStreamPlayer) -> void:
+	if is_instance_valid(music_node):
+		music_node.play()
+
+
+func fade_out_music(duration: float = 2.0) -> void:
+	var root = get_tree().get_root()
+	var music_node = root.get_node_or_null(MUSIC_NODE_NAME)
+	if music_node == null:
+		return
+	var tween = get_tree().create_tween()
+	tween.tween_property(music_node, "volume_db", -80.0, duration)
+	tween.tween_callback(Callable(music_node, "stop"))
+
+
 func _ready() -> void:
+	init_sound()
 	if DisplayServer.is_touchscreen_available() && !GAMESTATE.touch_inited:
 		$Touch.show()
 	current = main_screen
@@ -81,6 +120,7 @@ func _ready() -> void:
 
 
 func _on_play_pressed() -> void:
+	fade_out_music()
 	get_tree().paused = false
 	get_tree().change_scene_to_packed(STORE.game_scene)
 

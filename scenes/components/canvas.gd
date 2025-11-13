@@ -25,6 +25,7 @@ func _ready():
 	m.set_shader_parameter("progress", 0.0)
 	m.set_shader_parameter("col", Vector4(0.0, 0.0, 0.0, 1.0))
 	$Touch/Powers.hide()
+	$Touch/Meow.pressed.connect(_show_next_msg)
 
 func on_powers_unlocked():
 	$Pause.on_powers_unlocked()
@@ -42,6 +43,7 @@ func start_dialog(new_msgs: Array) -> void:
 
 
 var touch_vec := Vector2.ZERO
+
 
 
 func _process(_delta: float) -> void:

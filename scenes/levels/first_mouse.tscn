@@ -63,6 +63,7 @@ position = Vector2(184, -104)
 visible = true
 
 [node name="AREA" parent="Room" index="0"]
+visible = false
 position = Vector2(239.75, -144)
 shape = SubResource("RectangleShape2D_oudqj")
 

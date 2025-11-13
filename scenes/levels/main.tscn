@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://7uv76nxqe7nu"]
+[gd_scene load_steps=31 format=3 uid="uid://7uv76nxqe7nu"]
 
 [ext_resource type="PackedScene" uid="uid://cxpycm8cc7sgl" path="res://scenes/components/level.tscn" id="1_u81e1"]
 [ext_resource type="PackedScene" uid="uid://u3xhep13ucw4" path="res://scenes/components/player.tscn" id="2_b6bv0"]
@@ -25,6 +25,8 @@
 [ext_resource type="PackedScene" uid="uid://blme6uyjol8uj" path="res://shroom_corner.tscn" id="23_ysjpo"]
 [ext_resource type="Script" uid="uid://belq4bs3pexg5" path="res://scenes/levels/dialog_trigger.gd" id="25_gexqn"]
 [ext_resource type="PackedScene" uid="uid://lxtallxb4xwl" path="res://scenes/levels/after_mouse.tscn" id="25_ysjpo"]
+[ext_resource type="PackedScene" uid="uid://b7acuccr8ky73" path="res://scenes/levels/first_shroom.tscn" id="26_gexqn"]
+[ext_resource type="PackedScene" uid="uid://cgy3pbuqd00k0" path="res://scenes/levels/advanced_shroom.tscn" id="27_kc8j3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gexqn"]
 size = Vector2(56, 16)
@@ -60,7 +62,7 @@ volume_db = -26.294
 volume_db = -14.857
 
 [node name="Player" parent="Level" instance=ExtResource("2_b6bv0")]
-position = Vector2(3248, 1472)
+position = Vector2(-200, 473)
 
 [node name="F" type="Sprite2D" parent="Level"]
 y_sort_enabled = true
@@ -131,17 +133,17 @@ dialog_name = "keep_moving"
 position = Vector2(12, 0)
 shape = SubResource("RectangleShape2D_gexqn")
 
+[node name="TombOfTheIce" parent="Level" instance=ExtResource("11_2xkjh")]
+position = Vector2(2624, 1296)
+
 [node name="FirstMouse" parent="Level" instance=ExtResource("19_px1c8")]
 position = Vector2(3296, 1536)
 
 [node name="ShroomGuide" parent="Level" instance=ExtResource("23_ysjpo")]
-position = Vector2(4464, 2464)
-
-[node name="TombOfTheIce" parent="Level" instance=ExtResource("11_2xkjh")]
-position = Vector2(2624, 1296)
+position = Vector2(4416, 2384)
 
 [node name="LastIcePuzzle" parent="Level" instance=ExtResource("14_6ui35")]
-position = Vector2(4432, 1472)
+position = Vector2(5392, 2224)
 
 [node name="DialogTrigger" type="Area2D" parent="Level/LastIcePuzzle"]
 position = Vector2(48, -352)
@@ -153,7 +155,7 @@ position = Vector2(7, -8)
 shape = SubResource("RectangleShape2D_ysjpo")
 
 [node name="FinTp" parent="Level" node_paths=PackedStringArray("tp_pos") instance=ExtResource("15_y56qp")]
-position = Vector2(5056, 1392)
+position = Vector2(5920, 2000)
 tp_pos = NodePath("../Tp")
 
 [node name="lab_fin" parent="Level" instance=ExtResource("13_im81g")]
@@ -219,10 +221,15 @@ visible = false
 [node name="AfterMouse" parent="Level" instance=ExtResource("25_ysjpo")]
 position = Vector2(3472, 1968)
 
+[node name="FirstShroom" parent="Level" instance=ExtResource("26_gexqn")]
+position = Vector2(4032, 1968)
+
+[node name="AdvancedShroom" parent="Level" instance=ExtResource("27_kc8j3")]
+position = Vector2(4944, 2160)
+
 [node name="ScreenshoCam" type="Camera2D" parent="."]
-position = Vector2(-95, -209)
+position = Vector2(5072, 1376)
 enabled = false
-zoom = Vector2(0.75, 0.75)
 
 [editable path="Level"]
 [editable path="Level/lab"]

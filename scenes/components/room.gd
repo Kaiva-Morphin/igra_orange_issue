@@ -1,9 +1,9 @@
 extends Area2D
 
 @export var prefer_zoom = 3.
+@export var suppress_checkpoint : bool = false
 @onready var area = self.get_node("AREA")
 var rect : Rect2;
-
 func _ready() -> void:
 	#$AREA.disabled = true
 	self.process_mode = Node.PROCESS_MODE_ALWAYS
@@ -15,7 +15,8 @@ func _ready() -> void:
 func _on_body_entered(body):
 	if !body.is_in_group("player"): return
 	CAMERA.room_bound_rects.append([prefer_zoom, rect])
-	GAMESTATE.level_ref.checkpoint()
+	if !suppress_checkpoint:
+		GAMESTATE.level_ref.checkpoint()
 	var parent = get_parent();
 	#print("[room] player")
 	#print("[room] parent", parent)

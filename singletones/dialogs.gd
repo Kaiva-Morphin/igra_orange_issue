@@ -41,11 +41,19 @@ var dialogs = {
 			DialogEmotion.Surprised
 		),
 		DialogMsg.new(
-			"которое я использовал для перемещения между параллельными мирами",
+			"которое я использовал для перемещения",
 			DialogEmotion.Surprised
 		),
 		DialogMsg.new(
-			"Но в результате парадокса миры связались воедино и",
+			"между параллельными мирами.",
+			DialogEmotion.Point
+		),
+		DialogMsg.new(
+			"Но в результате парадокса миры",
+			DialogEmotion.Point
+		),
+		DialogMsg.new(
+			"связались воедино и",
 			DialogEmotion.Point
 		),
 		DialogMsg.new(
@@ -61,7 +69,11 @@ var dialogs = {
 			DialogEmotion.Point
 		),
 		DialogMsg.new(
-			"Но это значит что ты как-то смог активировать машину?",
+			"Но это значит что ты как-то",
+			DialogEmotion.Confused
+		),
+		DialogMsg.new(
+			"смог активировать машину?",
 			DialogEmotion.Confused
 		),
 		DialogMsg.new(

@@ -41,7 +41,7 @@ func gen(from, to, level, push_initial, rev):
 			var df : TileData = source.get_tile_data(af, 0)
 			
 			future.set_cell(tile_pos, source_id, af)
-
+			
 			var is_ground = d.get_custom_data("ground") || (df && df.get_custom_data("ground"))
 			if is_ground:
 				var g = STRUCTS.Ground.new()

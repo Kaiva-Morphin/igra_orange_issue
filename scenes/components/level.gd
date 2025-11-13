@@ -6,21 +6,34 @@ extends STRUCTS.Level
 @onready var rewind_sound = $Rewind
 @onready var theme_music = $MainTheme
 
+var music = false
 
 var powers_unlocked = false
+
 
 func checkpoint():
 	history = []
 	var s = take_snapshot()
 	initial_state = s
-	UTILS.save_data("level", {"initial": initial_state})
+	UTILS.save_data(
+		"state", {
+			"worldstate": GAMESTATE.worldstate,
+			"music": music
+		}
+	)
+	var pos = player.pos
+	var d = player.save_state().data
+	d["powers_unlocked"] = powers_unlocked
+	d["pos"] = pos
+	UTILS.save_data("player", d)
+
 
 func soft_hard_reset():
 	var hist = take_history()
 	hist.reverse()
 	for h in hist:
 		for p : StateData in h:
-			p.revert()	
+			p.revert()
 
 var cant_sound_delay = 0.25
 
@@ -35,19 +48,44 @@ var tweened_player
 @onready var swap_interpolation : TextureRect = $Canvas/PrevSwapState
 
 func _ready() -> void:
+	var d = UTILS.load_data("state")
+	if d:
+		var k = d.get("worldstate")
+		if k:
+			GAMESTATE.worldstate = k
+		var m = d.get("music")
+		music = m
+		if music:
+			$MainTheme.play()
+			$lab/Sounds/Env.stop()
+		
 	super._ready()
 	GAMESTATE.level_controller = self
 	GAMESTATE.camera = get_tree().get_nodes_in_group("camera")[0]
 	GAMESTATE.player = get_tree().get_nodes_in_group("player")[0]
 	player = GAMESTATE.player
+	var old_state = UTILS.load_data("player")
+	if old_state:
+		powers_unlocked = old_state.get("powers_unlocked")
+		player.pos = UTILS.str_to_vec2(old_state.get("pos"))
+		player.sprite.frame = old_state.get("frame")
+		player.sprite2.frame = old_state.get("frame")
+		player.sprite2.position = UTILS.str_to_vec2(old_state.get("offset"))
+		player.suppressed = old_state.get("suppressed")
+		player.position = UTILS.from_grid(player.pos)
+		#if pos:
+			#var p = UTILS.str_to_vec2i(pos)
+			#player.pos = p
+			#player.position = UTILS.from_grid(p)
+
 	tweened_player = Node2D.new()
 	add_child(tweened_player)
 	tweened_player.global_position = player.global_position
 	CAMERA.on_ready()
 	start_new_step()
 	get_tree().call_group(STRUCTS.SWAP_REACTION_GROUP, "on_swap", GAMESTATE.worldstate, true)
-	#GAMESTATE.vignette.animate(0.0, 0.3, 5.0)
-	GAMESTATE.vignette.animate(0.0, 0.3, 0.0)
+	GAMESTATE.vignette.animate(0.0, 0.3, 5.0)
+	#GAMESTATE.vignette.animate(0.0, 0.3, 0.0)
 
 
 

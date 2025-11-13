@@ -303,6 +303,7 @@ modulate = Color(0.19076231, 0.19076234, 0.19076231, 1)
 
 [node name="Room" parent="." instance=ExtResource("2_qmj5m")]
 visible = true
+suppress_checkpoint = true
 
 [node name="AREA" parent="Room" index="0"]
 position = Vector2(160, -160)
