@@ -239,7 +239,7 @@ func process_inner(_dt: float):
 		GAMESTATE.swap()
 		return
 	
-	if (Input.is_action_just_pressed("step_back") || GAMESTATE.touch_back_just_pressed)  && powers_unlocked && !player.suppressed:
+	if (Input.is_action_just_pressed("step_back") || GAMESTATE.touch_back_just_pressed)  && powers_unlocked:
 		UTILS.log_prints("[level instance] step_back")
 		var h = pop_from_history()
 		if h && h.size() > 0:
@@ -254,7 +254,7 @@ func process_inner(_dt: float):
 	
 	player.stop_anim()
 	
-	if (Input.is_action_just_pressed("hard_reset") || GAMESTATE.touch_fastrewind_just_pressed)  && powers_unlocked && !player.suppressed:
+	if (Input.is_action_just_pressed("hard_reset") || GAMESTATE.touch_fastrewind_just_pressed)  && powers_unlocked:
 		UTILS.log_print("[level instance] hard reset")
 		processing_step = true
 		GAMESTATE.vignette.animate(0.4, 0.2, 0.4)
@@ -267,7 +267,7 @@ func process_inner(_dt: float):
 		)
 		return
 	
-	if (Input.is_action_just_pressed("reset")  || GAMESTATE.touch_rewind_just_pressed) && powers_unlocked && !player.suppressed:
+	if (Input.is_action_just_pressed("reset")  || GAMESTATE.touch_rewind_just_pressed) && powers_unlocked:
 		UTILS.log_print("[level instance] reset")
 		var hist = take_history()
 		if hist.size() != 0:

@@ -46,7 +46,7 @@ func main_anim_done():
 	stage = Stage.LatePath
 
 func _ready():
-	var d = UTILS.load_data("CUTSCENE" + str(self.position))
+	var d = UTILS.load_data("CUTSCENE" + str(self.global_position))
 	if d:
 		var s = d.get("shooted")
 		if s:

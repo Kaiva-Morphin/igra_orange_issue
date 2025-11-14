@@ -9,8 +9,6 @@ size = Vector2(560, 392)
 [node name="AfterMouse" type="Node2D"]
 y_sort_enabled = true
 
-[node name="Room" parent="." instance=ExtResource("2_ama14")]
-
 [node name="LevelSurface" parent="." instance=ExtResource("2_3p2k2")]
 
 [node name="PastSurface" parent="LevelSurface/Past" index="0"]

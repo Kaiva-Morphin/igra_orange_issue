@@ -1662,7 +1662,6 @@ libraries = {
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InitCutscene/Area2D"]
-visible = false
 z_index = 25
 position = Vector2(76, 0)
 shape = SubResource("RectangleShape2D_j8bva")
