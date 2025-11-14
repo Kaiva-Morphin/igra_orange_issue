@@ -533,6 +533,15 @@ mouse_default_cursor_shape = 2
 theme = ExtResource("2_mcvr8")
 text = "Нет"
 
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 175.5
+offset_top = 138.0
+offset_right = 215.5
+offset_bottom = 151.0
+theme_override_colors/font_color = Color(1, 1, 1, 0.17254902)
+text = "v1.8"
+
 [connection signal="pressed" from="Main/HBoxContainer/VBoxContainer/play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Main/HBoxContainer/VBoxContainer/settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="Main/HBoxContainer/VBoxContainer/cred" to="." method="_on_cred_pressed"]

@@ -1636,6 +1636,7 @@ visible = false
 position = Vector2(104, 76)
 script = ExtResource("5_npa1g")
 prefer_zoom = 4.5
+suppress_checkpoint = true
 metadata/_edit_lock_ = true
 
 [node name="AREA" type="CollisionShape2D" parent="Room"]

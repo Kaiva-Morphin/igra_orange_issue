@@ -15,7 +15,7 @@ run/main_scene="uid://hqdryxc766fs"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 boot_splash/use_filter=false
 boot_splash/image="uid://cyhca3xtrxo2c"
-config/icon="uid://bmabkovrifpwn"
+config/icon="res://icon.svg"
 
 [autoload]
 

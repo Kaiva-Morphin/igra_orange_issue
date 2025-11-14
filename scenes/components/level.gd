@@ -67,6 +67,8 @@ func _ready() -> void:
 	var old_state = UTILS.load_data("player")
 	if old_state:
 		powers_unlocked = old_state.get("powers_unlocked")
+		if powers_unlocked:
+			GAMESTATE.canvas.on_powers_unlocked()
 		player.pos = UTILS.str_to_vec2(old_state.get("pos"))
 		player.sprite.frame = old_state.get("frame")
 		player.sprite2.frame = old_state.get("frame")
@@ -237,7 +239,7 @@ func process_inner(_dt: float):
 		GAMESTATE.swap()
 		return
 	
-	if (Input.is_action_just_pressed("step_back") || GAMESTATE.touch_back_just_pressed)  && powers_unlocked:
+	if (Input.is_action_just_pressed("step_back") || GAMESTATE.touch_back_just_pressed)  && powers_unlocked && !player.suppressed:
 		UTILS.log_prints("[level instance] step_back")
 		var h = pop_from_history()
 		if h && h.size() > 0:
@@ -252,7 +254,7 @@ func process_inner(_dt: float):
 	
 	player.stop_anim()
 	
-	if (Input.is_action_just_pressed("hard_reset") || GAMESTATE.touch_fastrewind_just_pressed)  && powers_unlocked:
+	if (Input.is_action_just_pressed("hard_reset") || GAMESTATE.touch_fastrewind_just_pressed)  && powers_unlocked && !player.suppressed:
 		UTILS.log_print("[level instance] hard reset")
 		processing_step = true
 		GAMESTATE.vignette.animate(0.4, 0.2, 0.4)
@@ -265,7 +267,7 @@ func process_inner(_dt: float):
 		)
 		return
 	
-	if (Input.is_action_just_pressed("reset")  || GAMESTATE.touch_rewind_just_pressed) && powers_unlocked:
+	if (Input.is_action_just_pressed("reset")  || GAMESTATE.touch_rewind_just_pressed) && powers_unlocked && !player.suppressed:
 		UTILS.log_print("[level instance] reset")
 		var hist = take_history()
 		if hist.size() != 0:
@@ -280,6 +282,7 @@ func process_inner(_dt: float):
 		return
 	
 	var i_dir = UTILS.get_input_dir()
+	if player.suppressed: return
 	if i_dir == Vector2i.ZERO:
 		return
 	
@@ -323,7 +326,6 @@ func process_inner(_dt: float):
 
 		# // p_i || (
 		if m_i and GAMESTATE.worldstate == WorldState.Past:
-
 			m_dst = get_slide_end(m_dst, i_dir)
 			var d = m_dst - grid_pos
 			var dist = max(abs(d.x), abs(d.y))

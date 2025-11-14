@@ -55,9 +55,11 @@ alignment = 1
 [node name="Control" type="Control" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
+mouse_filter = 1
 
 [node name="FoldableContainer2" type="FoldableContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
+mouse_filter = 1
 title = "Управление"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer/FoldableContainer2"]
@@ -65,11 +67,13 @@ layout_mode = 2
 
 [node name="TouchSetting" type="CheckButton" parent="VBoxContainer/ScrollContainer/VBoxContainer/FoldableContainer2/VBoxContainer"]
 layout_mode = 2
+mouse_filter = 1
 text = "Управление касанием"
 script = ExtResource("2_0t5g5")
 
 [node name="FoldableContainer3" type="FoldableContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
+mouse_filter = 1
 title = "Игра"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer/FoldableContainer3"]
@@ -81,14 +85,17 @@ layout_mode = 2
 [node name="Control2" type="Control" parent="VBoxContainer/ScrollContainer/VBoxContainer/FoldableContainer3/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(2, 0)
 layout_mode = 2
+mouse_filter = 1
 
 [node name="Label" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/FoldableContainer3/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 1
 text = "Удалить сохранение"
 
 [node name="ClearSave" type="Button" parent="VBoxContainer/ScrollContainer/VBoxContainer/FoldableContainer3/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+mouse_filter = 1
 theme_override_colors/font_color = Color(0.8745098, 0, 0, 1)
 text = "СТЕРЕТЬ"
 script = ExtResource("3_occy7")
@@ -96,9 +103,11 @@ script = ExtResource("3_occy7")
 [node name="Control" type="Control" parent="VBoxContainer/ScrollContainer/VBoxContainer/FoldableContainer3/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(2, 0)
 layout_mode = 2
+mouse_filter = 1
 
 [node name="FoldableContainer" type="FoldableContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
+mouse_filter = 1
 title = "Звук"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer/FoldableContainer"]
